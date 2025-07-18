@@ -1,0 +1,22 @@
+{
+  "name": "warhammer-statistics-ap",
+  "version": "1.0.0",
+  "description": "AP Statistics learning platform with Warhammer 40k themes",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve . -p 8080",
+    "dev": "serve . -p 8080",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "statistics",
+    "education",
+    "warhammer",
+    "ap-statistics"
+  ],
+  "author": "Statistics AP Tutor",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
