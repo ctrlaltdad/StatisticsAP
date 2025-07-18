@@ -690,7 +690,10 @@ class LessonManager {
                     <button class="cta-button" onclick="window.LessonManager.startQuiz()">
                         <i class="fas fa-sword"></i> Take Battle Assessment
                     </button>
-                    <button class="nav-button" onclick="window.StatisticsApp.showScreen('chapter-selection')">
+                </div>
+                
+                <div class="secondary-actions">
+                    <button class="nav-button secondary" onclick="window.StatisticsApp.showScreen('chapter-selection')">
                         <i class="fas fa-map"></i> Return to Campaign Map
                     </button>
                 </div>

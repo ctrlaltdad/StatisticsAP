@@ -292,15 +292,18 @@ class QuizManager {
                 </div>
                 
                 <div class="question-controls">
-                    <button id="quiz-prev" class="nav-button" ${this.currentQuestionIndex === 0 ? 'disabled' : ''} 
+                    <button id="quiz-prev" class="nav-button secondary-nav" ${this.currentQuestionIndex === 0 ? 'disabled' : ''} 
                         onclick="window.QuizManager.previousQuestion()">
                         <i class="fas fa-chevron-left"></i> Previous
                     </button>
                     
-                    <button id="quiz-next" class="nav-button" disabled onclick="window.QuizManager.nextQuestion()">
-                        ${this.currentQuestionIndex === this.quizQuestions.length - 1 ? 'Finish Quiz' : 'Next'} 
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <div class="next-button-container">
+                        <button id="quiz-next" class="nav-button primary-nav" disabled onclick="window.QuizManager.nextQuestion()">
+                            ${this.currentQuestionIndex === this.quizQuestions.length - 1 ? 'Finish Quiz' : 'Next'} 
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        <p class="next-hint" id="next-hint">Answer correctly to proceed</p>
+                    </div>
                 </div>
                 
                 <div class="answer-feedback" id="answer-feedback" style="display: none;"></div>
@@ -314,12 +317,30 @@ class QuizManager {
             
             // Check if the previous answer was correct to enable/disable next button
             const isCorrect = previousAnswer === question.shuffledCorrectIndex;
-            document.getElementById('quiz-next').disabled = !isCorrect;
+            const nextButton = document.getElementById('quiz-next');
+            const nextHint = document.getElementById('next-hint');
+            
+            if (nextButton) {
+                nextButton.disabled = !isCorrect;
+                if (isCorrect) {
+                    nextButton.classList.add('enabled');
+                    nextButton.classList.remove('disabled');
+                    if (nextHint) nextHint.style.display = 'none';
+                } else {
+                    nextButton.classList.remove('enabled');
+                    nextButton.classList.add('disabled');
+                    if (nextHint) nextHint.style.display = 'block';
+                }
+            }
         } else {
             // Ensure next button is disabled for unanswered questions
             const nextButton = document.getElementById('quiz-next');
+            const nextHint = document.getElementById('next-hint');
             if (nextButton) {
                 nextButton.disabled = true;
+                nextButton.classList.remove('enabled');
+                nextButton.classList.add('disabled');
+                if (nextHint) nextHint.style.display = 'block';
             }
         }
     }
@@ -372,8 +393,19 @@ class QuizManager {
         const question = this.quizQuestions[this.currentQuestionIndex];
         const isCorrect = optionIndex === question.shuffledCorrectIndex;
         const nextButton = document.getElementById('quiz-next');
+        const nextHint = document.getElementById('next-hint');
+        
         if (nextButton) {
             nextButton.disabled = !isCorrect;
+            if (isCorrect) {
+                nextButton.classList.add('enabled');
+                nextButton.classList.remove('disabled');
+                if (nextHint) nextHint.style.display = 'none';
+            } else {
+                nextButton.classList.remove('enabled');
+                nextButton.classList.add('disabled');
+                if (nextHint) nextHint.style.display = 'block';
+            }
         }
     }
 
@@ -514,10 +546,13 @@ class QuizManager {
                 </div>
                 
                 <div class="quiz-actions">
-                    <button class="nav-button" onclick="window.QuizManager.completeChapter()">
+                    <button class="nav-button primary" onclick="window.QuizManager.completeChapter()">
                         <i class="fas fa-flag-checkered"></i> Complete Chapter
                     </button>
-                    <button class="nav-button" onclick="window.StatisticsApp.showScreen('chapter-selection')">
+                </div>
+                
+                <div class="secondary-actions">
+                    <button class="nav-button secondary" onclick="window.StatisticsApp.showScreen('chapter-selection')">
                         <i class="fas fa-map"></i> Campaign Map
                     </button>
                 </div>
@@ -788,17 +823,131 @@ const quizStyles = `
         margin-top: 2rem;
     }
 
-    .question-controls {
+    .secondary-actions {
         display: flex;
-        justify-content: space-between;
-        margin-top: 2rem;
-        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .nav-button.primary {
+        background: var(--gradient-primary);
+        color: white;
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: var(--shadow-primary);
+    }
+
+    .nav-button.primary:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-elevated);
+    }
+
+    .nav-button.secondary {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--text-muted);
+        font-size: 0.9rem;
+        padding: 0.75rem 1.5rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+
+    .nav-button.secondary:hover {
+        color: var(--text-light);
+        border-color: var(--text-light);
+        opacity: 1;
+        transform: none;
+        box-shadow: none;
     }
 
     .option-letter {
         font-weight: bold;
         color: var(--secondary-gold);
         margin-right: 0.5rem;
+    }
+
+    .question-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-top: 2rem;
+        gap: 1rem;
+    }
+
+    .next-button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .next-hint {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin: 0;
+        opacity: 0.8;
+        font-style: italic;
+        text-align: center;
+    }
+
+    .nav-button.secondary-nav {
+        background: transparent;
+        color: var(--text-muted);
+        border: 1px solid var(--text-muted);
+        font-size: 0.9rem;
+        padding: 0.75rem 1.5rem;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+    }
+
+    .nav-button.secondary-nav:hover:not(:disabled) {
+        color: var(--text-light);
+        border-color: var(--text-light);
+        opacity: 1;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .nav-button.secondary-nav:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .nav-button.primary-nav {
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        font-size: 1.1rem;
+        padding: 1rem 2rem;
+        font-weight: 600;
+        min-width: 140px;
+        transition: all 0.3s ease;
+    }
+
+    .nav-button.primary-nav.enabled {
+        transform: translateY(0);
+        box-shadow: var(--shadow-primary);
+        opacity: 1;
+    }
+
+    .nav-button.primary-nav.enabled:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-elevated);
+    }
+
+    .nav-button.primary-nav.disabled {
+        background: var(--darker-bg);
+        color: var(--text-muted);
+        border: 2px solid var(--text-muted);
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
     }
 
     @media (max-width: 768px) {
@@ -812,6 +961,23 @@ const quizStyles = `
         
         .question-controls {
             flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .next-button-container {
+            order: -1;
+        }
+
+        .nav-button.secondary-nav {
+            font-size: 0.8rem;
+            padding: 0.6rem 1.2rem;
+        }
+
+        .nav-button.primary-nav {
+            font-size: 1rem;
+            padding: 0.9rem 1.8rem;
+            min-width: 120px;
         }
     }
 `;

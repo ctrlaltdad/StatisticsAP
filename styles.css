@@ -276,6 +276,49 @@ body {
     margin-right: 0.5rem;
 }
 
+/* Action Button Layouts */
+.secondary-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.nav-button.primary {
+    background: var(--gradient-primary);
+    color: white;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow-primary);
+}
+
+.nav-button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+}
+
+.nav-button.secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--text-muted);
+    font-size: 0.9rem;
+    padding: 0.75rem 1.5rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.nav-button.secondary:hover {
+    color: var(--text-light);
+    border-color: var(--text-light);
+    opacity: 1;
+    transform: none;
+    box-shadow: none;
+}
+
 /* Chapter Selection */
 .chapters-container h2 {
     text-align: center;
