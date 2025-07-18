@@ -5,6 +5,7 @@ class LessonManager {
         this.currentStepIndex = 0;
         this.lessonSteps = [];
         this.lessons = this.initializeLessons();
+        this.activityCompleted = false; // Track if current step's activity is completed
     }
 
     initializeLessons() {
@@ -522,6 +523,9 @@ class LessonManager {
         // Add interactive element if present
         if (step.interactive) {
             stepHTML += this.generateInteractiveElement(step.interactive);
+            this.activityCompleted = false; // Require completion for interactive steps
+        } else {
+            this.activityCompleted = true; // No activity to complete for non-interactive steps
         }
 
         lessonContent.innerHTML = stepHTML;
@@ -628,19 +632,25 @@ class LessonManager {
     }
 
     nextStep() {
+        // Check if current step has an interactive activity that needs completion
+        const currentStep = this.lessonSteps[this.currentStepIndex];
+        const hasInteractiveActivity = currentStep && currentStep.interactive;
+        
+        if (hasInteractiveActivity && !this.activityCompleted) {
+            // Don't proceed if activity not completed
+            return false;
+        }
+        
         if (this.currentStepIndex < this.lessonSteps.length - 1) {
             this.currentStepIndex++;
+            this.activityCompleted = false; // Reset for new step
             this.showCurrentStep();
             this.updateNavigationButtons();
-            
-            // Award XP for completing a step
-            if (window.StatisticsApp) {
-                window.StatisticsApp.awardXP(10, "Lesson step completed");
-            }
             return true;
         } else if (this.currentStepIndex === this.lessonSteps.length - 1) {
             // Move to lesson complete
             this.currentStepIndex++;
+            this.activityCompleted = false; // Reset for new step
             this.showLessonComplete();
             this.updateNavigationButtons();
             return true;
@@ -651,11 +661,10 @@ class LessonManager {
     previousStep() {
         if (this.currentStepIndex > 0) {
             this.currentStepIndex--;
+            this.activityCompleted = false; // Reset for the step we're going back to
             this.showCurrentStep();
             this.updateNavigationButtons();
-            return true;
         }
-        return false;
     }
 
     showLessonComplete() {
@@ -672,8 +681,8 @@ class LessonManager {
                     <h4>Mission Summary:</h4>
                     <ul>
                         <li>Steps completed: ${this.lessonSteps.length}</li>
-                        <li>XP earned: ${this.lessonSteps.length * 10 + 50}</li>
-                        <li>New concepts mastered: ${this.getLessonConcepts().length}</li>
+                        <li>Concepts mastered: ${this.getLessonConcepts().length}</li>
+                        <li>Ready for Battle Assessment!</li>
                     </ul>
                 </div>
                 
@@ -688,9 +697,9 @@ class LessonManager {
             </div>
         `;
 
-        // Award completion XP
+        // Chapter completion notification
         if (window.StatisticsApp) {
-            window.StatisticsApp.awardXP(50, "Chapter completed!");
+            window.StatisticsApp.showNotification("Chapter completed! Well done, Battle-Brother!", 'success');
         }
     }
 
@@ -707,13 +716,21 @@ class LessonManager {
         
         prevBtn.disabled = this.currentStepIndex === 0;
         
+        // Check if current step has an interactive activity that needs completion
+        const currentStep = this.lessonSteps[this.currentStepIndex];
+        const hasInteractiveActivity = currentStep && currentStep.interactive;
+        
         if (this.currentStepIndex >= this.lessonSteps.length) {
             nextBtn.textContent = 'Lesson Complete';
             nextBtn.disabled = true;
         } else if (this.currentStepIndex === this.lessonSteps.length - 1) {
             nextBtn.innerHTML = 'Complete <i class="fas fa-trophy"></i>';
+            // Disable if there's an interactive activity that hasn't been completed
+            nextBtn.disabled = hasInteractiveActivity && !this.activityCompleted;
         } else {
             nextBtn.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
+            // Disable if there's an interactive activity that hasn't been completed
+            nextBtn.disabled = hasInteractiveActivity && !this.activityCompleted;
         }
     }
 
@@ -764,19 +781,19 @@ class LessonManager {
         if (allCorrect) {
             feedback += '<div style="background: rgba(22, 163, 74, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--success-green);">';
             feedback += '<p style="color: var(--success-green); font-weight: bold;">🏆 Perfect! You understand data classification!</p>';
-            feedback += '<p style="color: var(--text-light);">You correctly identified all data types - a crucial skill for any Imperial data analyst!</p>';
+            feedback += '<p style="color: var(--text-light);">You correctly identified all data types - a crucial skill for any Imperial data analyst! You may now proceed.</p>';
             feedback += '</div>';
-            if (window.StatisticsApp) {
-                window.StatisticsApp.awardXP(25, "Perfect classification!");
-            }
+            this.activityCompleted = true;
         } else {
             feedback += '<div style="background: rgba(234, 88, 12, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--warning-orange);">';
-            feedback += '<p style="color: var(--warning-orange); font-weight: bold;">📚 Study the correct answers above</p>';
-            feedback += '<p style="color: var(--text-light);">Understanding data types is fundamental to choosing the right statistical methods!</p>';
+            feedback += '<p style="color: var(--warning-orange); font-weight: bold;">📚 You must get all answers correct to proceed</p>';
+            feedback += '<p style="color: var(--text-light);">Study the correct answers above and try again. Understanding data types is fundamental to choosing the right statistical methods!</p>';
             feedback += '</div>';
+            this.activityCompleted = false;
         }
 
         feedbackArea.innerHTML = feedback;
+        this.updateNavigationButtons();
     }
 
     getClassificationExplanation(itemText, correctType) {
@@ -825,19 +842,19 @@ class LessonManager {
         if (meanCorrect && medianCorrect) {
             feedback += '<div style="background: rgba(22, 163, 74, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--success-green);">';
             feedback += '<p style="color: var(--success-green); font-weight: bold;">🎯 Excellent calculations, Battle-Brother!</p>';
-            feedback += '<p style="color: var(--text-light);">You have mastered the sacred mathematics of central tendency!</p>';
+            feedback += '<p style="color: var(--text-light);">You have mastered the sacred mathematics of central tendency! You may now proceed.</p>';
             feedback += '</div>';
-            if (window.StatisticsApp) {
-                window.StatisticsApp.awardXP(30, "Perfect calculations!");
-            }
+            this.activityCompleted = true;
         } else {
             feedback += '<div style="background: rgba(234, 88, 12, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--warning-orange);">';
-            feedback += '<p style="color: var(--warning-orange); font-weight: bold;">📝 Review the calculations above</p>';
-            feedback += '<p style="color: var(--text-light);">Practice makes perfect - these calculations are essential for statistical analysis!</p>';
+            feedback += '<p style="color: var(--warning-orange); font-weight: bold;">📝 You must get both calculations correct to proceed</p>';
+            feedback += '<p style="color: var(--text-light);">Review the calculations above and try again. These calculations are essential for statistical analysis!</p>';
             feedback += '</div>';
+            this.activityCompleted = false;
         }
         
         feedbackArea.innerHTML = feedback;
+        this.updateNavigationButtons();
     }
 
     checkBias() {
@@ -889,20 +906,20 @@ class LessonManager {
                 overallFeedback.innerHTML = `
                     <div style="background: rgba(22, 163, 74, 0.2); padding: 1rem; border-radius: 8px; border: 2px solid var(--success-green);">
                         <p style="color: var(--success-green); font-weight: bold; margin: 0;">🛡️ Bias Detection Mastery!</p>
-                        <p style="color: var(--text-light); margin: 0.5rem 0 0 0;">You have shown the vigilance of an Inquisitor in detecting statistical heresy!</p>
+                        <p style="color: var(--text-light); margin: 0.5rem 0 0 0;">You have shown the vigilance of an Inquisitor in detecting statistical heresy! You may now proceed.</p>
                     </div>`;
-                if (window.StatisticsApp) {
-                    window.StatisticsApp.awardXP(20, "Bias detection mastery!");
-                }
+                this.activityCompleted = true;
             } else {
                 overallFeedback.innerHTML = `
                     <div style="background: rgba(234, 88, 12, 0.2); padding: 1rem; border-radius: 8px; border: 2px solid var(--warning-orange);">
                         <p style="color: var(--warning-orange); font-weight: bold; margin: 0;">📖 Score: ${correctCount}/${scenarios.length}</p>
-                        <p style="color: var(--text-light); margin: 0.5rem 0 0 0;">Keep studying! Detecting bias is crucial for valid statistical analysis.</p>
+                        <p style="color: var(--text-light); margin: 0.5rem 0 0 0;">You must get all scenarios correct to proceed. Detecting bias is crucial for valid statistical analysis.</p>
                     </div>`;
+                this.activityCompleted = false;
             }
             
             checkButton.parentNode.insertBefore(overallFeedback, checkButton.nextSibling);
+            this.updateNavigationButtons();
         }
     }
 

@@ -88,15 +88,34 @@ body {
     gap: 0.5rem;
 }
 
-.xp-counter {
+.rank-display {
     background: rgba(212, 175, 55, 0.2);
     padding: 0.5rem 1rem;
     border-radius: 25px;
     border: 2px solid var(--secondary-gold);
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
 }
 
-.xp-counter i {
+.rank-display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+.rank-display.promotion::before {
+    left: 100%;
+}
+
+.rank-display i {
     color: var(--secondary-gold);
     margin-right: 0.5rem;
 }
@@ -817,7 +836,105 @@ body {
     to { transform: translateX(0); opacity: 1; }
 }
 
-/* Responsive Design */
+/* Promotion Modal Styles */
+.promotion-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.5s ease;
+}
+
+.promotion-content {
+    background: var(--gradient-primary);
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 500px;
+    margin: 2rem;
+    border: 3px solid var(--secondary-gold);
+    box-shadow: var(--shadow-elevated);
+    animation: slideIn 0.6s ease;
+}
+
+.promotion-content h3 {
+    color: var(--secondary-gold);
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.rank-transition {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.old-rank {
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+.new-rank {
+    color: var(--secondary-gold);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.rank-transition i {
+    color: var(--secondary-gold);
+    font-size: 2rem;
+}
+
+.promotion-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.close-promotion {
+    background: var(--gradient-secondary);
+    color: var(--dark-bg);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.close-promotion:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Animation for rank updates */
+@keyframes rankGlow {
+    0% { box-shadow: 0 0 5px var(--secondary-gold); }
+    50% { box-shadow: 0 0 20px var(--secondary-gold), 0 0 30px var(--secondary-gold); }
+    100% { box-shadow: 0 0 5px var(--secondary-gold); }
+}
+
+.rank-display.promotion {
+    animation: rankGlow 2s ease-in-out;
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -887,6 +1004,25 @@ body {
     .simulation-controls button {
         width: 100%;
         max-width: 250px;
+    }
+    
+    .promotion-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .promotion-content h3 {
+        font-size: 1.5rem;
+    }
+    
+    .rank-transition {
+        font-size: 1.2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .rank-transition i {
+        transform: rotate(90deg);
     }
 }
 

@@ -5,10 +5,10 @@ A gamified web application for learning AP Statistics through the grim darkness 
 ## 🚀 Features
 
 ### 🎮 Gamified Learning Experience
-- **XP System**: Earn experience points for completing lessons and quizzes
+- **Rank System**: Progress from Recruit to Chapter Master based on quiz performance
 - **Chapter Progression**: Unlock new content as you master previous concepts
 - **Faction Selection**: Choose your learning style (Space Marines, Imperial Guard, or Adeptus Mechanicus)
-- **Ranking System**: Progress from Recruit to Chapter Master based on quiz performance
+- **Promotion Ceremonies**: Dramatic rank advancement when achieving excellence
 
 ### 📚 Comprehensive AP Statistics Curriculum
 - **10 Complete Chapters** covering all AP Statistics topics
@@ -68,15 +68,15 @@ Simply open `index.html` in your web browser - the app works as a static site!
 ### Learning Flow
 - **Read lesson content** with Warhammer-themed explanations
 - **Interact with examples** and practice problems
-- **Complete each lesson step** to earn XP
+- **Complete each lesson step** to progress through the chapter
 - **Take the chapter quiz** to test mastery
 - **Review incorrect answers** with detailed explanations
 
 ### Progress Tracking
-- **XP Points**: Earned for completing steps and correct answers
+- **Imperial Rank**: Advance from Recruit to Chapter Master based on performance
 - **Chapter Progress**: Visual indicators show your advancement
 - **Save/Load**: Progress automatically saves to browser storage
-- **Rankings**: Quiz performance determines your Imperial rank
+- **Promotion System**: Dramatic ceremonies when achieving new ranks
 
 ## 🔧 Technical Details
 

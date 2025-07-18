@@ -19,12 +19,12 @@ class QuizManager {
                         id: 1,
                         question: "A Planetary Governor wants to assess the morale of all Imperial Guard regiments in the sector. Due to time constraints, they decide to survey only the regiments stationed at the capital hive city. What type of bias does this introduce?",
                         options: [
+                            "Voluntary response bias",
                             "Response bias",
                             "Selection bias", 
-                            "Voluntary response bias",
                             "Survivorship bias"
                         ],
-                        correct: 1,
+                        correct: 2,
                         explanation: "This is selection bias because the sample (capital regiments) is not representative of the population (all regiments in the sector). Capital regiments might have different characteristics than those stationed elsewhere."
                     },
                     {
@@ -32,23 +32,23 @@ class QuizManager {
                         question: "Which of the following represents discrete quantitative data in an Imperial context?",
                         options: [
                             "The weight of a Space Marine's power armor",
-                            "The number of Titans in a Legion",
                             "The distance between forge worlds",
-                            "The time taken to complete a Warp jump"
+                            "The time taken to complete a Warp jump",
+                            "The number of Titans in a Legion"
                         ],
-                        correct: 1,
+                        correct: 3,
                         explanation: "The number of Titans is discrete quantitative data because you can count individual Titans (1, 2, 3, etc.) but cannot have fractional Titans."
                     },
                     {
                         id: 3,
                         question: "An Inquisitor surveys Space Marine chapters about their battle effectiveness by asking: 'Don't you agree that your chapter serves the Emperor with utmost efficiency?' This is an example of:",
                         options: [
-                            "Good survey design",
                             "Response bias due to leading questions",
+                            "Good survey design",
                             "Selection bias",
                             "Voluntary response bias"
                         ],
-                        correct: 1,
+                        correct: 0,
                         explanation: "This is response bias caused by a leading question. The question pushes respondents toward a positive answer rather than allowing them to express their true opinion."
                     },
                     {
@@ -56,11 +56,11 @@ class QuizManager {
                         question: "A study compares the combat effectiveness of Space Marines who volunteered for dangerous missions versus those who were assigned. What potential issue exists with this study design?",
                         options: [
                             "This is a well-designed experiment",
-                            "Selection bias - volunteers may be inherently different",
                             "The sample size is too small",
-                            "Response bias in the survey questions"
+                            "Response bias in the survey questions",
+                            "Selection bias - volunteers may be inherently different"
                         ],
-                        correct: 1,
+                        correct: 3,
                         explanation: "This is an observational study with potential selection bias. Marines who volunteer for dangerous missions may be inherently braver, more skilled, or have different motivations than those who are assigned."
                     },
                     {
@@ -85,9 +85,9 @@ class QuizManager {
                         id: 1,
                         question: "Five Space Marine squads report the following enemy kills: 8, 12, 15, 18, 22. An enemy artillery strike eliminates one squad with 8 kills from the data. How does this affect the mean and median of the remaining squads?",
                         options: [
-                            "Both mean and median increase",
+                            "Median increases more than mean",
                             "Mean increases more than median",
-                            "Median increases more than mean", 
+                            "Both mean and median increase", 
                             "Both remain the same"
                         ],
                         correct: 1,
@@ -97,12 +97,12 @@ class QuizManager {
                         id: 2,
                         question: "Battle effectiveness scores for two Imperial Guard regiments:\nRegiment A: 75, 78, 80, 82, 85 (Mean = 80)\nRegiment B: 60, 70, 80, 90, 100 (Mean = 80)\nWhich statement is correct?",
                         options: [
-                            "Both regiments perform equally well",
                             "Regiment A is more consistent in performance",
+                            "Both regiments perform equally well",
                             "Regiment B is more reliable",
                             "The data is insufficient to compare"
                         ],
-                        correct: 1,
+                        correct: 0,
                         explanation: "While both have the same mean (80), Regiment A has lower variability (range = 10) compared to Regiment B (range = 40), making Regiment A more consistent and reliable."
                     },
                     {
@@ -122,21 +122,21 @@ class QuizManager {
                         question: "A Commissar reviews accuracy scores that are heavily right-skewed (most soldiers score low, few score very high). Which measure of central tendency would best represent typical performance?",
                         options: [
                             "Mean, because it uses all data points",
-                            "Median, because it's resistant to skewness",
+                            "All three are equally appropriate",
                             "Mode, because it shows the most common score",
-                            "All three are equally appropriate"
+                            "Median, because it's resistant to skewness"
                         ],
-                        correct: 1,
+                        correct: 3,
                         explanation: "In skewed distributions, the median is preferred because it's not affected by extreme values. The mean would be pulled toward the tail, giving a misleading impression of typical performance."
                     },
                     {
                         id: 5,
                         question: "Two Adeptus Mechanicus forge worlds report production data:\nForge Alpha: Standard deviation = 50 units\nForge Beta: Standard deviation = 200 units\nWhat can you conclude about their production consistency?",
                         options: [
-                            "Forge Alpha produces more on average",
-                            "Forge Beta produces more on average", 
-                            "Forge Alpha has more consistent production",
-                            "Cannot determine without knowing the means"
+                            "Forge Beta produces more on average",
+                            "Cannot determine without knowing the means",
+                            "Forge Alpha has more consistent production", 
+                            "Forge Alpha produces more on average"
                         ],
                         correct: 2,
                         explanation: "Standard deviation measures variability. A lower standard deviation (Forge Alpha = 50) indicates more consistent production compared to higher standard deviation (Forge Beta = 200)."
@@ -151,24 +151,24 @@ class QuizManager {
                         id: 1,
                         question: "A Space Marine has a 0.8 probability of hitting a target. If he fires at 3 independent targets, what's the probability he hits all three?",
                         options: [
+                            "0.512",
                             "0.8",
                             "0.64",
-                            "0.512",
                             "2.4"
                         ],
-                        correct: 2,
+                        correct: 0,
                         explanation: "For independent events, P(A and B and C) = P(A) × P(B) × P(C) = 0.8 × 0.8 × 0.8 = 0.512"
                     },
                     {
                         id: 2,
                         question: "In a Space Marine recruitment test, 30% of candidates are from Death Worlds, and 60% of Death World candidates pass the trials. If 18% of all candidates both come from Death Worlds AND pass, are being from a Death World and passing the trials independent events?",
                         options: [
+                            "Cannot determine from given information",
                             "Yes, they are independent",
                             "No, they are dependent",
-                            "Cannot determine from given information",
                             "The question is invalid"
                         ],
-                        correct: 0,
+                        correct: 1,
                         explanation: "If independent: P(Death World AND Pass) = P(Death World) × P(Pass|Death World) = 0.30 × 0.60 = 0.18. Since this matches the given 18%, the events are independent."
                     },
                     {
@@ -176,21 +176,21 @@ class QuizManager {
                         question: "A Drop Pod has a 90% success rate for landing. What's the probability that at least one of three Drop Pods fails to land successfully?",
                         options: [
                             "0.1",
-                            "0.271", 
+                            "0.3",
                             "0.729",
-                            "0.3"
+                            "0.271"
                         ],
-                        correct: 1,
+                        correct: 3,
                         explanation: "P(at least one fails) = 1 - P(all succeed) = 1 - P(success)³ = 1 - (0.9)³ = 1 - 0.729 = 0.271"
                     },
                     {
                         id: 4,
                         question: "Intelligence reports indicate that 20% of enemy positions are heavily fortified. Your orbital scan correctly identifies fortified positions 85% of the time and correctly identifies non-fortified positions 90% of the time. If a scan indicates 'heavily fortified,' what's the probability it actually is fortified?",
                         options: [
+                            "0.175",
+                            "0.68",
                             "0.85",
-                            "0.68",
-                            "0.68",
-                            "0.175"
+                            "0.68"
                         ],
                         correct: 1,
                         explanation: "Using Bayes' theorem: P(Fortified|Positive scan) = P(Positive|Fortified) × P(Fortified) / P(Positive scan) = (0.85 × 0.20) / (0.85 × 0.20 + 0.10 × 0.80) = 0.17 / 0.25 = 0.68"
@@ -218,6 +218,12 @@ class QuizManager {
         this.userAnswers = [];
         this.quizQuestions = this.quizData[chapterId]?.questions || [];
         this.timeStarted = new Date();
+
+        // Reset shuffled options for new quiz attempt
+        this.quizQuestions.forEach(question => {
+            question.shuffledOptions = null;
+            question.shuffledCorrectIndex = null;
+        });
 
         if (this.quizQuestions.length === 0) {
             this.showPlaceholderQuiz(chapterId);
@@ -262,6 +268,11 @@ class QuizManager {
         const question = this.quizQuestions[this.currentQuestionIndex];
         const quizContent = document.getElementById('quiz-content');
         
+        // Randomize answer options if not already done for this question
+        if (!question.shuffledOptions) {
+            this.shuffleQuestionOptions(question);
+        }
+        
         // Update progress
         document.getElementById('quiz-progress-text').textContent = 
             `Question ${this.currentQuestionIndex + 1} of ${this.quizQuestions.length}`;
@@ -272,10 +283,10 @@ class QuizManager {
                 <p class="question-text">${question.question}</p>
                 
                 <div class="options">
-                    ${question.options.map((option, index) => `
+                    ${question.shuffledOptions.map((option, index) => `
                         <div class="option" data-index="${index}" onclick="window.QuizManager.selectOption(${index})">
                             <span class="option-letter">${String.fromCharCode(65 + index)})</span>
-                            <span class="option-text">${option}</span>
+                            <span class="option-text">${option.text}</span>
                         </div>
                     `).join('')}
                 </div>
@@ -298,55 +309,93 @@ class QuizManager {
 
         // If user has already answered this question, show their selection
         if (this.userAnswers[this.currentQuestionIndex] !== undefined) {
-            this.selectOption(this.userAnswers[this.currentQuestionIndex], false);
+            const previousAnswer = this.userAnswers[this.currentQuestionIndex];
+            this.selectOption(previousAnswer, false);
+            
+            // Check if the previous answer was correct to enable/disable next button
+            const isCorrect = previousAnswer === question.shuffledCorrectIndex;
+            document.getElementById('quiz-next').disabled = !isCorrect;
+        } else {
+            // Ensure next button is disabled for unanswered questions
+            const nextButton = document.getElementById('quiz-next');
+            if (nextButton) {
+                nextButton.disabled = true;
+            }
         }
     }
 
+    shuffleQuestionOptions(question) {
+        // Create an array of options with their original indices
+        const optionsWithIndices = question.options.map((text, index) => ({
+            text: text,
+            originalIndex: index
+        }));
+        
+        // Shuffle the options array
+        for (let i = optionsWithIndices.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [optionsWithIndices[i], optionsWithIndices[j]] = [optionsWithIndices[j], optionsWithIndices[i]];
+        }
+        
+        // Store shuffled options and update correct answer index
+        question.shuffledOptions = optionsWithIndices;
+        question.shuffledCorrectIndex = optionsWithIndices.findIndex(option => option.originalIndex === question.correct);
+    }
+
     selectOption(optionIndex, newSelection = true) {
-        // Clear previous selections
+        // Clear previous selections and highlights
         document.querySelectorAll('.option').forEach(option => {
-            option.classList.remove('selected');
+            option.classList.remove('selected', 'correct', 'incorrect');
         });
+
+        // Hide previous feedback
+        const feedbackDiv = document.getElementById('answer-feedback');
+        if (feedbackDiv) {
+            feedbackDiv.style.display = 'none';
+        }
 
         // Mark selected option
         const selectedOption = document.querySelector(`[data-index="${optionIndex}"]`);
-        selectedOption.classList.add('selected');
+        if (selectedOption) {
+            selectedOption.classList.add('selected');
+        }
 
         // Store answer
         this.userAnswers[this.currentQuestionIndex] = optionIndex;
 
-        // Enable next button
-        document.getElementById('quiz-next').disabled = false;
-
         // Show immediate feedback if this is a new selection
         if (newSelection) {
             this.showAnswerFeedback(optionIndex);
+        }
+
+        // Only enable next button if the answer is correct
+        const question = this.quizQuestions[this.currentQuestionIndex];
+        const isCorrect = optionIndex === question.shuffledCorrectIndex;
+        const nextButton = document.getElementById('quiz-next');
+        if (nextButton) {
+            nextButton.disabled = !isCorrect;
         }
     }
 
     showAnswerFeedback(selectedIndex) {
         const question = this.quizQuestions[this.currentQuestionIndex];
         const feedbackDiv = document.getElementById('answer-feedback');
-        const isCorrect = selectedIndex === question.correct;
+        const isCorrect = selectedIndex === question.shuffledCorrectIndex;
 
         let feedbackHTML = '';
         if (isCorrect) {
             feedbackHTML = `
                 <div class="feedback correct">
                     <i class="fas fa-check-circle"></i>
-                    <strong>Correct!</strong> Well done, Battle-Brother!
+                    <strong>Correct!</strong> Well done, Battle-Brother! You may proceed.
                     <p>${question.explanation}</p>
                 </div>
             `;
-            // Award XP for correct answer
-            if (window.StatisticsApp) {
-                window.StatisticsApp.awardXP(20, "Correct answer!");
-            }
         } else {
             feedbackHTML = `
                 <div class="feedback incorrect">
                     <i class="fas fa-times-circle"></i>
-                    <strong>Incorrect.</strong> The correct answer is ${String.fromCharCode(65 + question.correct)}).
+                    <strong>Incorrect.</strong> You must answer correctly to proceed. The correct answer is ${String.fromCharCode(65 + question.shuffledCorrectIndex)}).
                     <p>${question.explanation}</p>
                 </div>
             `;
@@ -357,7 +406,7 @@ class QuizManager {
 
         // Highlight correct answer
         document.querySelectorAll('.option').forEach((option, index) => {
-            if (index === question.correct) {
+            if (index === question.shuffledCorrectIndex) {
                 option.classList.add('correct');
             } else if (index === selectedIndex && !isCorrect) {
                 option.classList.add('incorrect');
@@ -366,6 +415,12 @@ class QuizManager {
     }
 
     nextQuestion() {
+        // Check if next button should be disabled
+        const nextButton = document.getElementById('quiz-next');
+        if (nextButton && nextButton.disabled) {
+            return; // Don't proceed if button is disabled
+        }
+        
         if (this.currentQuestionIndex < this.quizQuestions.length - 1) {
             this.currentQuestionIndex++;
             this.showCurrentQuestion();
@@ -391,33 +446,34 @@ class QuizManager {
         
         let performanceMessage = '';
         let performanceClass = '';
-        let rank = '';
+        
+        // Calculate what the rank would be after completing this chapter
+        const potentialRank = this.calculatePotentialRank(percentage);
 
-        if (percentage >= 90) {
+        // Since all answers are now required to be correct, users should always get 100%
+        if (percentage === 100) {
+            performanceMessage = "Perfect! You have mastered this chapter with the skill of a Primarch!";
+            performanceClass = 'excellent';
+        } else if (percentage >= 90) {
             performanceMessage = "Outstanding! You fight with the skill of a Primarch!";
             performanceClass = 'excellent';
-            rank = 'Chapter Master';
         } else if (percentage >= 80) {
             performanceMessage = "Well done! You have proven yourself worthy of the Emperor's trust.";
             performanceClass = 'good';
-            rank = 'Captain';
         } else if (percentage >= 70) {
             performanceMessage = "Acceptable performance, but more training is required.";
             performanceClass = 'average';
-            rank = 'Sergeant';
         } else if (percentage >= 60) {
             performanceMessage = "You need additional study to serve the Emperor effectively.";
             performanceClass = 'below-average';
-            rank = 'Initiate';
         } else {
             performanceMessage = "Report for immediate retraining, recruit!";
             performanceClass = 'poor';
-            rank = 'Recruit';
         }
 
         quizContent.innerHTML = `
             <div class="quiz-results ${performanceClass}">
-                <h3>🏆 Battle Assessment Complete</h3>
+                <h3>🏆 Battle Assessment Complete - Chapter Mastered!</h3>
                 
                 <div class="score-display">
                     <div class="score-circle">
@@ -430,13 +486,13 @@ class QuizManager {
                 </div>
                 
                 <div class="performance-summary">
-                    <h4>Rank Achieved: ${rank}</h4>
+                    <h4>Rank After Completion: ${potentialRank}</h4>
                     <p class="performance-message">${performanceMessage}</p>
                     
                     <div class="stats-grid">
                         <div class="stat-item">
                             <i class="fas fa-target"></i>
-                            <span>Accuracy</span>
+                            <span>Mastery</span>
                             <strong>${percentage}%</strong>
                         </div>
                         <div class="stat-item">
@@ -446,21 +502,18 @@ class QuizManager {
                         </div>
                         <div class="stat-item">
                             <i class="fas fa-star"></i>
-                            <span>XP Earned</span>
-                            <strong>${correctAnswers * 20}</strong>
+                            <span>Score</span>
+                            <strong>${correctAnswers}/${totalQuestions}</strong>
                         </div>
                     </div>
                 </div>
                 
                 <div class="question-review">
-                    <h4>Question Review:</h4>
+                    <h4>Knowledge Review:</h4>
                     ${this.generateQuestionReview()}
                 </div>
                 
                 <div class="quiz-actions">
-                    <button class="cta-button" onclick="window.QuizManager.retakeQuiz()">
-                        <i class="fas fa-redo"></i> Retake Assessment
-                    </button>
                     <button class="nav-button" onclick="window.QuizManager.completeChapter()">
                         <i class="fas fa-flag-checkered"></i> Complete Chapter
                     </button>
@@ -471,36 +524,68 @@ class QuizManager {
             </div>
         `;
 
-        // Award completion bonus XP
+        // Results summary for the user
         if (window.StatisticsApp) {
-            let bonusXP = 0;
-            if (percentage >= 90) bonusXP = 100;
-            else if (percentage >= 80) bonusXP = 75;
-            else if (percentage >= 70) bonusXP = 50;
-            else if (percentage >= 60) bonusXP = 25;
-
-            if (bonusXP > 0) {
-                window.StatisticsApp.awardXP(bonusXP, `${rank} rank bonus!`);
-            }
+            window.StatisticsApp.showNotification(
+                `Chapter mastered! Perfect understanding achieved with ${percentage}% accuracy!`, 
+                'success'
+            );
         }
     }
 
     calculateScore() {
         let correct = 0;
         for (let i = 0; i < this.quizQuestions.length; i++) {
-            if (this.userAnswers[i] === this.quizQuestions[i].correct) {
+            if (this.userAnswers[i] === this.quizQuestions[i].shuffledCorrectIndex) {
                 correct++;
             }
         }
         return correct;
     }
 
+    calculatePotentialRank(quizPercentage) {
+        // Only calculate potential rank if passing grade (70% or higher)
+        if (quizPercentage < 70) {
+            return window.StatisticsApp ? window.StatisticsApp.currentRank : 'Recruit';
+        }
+        
+        if (!window.StatisticsApp) {
+            return 'Recruit';
+        }
+        
+        // Simulate what the rank would be after completing this chapter
+        const currentCompletedChapters = window.StatisticsApp.completedChapters.size;
+        const currentScores = Object.values(window.StatisticsApp.chapterScores);
+        
+        // Calculate what the new average would be
+        const newCompletedCount = currentCompletedChapters + 1;
+        const newTotalScore = currentScores.reduce((a, b) => a + b, 0) + quizPercentage;
+        const newAverageScore = newTotalScore / newCompletedCount;
+        
+        console.log('Potential rank calculation:', {
+            currentCompletedChapters,
+            currentScores,
+            quizPercentage,
+            newCompletedCount,
+            newAverageScore
+        });
+        
+        // Apply the same rank logic as the main app
+        if (newCompletedCount >= 8 && newAverageScore >= 90) return 'Chapter Master';
+        if (newCompletedCount >= 6 && newAverageScore >= 85) return 'Captain';
+        if (newCompletedCount >= 4 && newAverageScore >= 80) return 'Lieutenant';
+        if (newCompletedCount >= 2 && newAverageScore >= 75) return 'Sergeant';
+        if (newCompletedCount >= 1 && newAverageScore >= 70) return 'Initiate';
+        
+        return 'Recruit';
+    }
+
     generateQuestionReview() {
         return this.quizQuestions.map((question, index) => {
             const userAnswer = this.userAnswers[index];
-            const isCorrect = userAnswer === question.correct;
-            const userAnswerText = userAnswer !== undefined ? question.options[userAnswer] : 'Not answered';
-            const correctAnswerText = question.options[question.correct];
+            const isCorrect = userAnswer === question.shuffledCorrectIndex;
+            const userAnswerText = userAnswer !== undefined ? question.shuffledOptions[userAnswer].text : 'Not answered';
+            const correctAnswerText = question.shuffledOptions[question.shuffledCorrectIndex].text;
 
             return `
                 <div class="question-review-item ${isCorrect ? 'correct' : 'incorrect'}">
@@ -517,6 +602,13 @@ class QuizManager {
         this.currentQuestionIndex = 0;
         this.userAnswers = [];
         this.timeStarted = new Date();
+        
+        // Reset shuffled options for retake
+        this.quizQuestions.forEach(question => {
+            question.shuffledOptions = null;
+            question.shuffledCorrectIndex = null;
+        });
+        
         this.showCurrentQuestion();
     }
 
@@ -524,15 +616,16 @@ class QuizManager {
         const score = this.calculateScore();
         const percentage = (score / this.quizQuestions.length) * 100;
         
-        // Only mark chapter as complete if passing grade (70% or higher)
+        // Since all answers are now required to be correct, users should always have 100%
+        // But we'll keep the check for safety
         if (percentage >= 70) {
             if (window.StatisticsApp) {
-                window.StatisticsApp.completeChapter(this.currentQuizId);
+                window.StatisticsApp.completeChapter(this.currentQuizId, percentage);
             }
         } else {
             if (window.StatisticsApp) {
                 window.StatisticsApp.showNotification(
-                    'Achieve 70% or higher to complete the chapter!', 
+                    'Chapter mastery required! Please review the questions you missed.', 
                     'warning'
                 );
             }

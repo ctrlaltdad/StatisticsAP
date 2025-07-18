@@ -6,8 +6,9 @@ class StatisticsApp {
         this.currentChapter = 1;
         this.currentLesson = null;
         this.currentLessonStep = 0;
-        this.xpPoints = 0;
+        this.currentRank = 'Recruit';
         this.completedChapters = new Set();
+        this.chapterScores = {}; // Track quiz performance
         this.currentQuiz = null;
         
         this.init();
@@ -255,19 +256,79 @@ class StatisticsApp {
         document.getElementById('next-step').disabled = this.currentLessonStep >= totalSteps;
     }
 
-    awardXP(amount, reason) {
-        this.xpPoints += amount;
-        this.updateXPDisplay();
-        this.showNotification(`+${amount} XP: ${reason}`, 'success');
-        this.saveProgress();
+    getRankFromProgress() {
+        const completedCount = this.completedChapters.size;
+        const averageScore = this.getAverageQuizScore();
+        
+        // No chapters completed
+        if (completedCount === 0) return 'Recruit';
+        
+        // Check rank requirements (ordered from highest to lowest)
+        if (completedCount >= 8 && averageScore >= 90) return 'Chapter Master';
+        if (completedCount >= 6 && averageScore >= 85) return 'Captain';
+        if (completedCount >= 4 && averageScore >= 80) return 'Lieutenant';
+        if (completedCount >= 2 && averageScore >= 75) return 'Sergeant';
+        if (completedCount >= 1 && averageScore >= 70) return 'Initiate';
+        
+        // If completed chapters but score is too low, remain Recruit
+        return 'Recruit';
     }
 
-    updateXPDisplay() {
-        document.getElementById('xp-points').textContent = this.xpPoints;
+    getAverageQuizScore() {
+        const scores = Object.values(this.chapterScores);
+        if (scores.length === 0) return 0;
+        return scores.reduce((a, b) => a + b, 0) / scores.length;
+    }
+
+    updateRank() {
+        const newRank = this.getRankFromProgress();
+        const oldRank = this.currentRank;
+        
+        if (newRank !== oldRank) {
+            this.currentRank = newRank;
+            this.updateRankDisplay();
+            this.showRankPromotion(oldRank, newRank);
+        }
+    }
+
+    updateRankDisplay() {
+        document.getElementById('current-rank').textContent = this.currentRank;
+    }
+
+    showRankPromotion(oldRank, newRank) {
+        this.showNotification(`🏆 PROMOTION! ${oldRank} → ${newRank}`, 'success');
+        
+        // Show detailed promotion modal
+        const container = document.getElementById('notification-container');
+        const promotionModal = document.createElement('div');
+        promotionModal.className = 'promotion-modal';
+        promotionModal.innerHTML = `
+            <div class="promotion-content">
+                <h3>🎖️ IMPERIAL PROMOTION 🎖️</h3>
+                <div class="rank-transition">
+                    <span class="old-rank">${oldRank}</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span class="new-rank">${newRank}</span>
+                </div>
+                <p>Your dedication to statistical mastery has been recognized by the Emperor himself!</p>
+                <button onclick="this.parentElement.parentElement.remove()" class="close-promotion">
+                    For the Emperor!
+                </button>
+            </div>
+        `;
+        
+        container.appendChild(promotionModal);
+        
+        // Auto-remove after 8 seconds
+        setTimeout(() => {
+            if (promotionModal.parentNode) {
+                promotionModal.parentNode.removeChild(promotionModal);
+            }
+        }, 8000);
     }
 
     updateUI() {
-        this.updateXPDisplay();
+        this.updateRankDisplay();
         document.getElementById('current-chapter').textContent = this.currentChapter;
         
         // Update faction-specific styling if selected
@@ -276,10 +337,11 @@ class StatisticsApp {
         }
     }
 
-    completeChapter(chapterId) {
+    completeChapter(chapterId, quizScore) {
         this.completedChapters.add(chapterId);
+        this.chapterScores[chapterId] = quizScore;
         this.currentChapter = Math.max(this.currentChapter, chapterId + 1);
-        this.awardXP(100, `Chapter ${chapterId} completed!`);
+        this.updateRank();
         this.generateChapters();
         this.showScreen('chapter-selection');
     }
@@ -304,8 +366,9 @@ class StatisticsApp {
         const progress = {
             selectedFaction: this.selectedFaction,
             currentChapter: this.currentChapter,
-            xpPoints: this.xpPoints,
+            currentRank: this.currentRank,
             completedChapters: Array.from(this.completedChapters),
+            chapterScores: this.chapterScores,
             lastSaved: new Date().toISOString()
         };
         
@@ -319,8 +382,11 @@ class StatisticsApp {
                 const progress = JSON.parse(saved);
                 this.selectedFaction = progress.selectedFaction;
                 this.currentChapter = progress.currentChapter || 1;
-                this.xpPoints = progress.xpPoints || 0;
+                this.chapterScores = progress.chapterScores || {};
                 this.completedChapters = new Set(progress.completedChapters || []);
+                
+                // Always recalculate rank based on current progress
+                this.currentRank = this.getRankFromProgress();
                 
                 // If returning user, skip to chapter selection
                 if (this.selectedFaction) {
@@ -342,7 +408,8 @@ class StatisticsApp {
     resetProgress() {
         this.selectedFaction = null;
         this.currentChapter = 1;
-        this.xpPoints = 0;
+        this.currentRank = 'Recruit';
+        this.chapterScores = {};
         this.completedChapters.clear();
         this.currentLesson = null;
         this.currentLessonStep = 0;
