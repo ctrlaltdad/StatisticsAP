@@ -10,6 +10,7 @@ class StatisticsApp {
         this.dataManager = null;
         this.progressManager = null;
         this.eventManager = null;
+        this.adminManager = null;
         
         // UI components
         this.chapterComponent = null;
@@ -74,6 +75,9 @@ class StatisticsApp {
         // Initialize content manager
         this.contentManager = new ContentManager(this.dataManager);
         
+        // Initialize admin manager
+        this.adminManager = new AdminManager(this.dataManager, this.eventManager);
+        
         console.log('✅ Core managers initialized');
     }
 
@@ -108,12 +112,14 @@ class StatisticsApp {
         window.chapterComponent = this.chapterComponent;
         window.lessonComponent = this.lessonComponent;
         window.quizComponent = this.quizComponent;
+        window.adminManager = this.adminManager;
         
         // Debug: Verify components are accessible
         console.log('✅ Components made globally accessible:', {
             chapterComponent: !!window.chapterComponent,
             lessonComponent: !!window.lessonComponent,
-            quizComponent: !!window.quizComponent
+            quizComponent: !!window.quizComponent,
+            adminManager: !!window.adminManager
         });
 
         console.log('✅ UI components initialized');
@@ -197,6 +203,27 @@ class StatisticsApp {
 
         this.eventManager.on(EVENTS.NOTIFICATION_SHOW, (notification) => {
             this.showNotification(notification.message, notification.type);
+        });
+
+        // Admin event listeners
+        this.eventManager.on('admin:login', (data) => {
+            this.onAdminLogin(data);
+        });
+
+        this.eventManager.on('admin:logout', () => {
+            this.onAdminLogout();
+        });
+
+        this.eventManager.on('admin:jump-to-chapter', (data) => {
+            this.adminJumpToChapter(data.chapterId);
+        });
+
+        this.eventManager.on('admin:unlock-all-chapters', () => {
+            this.adminUnlockAllChapters();
+        });
+
+        this.eventManager.on('admin:reset-progress', () => {
+            this.adminResetProgress();
         });
 
         console.log('✅ Event listeners configured');
@@ -581,6 +608,63 @@ class StatisticsApp {
      */
     showChapterSelect() {
         this.showScreen('chapter-selection');
+    }
+
+    // ===== ADMIN EVENT HANDLERS =====
+
+    /**
+     * Handle admin login event
+     */
+    onAdminLogin(data) {
+        console.log('🔑 Admin logged in');
+        // Refresh chapter component to show admin controls
+        this.chapterComponent?.render();
+    }
+
+    /**
+     * Handle admin logout event
+     */
+    onAdminLogout() {
+        console.log('🔑 Admin logged out');
+        // Refresh chapter component to remove admin controls
+        this.chapterComponent?.render();
+    }
+
+    /**
+     * Admin action: Jump to specific chapter
+     */
+    adminJumpToChapter(chapterId) {
+        // Get chapter data first
+        const chapterData = this.dataManager.getChapterData(chapterId);
+        if (!chapterData) {
+            console.error(`Chapter ${chapterId} not found`);
+            return;
+        }
+
+        // Update current chapter in progress
+        this.progressManager.currentChapter = chapterId;
+        
+        // Use the existing startChapter method with chapter object
+        this.startChapter(chapterData);
+        
+        console.log(`🔑 Admin jumped to chapter ${chapterId}: ${chapterData.title}`);
+    }
+
+    /**
+     * Admin action: Unlock all chapters temporarily
+     */
+    adminUnlockAllChapters() {
+        // Refresh chapter component which will check admin status
+        this.chapterComponent?.render();
+    }
+
+    /**
+     * Admin action: Reset all progress
+     */
+    adminResetProgress() {
+        this.progressManager.resetProgress();
+        this.chapterComponent?.render();
+        this.showScreen('welcome-screen');
     }
 }
 

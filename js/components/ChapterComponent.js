@@ -60,22 +60,24 @@ class ChapterComponent {
      * Create a chapter card element
      */
     createChapterCard(chapter) {
-        const isUnlocked = this.progressManager.isChapterUnlocked(chapter.id);
+        const isNormallyUnlocked = this.progressManager.isChapterUnlocked(chapter.id);
+        const isAdminUnlocked = window.adminManager?.isChapterAdminUnlocked(chapter.id) || false;
+        const isUnlocked = isNormallyUnlocked || isAdminUnlocked;
         const isCompleted = this.progressManager.completedChapters.has(chapter.id);
         const score = this.progressManager.chapterScores[chapter.id];
 
         const chapterCard = document.createElement('div');
-        chapterCard.className = `chapter-card ${!isUnlocked ? 'locked' : ''} ${isCompleted ? 'completed' : ''}`;
+        chapterCard.className = `chapter-card ${!isUnlocked ? 'locked' : ''} ${isCompleted ? 'completed' : ''} ${isAdminUnlocked && !isNormallyUnlocked ? 'admin-unlocked' : ''}`;
         chapterCard.dataset.chapterId = chapter.id;
 
         if (isUnlocked) {
-            chapterCard.addEventListener('click', () => this.onChapterClick(chapter));
+            chapterCard.addEventListener('click', () => this.onChapterClick(chapter, isAdminUnlocked && !isNormallyUnlocked));
             chapterCard.setAttribute('role', 'button');
             chapterCard.setAttribute('tabindex', '0');
-            chapterCard.setAttribute('aria-label', `Start ${chapter.title}`);
+            chapterCard.setAttribute('aria-label', `Start ${chapter.title}${isAdminUnlocked && !isNormallyUnlocked ? ' (Admin Access)' : ''}`);
         }
 
-        chapterCard.innerHTML = this.getChapterCardHTML(chapter, isUnlocked, isCompleted, score);
+        chapterCard.innerHTML = this.getChapterCardHTML(chapter, isUnlocked, isCompleted, score, isAdminUnlocked && !isNormallyUnlocked);
         
         return chapterCard;
     }
@@ -83,9 +85,10 @@ class ChapterComponent {
     /**
      * Get HTML for chapter card
      */
-    getChapterCardHTML(chapter, isUnlocked, isCompleted, score) {
-        const statusIcon = this.getStatusIcon(isUnlocked, isCompleted);
+    getChapterCardHTML(chapter, isUnlocked, isCompleted, score, isAdminAccess = false) {
+        const statusIcon = this.getStatusIcon(isUnlocked, isCompleted, isAdminAccess);
         const scoreDisplay = score ? `<div class="chapter-score">${score}%</div>` : '';
+        const adminBadge = isAdminAccess ? '<div class="admin-badge">🔑 ADMIN</div>' : '';
         
         return `
             <div class="chapter-header">
@@ -94,6 +97,7 @@ class ChapterComponent {
                     ${statusIcon}
                 </div>
                 ${scoreDisplay}
+                ${adminBadge}
             </div>
             <h3 class="chapter-title">${chapter.title}</h3>
             <p class="chapter-description">${chapter.description}</p>
@@ -104,18 +108,20 @@ class ChapterComponent {
             <div class="chapter-topics">
                 ${chapter.topics.map(topic => `<span class="topic-tag">${topic}</span>`).join('')}
             </div>
-            ${this.getChapterActions(chapter, isUnlocked, isCompleted)}
+            ${this.getChapterActions(chapter, isUnlocked, isCompleted, isAdminAccess)}
         `;
     }
 
     /**
      * Get status icon for chapter
      */
-    getStatusIcon(isUnlocked, isCompleted) {
+    getStatusIcon(isUnlocked, isCompleted, isAdminAccess = false) {
         if (isCompleted) {
             return '<i class="fas fa-check-circle" title="Completed"></i>';
         } else if (isUnlocked) {
-            return '<i class="fas fa-play-circle" title="Available"></i>';
+            const title = isAdminAccess ? "Available (Admin Access)" : "Available";
+            const icon = isAdminAccess ? "fas fa-key" : "fas fa-play-circle";
+            return `<i class="${icon}" title="${title}"></i>`;
         } else {
             return '<i class="fas fa-lock" title="Locked"></i>';
         }
@@ -124,21 +130,27 @@ class ChapterComponent {
     /**
      * Get action buttons for chapter
      */
-    getChapterActions(chapter, isUnlocked, isCompleted) {
+    getChapterActions(chapter, isUnlocked, isCompleted, isAdminAccess = false) {
         if (!isUnlocked) {
-            return '<div class="chapter-actions"><span class="unlock-requirement">Complete previous chapters to unlock</span></div>';
+            const adminHint = window.adminManager?.isAdminMode ? 
+                '<div class="admin-hint">💡 Press Ctrl+Shift+A for admin access</div>' : '';
+            return `<div class="chapter-actions">
+                <span class="unlock-requirement">Complete previous chapters to unlock</span>
+                ${adminHint}
+            </div>`;
         }
 
         const startText = isCompleted ? 'Review Chapter' : 'Start Chapter';
+        const adminBadge = isAdminAccess ? ' <span class="admin-action-badge">🔑</span>' : '';
         const retakeButton = isCompleted ? 
             `<button class="action-button secondary" onclick="event.stopPropagation(); window.chapterComponent.retakeQuiz(${chapter.id})">
-                <i class="fas fa-redo"></i> Retake Quiz
+                <i class="fas fa-redo"></i> Retake Quiz${adminBadge}
             </button>` : '';
 
         return `
             <div class="chapter-actions">
                 <button class="action-button primary">
-                    <i class="fas fa-play"></i> ${startText}
+                    <i class="fas fa-play"></i> ${startText}${adminBadge}
                 </button>
                 ${retakeButton}
             </div>
@@ -148,8 +160,14 @@ class ChapterComponent {
     /**
      * Handle chapter click
      */
-    onChapterClick(chapter) {
-        this.eventManager.emit(EVENTS.CHAPTER_STARTED, chapter);
+    onChapterClick(chapter, isAdminAccess = false) {
+        if (isAdminAccess) {
+            // Emit admin chapter start event
+            this.eventManager.emit('admin:jump-to-chapter', { chapterId: chapter.id });
+        } else {
+            // Normal chapter start
+            this.eventManager.emit(EVENTS.CHAPTER_STARTED, chapter);
+        }
     }
 
     /**
