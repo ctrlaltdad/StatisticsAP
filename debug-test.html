@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>Interactive Data Debug Test</h1>
+    <div id="test-output"></div>
+
+    <script>
+        // Test data scenarios
+        const testCases = [
+            {
+                name: "Valid Array",
+                data: [85, 92, 78, 88, 95, 82, 90]
+            },
+            {
+                name: "Empty Array",
+                data: []
+            },
+            {
+                name: "Null Data",
+                data: null
+            },
+            {
+                name: "Undefined Data",
+                data: undefined
+            },
+            {
+                name: "Object Data",
+                data: { series1: [1, 2, 3], series2: [4, 5, 6] }
+            },
+            {
+                name: "String Data",
+                data: "not an array"
+            },
+            {
+                name: "Number Data",
+                data: 123
+            }
+        ];
+
+        const output = document.getElementById('test-output');
+        
+        testCases.forEach(testCase => {
+            console.log(`Testing: ${testCase.name}`, testCase.data);
+            
+            let result = '';
+            try {
+                if (Array.isArray(testCase.data) && typeof testCase.data.join === 'function') {
+                    result = `Array with join: ${testCase.data.join(', ')}`;
+                } else if (typeof testCase.data === 'object' && testCase.data !== null) {
+                    result = `Object: ${JSON.stringify(testCase.data)}`;
+                    if (testCase.data) {
+                        for (const entry of Object.entries(testCase.data)) {
+                            const key = entry[0];
+                            const values = entry[1];
+                            if (Array.isArray(values) && typeof values.join === 'function') {
+                                result += ` | ${key}: ${values.join(', ')}`;
+                            } else {
+                                result += ` | ${key}: ${values}`;
+                            }
+                        }
+                    }
+                } else {
+                    result = `Other type: ${testCase.data}`;
+                }
+            } catch (error) {
+                result = `ERROR: ${error.message}`;
+            }
+            
+            output.innerHTML += `<p><strong>${testCase.name}:</strong> ${result}</p>`;
+        });
+    </script>
+</body>
+</html>

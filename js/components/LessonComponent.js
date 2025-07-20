@@ -113,6 +113,7 @@ class LessonComponent {
 
         // Add interactive element if present
         if (step.interactive) {
+            console.log('Processing interactive element for step:', this.currentStepIndex, step.interactive);
             stepHTML += this.generateInteractiveElement(step.interactive);
             this.activityCompleted = false;
         } else {
@@ -126,6 +127,18 @@ class LessonComponent {
      * Generate interactive element HTML
      */
     generateInteractiveElement(interactive) {
+        if (!interactive) {
+            console.error('Invalid interactive object: null or undefined');
+            return '<div class="interactive-element"><p>Error: Interactive content not available.</p></div>';
+        }
+        
+        if (!interactive.type) {
+            console.error('Invalid interactive object: missing type property');
+            return '<div class="interactive-element"><p>Error: Interactive type not specified.</p></div>';
+        }
+        
+        console.log('Generating interactive element:', interactive.type, interactive);
+        
         switch (interactive.type) {
             case 'classification':
                 return this.generateClassificationActivity(interactive);
@@ -136,6 +149,7 @@ class LessonComponent {
             case 'simulation':
                 return this.generateSimulationActivity(interactive);
             default:
+                console.warn('Unknown interactive type:', interactive.type);
                 return '<div class="interactive-element">Interactive activity not implemented</div>';
         }
     }
@@ -173,20 +187,96 @@ class LessonComponent {
      * Generate calculation activity
      */
     generateCalculationActivity(interactive) {
-        return `
-            <div class="interactive-element">
-                <h4>${interactive.question}</h4>
-                <p><strong>Data:</strong> ${interactive.data.join(', ')}</p>
-                <div class="calculation-inputs">
-                    <label>Mean: <input type="number" id="mean-input" step="0.01" placeholder="Enter calculated mean"></label>
-                    <label>Median: <input type="number" id="median-input" step="0.01" placeholder="Enter calculated median"></label>
+        try {
+            // Validate the interactive object
+            if (!interactive) {
+                console.error('Invalid interactive object: null or undefined');
+                return '<div class="interactive-element"><p>Error: Interactive content not available.</p></div>';
+            }
+            
+            if (!interactive.data) {
+                console.error('Invalid interactive object: missing data property');
+                return '<div class="interactive-element"><p>Error: No data provided for calculation.</p></div>';
+            }
+            
+            if (!interactive.answers || typeof interactive.answers !== 'object') {
+                console.error('Invalid interactive object: missing or invalid answers property');
+                return '<div class="interactive-element"><p>Error: No answers provided for validation.</p></div>';
+            }
+            
+            console.log('Processing calculation activity with data:', interactive.data, 'type:', typeof interactive.data, 'isArray:', Array.isArray(interactive.data));
+            
+            // Handle different data formats
+            let dataDisplay = '';
+            
+            if (Array.isArray(interactive.data) && typeof interactive.data.join === 'function') {
+                // Simple array format - additional safety check
+                try {
+                    dataDisplay = `<p><strong>Data:</strong> ${interactive.data.join(', ')}</p>`;
+                } catch (joinError) {
+                    console.warn('Error calling join on array:', joinError, interactive.data);
+                    dataDisplay = `<p><strong>Data:</strong> ${interactive.data.toString()}</p>`;
+                }
+            } else if (typeof interactive.data === 'object' && interactive.data !== null) {
+                // Object format (e.g., multiple datasets)
+                dataDisplay = '<div class="data-sets">';
+                try {
+                    for (const entry of Object.entries(interactive.data)) {
+                        // Safely destructure with default values
+                        const key = entry[0] || 'Unknown';
+                        const values = entry[1];
+                        
+                        if (Array.isArray(values) && typeof values.join === 'function') {
+                            try {
+                                dataDisplay += `<p><strong>${key}:</strong> ${values.join(', ')}</p>`;
+                            } catch (joinError) {
+                                console.warn('Error calling join on nested array:', joinError, values);
+                                dataDisplay += `<p><strong>${key}:</strong> ${values.toString()}</p>`;
+                            }
+                        } else {
+                            dataDisplay += `<p><strong>${key}:</strong> ${values}</p>`;
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Error processing interactive data:', error);
+                    dataDisplay += `<p><strong>Data:</strong> ${JSON.stringify(interactive.data)}</p>`;
+                }
+                dataDisplay += '</div>';
+            } else {
+                // Fallback for other data types
+                dataDisplay = `<p><strong>Data:</strong> ${interactive.data}</p>`;
+            }
+
+            return `
+                <div class="interactive-element">
+                    <h4>${interactive.question || 'Calculation Exercise'}</h4>
+                    ${dataDisplay}
+                    <div class="calculation-inputs">
+                        ${interactive.answers && interactive.answers.mean !== undefined ? 
+                            '<label>Mean: <input type="number" id="mean-input" step="0.01" placeholder="Enter calculated mean"></label>' : ''}
+                        ${interactive.answers && interactive.answers.median !== undefined ? 
+                            '<label>Median: <input type="number" id="median-input" step="0.01" placeholder="Enter calculated median"></label>' : ''}
+                        ${interactive.answers && interactive.answers.range !== undefined ? 
+                            '<label>Range: <input type="number" id="range-input" step="0.01" placeholder="Enter calculated range"></label>' : ''}
+                        ${interactive.answers && interactive.answers.mode !== undefined ? 
+                            '<label>Mode: <input type="text" id="mode-input" placeholder="Enter mode (or \'none\')"></label>' : ''}
+                    </div>
+                    <button class="check-answers-btn" onclick="window.lessonComponent.checkCalculation()">
+                        Check Answers
+                    </button>
+                    <div class="feedback-area"></div>
                 </div>
-                <button class="check-answers-btn" onclick="window.lessonComponent.checkCalculation()">
-                    Check Answers
-                </button>
-                <div class="feedback-area"></div>
-            </div>
-        `;
+            `;
+        } catch (error) {
+            console.error('Error in generateCalculationActivity:', error, 'Interactive object:', interactive);
+            return `
+                <div class="interactive-element">
+                    <h4>Calculation Activity Error</h4>
+                    <p>An error occurred while loading this activity: ${error.message}</p>
+                    <p>Please check the browser console for more details.</p>
+                </div>
+            `;
+        }
     }
 
     /**
@@ -503,41 +593,89 @@ class LessonComponent {
         const interactive = this.lessonSteps[this.currentStepIndex].interactive;
         const feedbackArea = document.querySelector('.feedback-area');
         
+        // Get all possible input values
         const meanInput = document.getElementById('mean-input');
         const medianInput = document.getElementById('median-input');
+        const rangeInput = document.getElementById('range-input');
+        const modeInput = document.getElementById('mode-input');
         
-        const meanValue = parseFloat(meanInput.value);
-        const medianValue = parseFloat(medianInput.value);
-        
-        const meanCorrect = Math.abs(meanValue - interactive.answers.mean) < 0.1;
-        const medianCorrect = medianValue === interactive.answers.median;
-        
+        const results = {};
+        let allCorrect = true;
         let feedback = '<h5>📊 Calculation Results:</h5><ul>';
         
-        if (meanCorrect && medianCorrect) {
-            feedback += '<li>✅ <strong>Mean:</strong> Correct!</li>';
-            feedback += '<li>✅ <strong>Median:</strong> Correct!</li>';
-            feedback += '</ul><div style="background: rgba(22, 163, 74, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--success-green);">';
+        // Check mean if present
+        if (meanInput && interactive.answers.mean !== undefined) {
+            const meanValue = parseFloat(meanInput.value);
+            const meanCorrect = Math.abs(meanValue - interactive.answers.mean) < 0.1;
+            results.mean = meanCorrect;
+            allCorrect = allCorrect && meanCorrect;
+            
+            if (meanCorrect) {
+                feedback += '<li>✅ <strong>Mean:</strong> Correct!</li>';
+            } else {
+                feedback += `<li>❌ <strong>Mean:</strong> ${meanValue || 'Not provided'}<br>
+                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.mean}</li>`;
+            }
+        }
+        
+        // Check median if present
+        if (medianInput && interactive.answers.median !== undefined) {
+            const medianValue = parseFloat(medianInput.value);
+            const medianCorrect = medianValue === interactive.answers.median;
+            results.median = medianCorrect;
+            allCorrect = allCorrect && medianCorrect;
+            
+            if (medianCorrect) {
+                feedback += '<li>✅ <strong>Median:</strong> Correct!</li>';
+            } else {
+                feedback += `<li>❌ <strong>Median:</strong> ${medianValue || 'Not provided'}<br>
+                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.median}</li>`;
+            }
+        }
+        
+        // Check range if present
+        if (rangeInput && interactive.answers.range !== undefined) {
+            const rangeValue = parseFloat(rangeInput.value);
+            const rangeCorrect = rangeValue === interactive.answers.range;
+            results.range = rangeCorrect;
+            allCorrect = allCorrect && rangeCorrect;
+            
+            if (rangeCorrect) {
+                feedback += '<li>✅ <strong>Range:</strong> Correct!</li>';
+            } else {
+                feedback += `<li>❌ <strong>Range:</strong> ${rangeValue || 'Not provided'}<br>
+                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.range}</li>`;
+            }
+        }
+        
+        // Check mode if present
+        if (modeInput && interactive.answers.mode !== undefined) {
+            const modeValue = modeInput.value.trim().toLowerCase();
+            const correctMode = interactive.answers.mode.toString().toLowerCase();
+            const modeCorrect = modeValue === correctMode;
+            results.mode = modeCorrect;
+            allCorrect = allCorrect && modeCorrect;
+            
+            if (modeCorrect) {
+                feedback += '<li>✅ <strong>Mode:</strong> Correct!</li>';
+            } else {
+                feedback += `<li>❌ <strong>Mode:</strong> ${modeInput.value || 'Not provided'}<br>
+                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.mode}</li>`;
+            }
+        }
+        
+        feedback += '</ul>';
+        
+        if (allCorrect) {
+            feedback += '<div style="background: rgba(22, 163, 74, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid var(--success-green);">';
             feedback += '<p style="color: var(--success-green); font-weight: bold;">🏆 Excellent! Your calculations are correct!</p>';
             feedback += '</div>';
             this.activityCompleted = true;
             this.eventManager.emit(EVENTS.LESSON_ACTIVITY_COMPLETED);
         } else {
-            if (!meanCorrect) {
-                feedback += `<li>❌ <strong>Mean:</strong> ${meanValue || 'Not provided'}<br>
-                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.mean}</li>`;
-            } else {
-                feedback += '<li>✅ <strong>Mean:</strong> Correct!</li>';
-            }
-            
-            if (!medianCorrect) {
-                feedback += `<li>❌ <strong>Median:</strong> ${medianValue || 'Not provided'}<br>
-                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.median}</li>`;
-            } else {
-                feedback += '<li>✅ <strong>Median:</strong> Correct!</li>';
-            }
-            
-            feedback += '</ul>';
+            feedback += '<div style="background: rgba(239, 68, 68, 0.2); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid #ef4444;">';
+            feedback += '<p style="color: #ef4444; font-weight: bold;">📖 Review your calculations and try again!</p>';
+            feedback += '</div>';
         }
         
         feedbackArea.innerHTML = feedback;

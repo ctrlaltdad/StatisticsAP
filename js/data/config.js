@@ -90,7 +90,7 @@ const APP_CONFIG = {
     // Admin configuration
     admin: {
         enabled: true,
-        passwordHash: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", // 'password' for development
+        passwordHash: "a20aff106fe011d5dd696e3b7105200ff74331eeb8e865bb80ebd82b12665a07", // 'passwordxyz' for development
         sessionTimeout: 3600000, // 1 hour in milliseconds
         features: {
             skipChapterRequirements: true,
