@@ -634,18 +634,25 @@ class StatisticsApp {
         // Update current chapter in progress
         this.progressManager.currentChapter = chapterId;
         
-        // Start the chapter first (this switches to lesson screen)
-        this.startChapter(chapterData);
+        // Show the lesson screen first
+        this.showScreen('lesson-screen');
         
-        // Then jump to the specific step after a brief delay to ensure lesson component is ready
+        // Emit the CHAPTER_STARTED event to trigger lesson loading
+        this.eventManager.emit(EVENTS.CHAPTER_STARTED, chapterData);
+        
+        // Then jump to the specific step after a delay to ensure lesson component loads the lesson
         setTimeout(() => {
             if (this.lessonComponent) {
-                this.lessonComponent.jumpToStep(stepIndex);
-                console.log(`🎯 Admin jumped to chapter ${chapterId}, step ${stepIndex + 1}: ${lessonData.steps[stepIndex].title}`);
+                const success = this.lessonComponent.jumpToStep(stepIndex);
+                if (success) {
+                    console.log(`🎯 Admin jumped to chapter ${chapterId}, step ${stepIndex + 1}: ${lessonData.steps[stepIndex].title}`);
+                } else {
+                    console.error(`Failed to jump to step ${stepIndex} in chapter ${chapterId}`);
+                }
             } else {
                 console.error('Lesson component not available for step navigation');
             }
-        }, 100);
+        }, 200); // Increased delay to ensure lesson loading completes
     }
 
     /**

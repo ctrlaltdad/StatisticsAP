@@ -263,6 +263,8 @@ class LessonComponent {
                             '<label>Percentage: <input type="number" id="percentage-input" step="0.01" min="0" max="100" placeholder="Enter percentage (e.g., 5)"> %</label>' : ''}
                         ${interactive.answers && interactive.answers.difference !== undefined ? 
                             '<label>Difference: <input type="number" id="difference-input" step="1" placeholder="Enter the difference (e.g., 5)"></label>' : ''}
+                        ${interactive.answers && interactive.answers.ratio !== undefined ? 
+                            '<label>Ratio: <input type="number" id="ratio-input" step="0.01" min="0" placeholder="Enter ratio (e.g., 1.55)"></label>' : ''}
                     </div>
                     <button class="check-answers-btn" onclick="window.lessonComponent.checkCalculation()">
                         Check Answers
@@ -537,6 +539,14 @@ class LessonComponent {
      * Jump to specific step (admin function)
      */
     jumpToStep(stepIndex) {
+        console.log(`🎯 Attempting to jump to step ${stepIndex}. Current lesson steps: ${this.lessonSteps.length}`);
+        
+        // Ensure lesson is loaded
+        if (!this.lessonSteps || this.lessonSteps.length === 0) {
+            console.warn('⚠️ No lesson steps loaded yet. Cannot jump to step.');
+            return false;
+        }
+        
         if (stepIndex >= 0 && stepIndex < this.lessonSteps.length) {
             this.currentStepIndex = stepIndex;
             this.activityCompleted = false; // Reset activity completion for new step
@@ -544,7 +554,7 @@ class LessonComponent {
             this.updateNavigationButtons();
             this.updateProgress();
             
-            console.log(`📍 Jumped to step ${stepIndex + 1}/${this.lessonSteps.length}`);
+            console.log(`📍 Successfully jumped to step ${stepIndex + 1}/${this.lessonSteps.length}: "${this.lessonSteps[stepIndex].title}"`);
             return true;
         } else {
             console.warn(`Invalid step index: ${stepIndex}. Valid range: 0-${this.lessonSteps.length - 1}`);
@@ -622,6 +632,7 @@ class LessonComponent {
         const modeInput = document.getElementById('mode-input');
         const percentageInput = document.getElementById('percentage-input');
         const differenceInput = document.getElementById('difference-input');
+        const ratioInput = document.getElementById('ratio-input');
         
         const results = {};
         let allCorrect = true;
@@ -715,6 +726,21 @@ class LessonComponent {
             } else {
                 feedback += `<li>❌ <strong>Difference:</strong> ${differenceValue || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.difference}</li>`;
+            }
+        }
+        
+        // Check ratio if present
+        if (ratioInput && interactive.answers.ratio !== undefined) {
+            const ratioValue = parseFloat(ratioInput.value);
+            const ratioCorrect = Math.abs(ratioValue - interactive.answers.ratio) < 0.01;
+            results.ratio = ratioCorrect;
+            allCorrect = allCorrect && ratioCorrect;
+            
+            if (ratioCorrect) {
+                feedback += '<li>✅ <strong>Ratio:</strong> Correct!</li>';
+            } else {
+                feedback += `<li>❌ <strong>Ratio:</strong> ${ratioValue || 'Not provided'}<br>
+                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.ratio}</li>`;
             }
         }
         

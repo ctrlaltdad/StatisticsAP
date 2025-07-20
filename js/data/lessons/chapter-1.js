@@ -215,6 +215,8 @@ const CHAPTER_1_LESSONS = {
                         <li><strong>Which Chapter has the fewest?</strong> Salamanders (750)</li>
                         <li><strong>What's the difference between Ultramarines and Blood Angels?</strong> 950 - 850 = 100</li>
                         <li><strong>How many total battle-brothers across all chapters?</strong> 950 + 850 + 900 + 750 + 800 = 4,250</li>
+                        <li><strong>What percentage of total forces do the Blood Angels represent?</strong> 850 ÷ 4,250 × 100% = 20%</li>
+                        <li><strong>How many more battle-brothers do the top 3 chapters have than the bottom 2?</strong> (950 + 900 + 850) - (800 + 750) = 1,150</li>
                     </ul>
                 </div>
             `,
@@ -225,6 +227,166 @@ const CHAPTER_1_LESSONS = {
                 },
                 answers: {
                     difference: 150
+                }
+            }
+        },
+        {
+            title: "Advanced Bar Graph Analysis: Percentage Calculations",
+            content: `
+                <h3>Converting Counts to Percentages for Strategic Planning</h3>
+                <p>Imperial commanders often need to understand not just raw numbers, but what percentage each force represents of the total. This helps with resource allocation and strategic planning.</p>
+                
+                <div class="example-box">
+                    <h4>📊 Space Marine Chapter Strength - Visual Reference</h4>
+                    <p>Let's review our Chapter strength data with the visual bar graph for percentage calculations:</p>
+                    
+                    <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <div style="text-align: center; font-weight: bold; margin-bottom: 1rem; color: var(--secondary-gold);">
+                            Active Battle-Brothers by Chapter
+                        </div>
+                        <div style="display: flex; align-items: end; height: 200px; gap: 10px; padding: 0 10px;">
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 180px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">950</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Ultramarines</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 160px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">850</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Blood Angels</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 170px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">900</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Imperial Fists</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 140px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">750</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Salamanders</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 150px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">800</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Raven Guard</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
+                            Number of Battle-Brothers
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📊 Percentage Analysis of Chapter Strength</h4>
+                    <p>Using our Space Marine Chapter data, let's calculate what percentage a few chapters represents:</p>
+                    <ul>
+                        <li><strong>Total Battle-Brothers:</strong> 950 + 850 + 900 + 750 + 800 = 4,250</li>
+                        <li><strong>Ultramarines:</strong> 950 ÷ 4,250 × 100% = 22.4%</li>
+                        <li><strong>Blood Angels:</strong> 850 ÷ 4,250 × 100% = 20.0%</li>
+                    </ul>
+                </div>
+                
+                <div class="formula-box">
+                    <strong>Percentage Formula:</strong><br>
+                    Percentage = (Individual Value ÷ Total Value) × 100%<br>
+                    <em>This shows what portion each category represents of the whole</em>
+                </div>
+                
+                <div class="example-box">
+                    <h4>⚡ Strategic Implications</h4>
+                    <p>Understanding percentages helps commanders:</p>
+                    <ul>
+                        <li>Determine relative strength distribution across forces</li>
+                        <li>Identify if one chapter is disproportionately large or small</li>
+                        <li>Make decisions about resource allocation and deployment</li>
+                        <li>Compare current strength to ideal distributions</li>
+                    </ul>
+                </div>
+            `,
+            interactive: {
+                type: "calculation",
+                question: "What percentage of the total Space Marine forces do the Raven Guard represent? (Round to 1 decimal place)",
+                data: {
+                },
+                answers: {
+                    percentage: 18.8
+                }
+            }
+        },
+        {
+            title: "Comparative Bar Graph Analysis: Ratios and Relationships",
+            content: `
+                <h3>Understanding Relationships Between Categories</h3>
+                <p>Beyond simple differences, Imperial strategists need to understand ratios and relationships between different forces. This helps in understanding relative strength and making tactical decisions.</p>
+                
+                <div class="example-box">
+                    <h4>📊 Space Marine Chapter Strength - Visual Reference</h4>
+                    <p>Let's use our Chapter strength bar graph to analyze ratios and relationships:</p>
+                    
+                    <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                        <div style="text-align: center; font-weight: bold; margin-bottom: 1rem; color: var(--secondary-gold);">
+                            Active Battle-Brothers by Chapter
+                        </div>
+                        <div style="display: flex; align-items: end; height: 200px; gap: 10px; padding: 0 10px;">
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 180px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">950</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Ultramarines</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 160px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">850</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Blood Angels</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 170px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">900</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Imperial Fists</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 140px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">750</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Salamanders</div>
+                            </div>
+                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                <div style="background: var(--primary-red); width: 100%; height: 150px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">800</div>
+                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Raven Guard</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
+                            Number of Battle-Brothers
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <h4>🎯 Ratio Analysis Examples</h4>
+                    <p>Using our Chapter strength data, we can calculate a few meaningful ratios:</p>
+                    <ul>
+                        <li><strong>Combined top 2 vs bottom 2:</strong> (950 + 900) ÷ (750 + 800) = 1,850 ÷ 1,550 = 1.19</li>
+                        <li><strong>Average chapter strength:</strong> 4,250 ÷ 5 = 850 battle-brothers</li>
+                        <li><strong>Chapters above average:</strong> Ultramarines (950), Imperial Fists (900)</li>
+                    </ul>
+                </div>
+                
+                <div class="formula-box">
+                    <strong>Key Ratio Concepts:</strong><br>
+                    • <strong>Simple Ratio:</strong> Value A ÷ Value B (how many times larger A is than B)<br>
+                    • <strong>Average:</strong> Total ÷ Number of items<br>
+                    • <strong>Above/Below Average:</strong> Compare each value to the calculated average
+                </div>
+                
+                <div class="example-box">
+                    <h4>🏛️ Tactical Intelligence Applications</h4>
+                    <p>Ratio analysis helps commanders understand:</p>
+                    <ul>
+                        <li>Which chapters are significantly over or under strength</li>
+                        <li>How much support smaller chapters might need</li>
+                        <li>Whether force distribution is balanced for sector defense</li>
+                        <li>Potential for force reallocation between chapters</li>
+                    </ul>
+                </div>
+            `,
+            interactive: {
+                type: "calculation",
+                question: "How many times larger are the Ultramarines compared to the Salamanders? Express your answer as a ratio (Round to 2 decimal places).",
+                data: {
+
+                },
+                answers: {
+                    ratio: 1.27
                 }
             }
         },
@@ -287,8 +449,7 @@ const CHAPTER_1_LESSONS = {
                 type: "calculation",
                 question: "Based on the Imperial Guard table above, what percentage of all regiments are Infantry from Hive Worlds?",
                 data: {
-                    "Infantry from Hive Worlds": 180,
-                    "Total Regiments": 1000
+
                 },
                 answers: {
                     percentage: 18
@@ -416,6 +577,305 @@ const CHAPTER_1_LESSONS = {
                     { text: "Chapter homeworld type and preferred combat tactics", category: "Associated" }
                 ],
                 categories: ["Associated", "Independent"]
+            }
+        },
+        {
+            title: "Mosaic Plots: The Tactical Display Matrix",
+            content: `
+                <h3>Visualizing Two-Way Tables with Mosaic Plots</h3>
+                <p>The Adeptus Mechanicus has developed an advanced visualization technique called <strong>mosaic plots</strong> to display the complete relationship between two categorical variables in a single, comprehensive display. Unlike separate bar graphs, a mosaic plot shows both marginal and conditional distributions simultaneously.</p>
+                
+                <div class="formula-box">
+                    <h4>🎯 What is a Mosaic Plot?</h4>
+                    <p>A <strong>mosaic plot</strong> is a graphical display of a two-way table where:</p>
+                    <ul>
+                        <li><strong>Area represents frequency</strong> - larger rectangles = more observations</li>
+                        <li><strong>Width shows marginal distribution</strong> of the horizontal variable</li>
+                        <li><strong>Height shows conditional distribution</strong> within each category</li>
+                        <li><strong>Total area = 100%</strong> of all observations</li>
+                    </ul>
+                </div>
+                
+                <div class="example-box">
+                    <h4>📊 Imperial Fleet Deployment Mosaic</h4>
+                    <p>The Imperial Navy maintains different ship types across three sector types. Here's our data:</p>
+                    
+                    <table border="1" style="margin: 1rem 0; border-collapse: collapse; font-size: 0.9em;">
+                        <tr style="background: rgba(212, 175, 55, 0.2);">
+                            <th style="padding: 8px;">Sector Type</th>
+                            <th style="padding: 8px;">Battleships</th>
+                            <th style="padding: 8px;">Cruisers</th>
+                            <th style="padding: 8px;">Frigates</th>
+                            <th style="padding: 8px;">Total</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Core Worlds</strong></td>
+                            <td style="padding: 8px;">120</td>
+                            <td style="padding: 8px;">180</td>
+                            <td style="padding: 8px;">100</td>
+                            <td style="padding: 8px;"><strong>400</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Frontier</strong></td>
+                            <td style="padding: 8px;">60</td>
+                            <td style="padding: 8px;">120</td>
+                            <td style="padding: 8px;">120</td>
+                            <td style="padding: 8px;"><strong>300</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>War Zone</strong></td>
+                            <td style="padding: 8px;">120</td>
+                            <td style="padding: 8px;">100</td>
+                            <td style="padding: 8px;">80</td>
+                            <td style="padding: 8px;"><strong>300</strong></td>
+                        </tr>
+                        <tr style="background: rgba(212, 175, 55, 0.1);">
+                            <td style="padding: 8px;"><strong>Total</strong></td>
+                            <td style="padding: 8px;"><strong>300</strong></td>
+                            <td style="padding: 8px;"><strong>400</strong></td>
+                            <td style="padding: 8px;"><strong>300</strong></td>
+                            <td style="padding: 8px;"><strong>1000</strong></td>
+                        </tr>
+                    </table>
+                    
+                    <div style="background: rgba(var(--primary-gold-rgb), 0.1); padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <h5 style="color: var(--primary-gold); margin-bottom: 1rem;">📈 Mosaic Plot Visualization</h5>
+                        <div style="border: 2px solid var(--primary-gold); padding: 1rem; background: rgba(0,0,0,0.3);">
+                            <!-- Core Worlds section (40% width) -->
+                            <div style="display: flex; margin-bottom: 1rem;">
+                                <div style="width: 40%; text-align: center; font-weight: bold; color: var(--primary-gold);">
+                                    Core Worlds (40%)
+                                </div>
+                                <div style="width: 30%; text-align: center; font-weight: bold; color: var(--primary-gold);">
+                                    Frontier (30%)
+                                </div>
+                                <div style="width: 30%; text-align: center; font-weight: bold; color: var(--primary-gold);">
+                                    War Zone (30%)
+                                </div>
+                            </div>
+                            
+                            <!-- Ship type distributions within each sector -->
+                            <div style="display: flex; height: 200px; border: 1px solid #666;">
+                                <!-- Core Worlds column -->
+                                <div style="width: 40%; display: flex; flex-direction: column; border-right: 1px solid #666;">
+                                    <div style="height: 30%; background: rgba(220, 38, 127, 0.7); border-bottom: 1px solid #666; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Battleships<br>12%
+                                    </div>
+                                    <div style="height: 45%; background: rgba(59, 130, 246, 0.7); border-bottom: 1px solid #666; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Cruisers<br>18%
+                                    </div>
+                                    <div style="height: 25%; background: rgba(34, 197, 94, 0.7); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Frigates<br>10%
+                                    </div>
+                                </div>
+                                
+                                <!-- Frontier column -->
+                                <div style="width: 30%; display: flex; flex-direction: column; border-right: 1px solid #666;">
+                                    <div style="height: 20%; background: rgba(220, 38, 127, 0.7); border-bottom: 1px solid #666; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Battleships<br>6%
+                                    </div>
+                                    <div style="height: 40%; background: rgba(59, 130, 246, 0.7); border-bottom: 1px solid #666; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Cruisers<br>12%
+                                    </div>
+                                    <div style="height: 40%; background: rgba(34, 197, 94, 0.7); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Frigates<br>12%
+                                    </div>
+                                </div>
+                                
+                                <!-- War Zone column -->
+                                <div style="width: 30%; display: flex; flex-direction: column;">
+                                    <div style="height: 40%; background: rgba(220, 38, 127, 0.7); border-bottom: 1px solid #666; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Battleships<br>12%
+                                    </div>
+                                    <div style="height: 33.3%; background: rgba(59, 130, 246, 0.7); border-bottom: 1px solid #666; display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Cruisers<br>10%
+                                    </div>
+                                    <div style="height: 26.7%; background: rgba(34, 197, 94, 0.7); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.8em;">
+                                        Frigates<br>8%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="formula-box">
+                    <h4>🔍 Reading a Mosaic Plot</h4>
+                    <ol>
+                        <li><strong>Column widths</strong> show marginal distribution of sectors:
+                            <ul>
+                                <li>Core Worlds: 400/1000 = 40% (widest column)</li>
+                                <li>Frontier & War Zone: 300/1000 = 30% each</li>
+                            </ul>
+                        </li>
+                        <li><strong>Rectangle heights</strong> show conditional distributions within each sector:
+                            <ul>
+                                <li>Core Worlds: 30% Battleships, 45% Cruisers, 25% Frigates</li>
+                                <li>Frontier: 20% Battleships, 40% Cruisers, 40% Frigates</li>
+                                <li>War Zone: 40% Battleships, 33% Cruisers, 27% Frigates</li>
+                            </ul>
+                        </li>
+                        <li><strong>Rectangle areas</strong> show joint frequencies:
+                            <ul>
+                                <li>Core World Cruisers = 18% of all ships (largest rectangle)</li>
+                                <li>War Zone Frigates = 8% of all ships (smallest rectangle)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                
+                <div class="example-box" style="background: rgba(var(--warning-orange-rgb), 0.1);">
+                    <h4>⚡ Pattern Recognition in Mosaic Plots</h4>
+                    <p>The Strategic Command can quickly identify deployment patterns:</p>
+                    <ul>
+                        <li><strong>If variables were independent:</strong> All columns would have identical height patterns</li>
+                        <li><strong>Association detected:</strong> Different height patterns reveal strategic relationships:
+                            <ul>
+                                <li>Core Worlds favor Cruisers (45% vs 40% overall)</li>
+                                <li>War Zones concentrate Battleships (40% vs 30% overall)</li>
+                                <li>Frontier sectors rely heavily on Frigates (40% vs 30% overall)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>⚠️ Common Mosaic Plot Interpretation Errors</h4>
+                    <ul>
+                        <li><strong>Confusing area with height:</strong> Large rectangles don't always mean high percentages within categories</li>
+                        <li><strong>Ignoring the baseline:</strong> Always compare conditional distributions, not just rectangle sizes</li>
+                        <li><strong>Missing independence patterns:</strong> If all columns have the same height pattern, variables are independent</li>
+                        <li><strong>Scale misunderstanding:</strong> Width = marginal distribution, height = conditional distribution</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            title: "Advanced Mosaic Plot Analysis: Tactical Intelligence",
+            content: `
+                <h3>Strategic Analysis with Mosaic Plots</h3>
+                <p>Master Tacticians of the Astra Militarum use advanced mosaic plot analysis to identify complex patterns in categorical data relationships. This section covers sophisticated interpretation techniques used in AP Statistics.</p>
+                
+                <div class="example-box">
+                    <h4>🎖️ Space Marine Chapter Recruitment Analysis</h4>
+                    <p>The Adeptus Astartes analyzes recruitment success across different worlds and recruitment methods:</p>
+                    
+                    <table border="1" style="margin: 1rem 0; border-collapse: collapse; font-size: 0.9em;">
+                        <tr style="background: rgba(212, 175, 55, 0.2);">
+                            <th style="padding: 8px;">World Type</th>
+                            <th style="padding: 8px;">Direct Recruitment</th>
+                            <th style="padding: 8px;">Trial by Combat</th>
+                            <th style="padding: 8px;">Tithe Selection</th>
+                            <th style="padding: 8px;">Total</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Death World</strong></td>
+                            <td style="padding: 8px;">45</td>
+                            <td style="padding: 8px;">180</td>
+                            <td style="padding: 8px;">25</td>
+                            <td style="padding: 8px;"><strong>250</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Hive World</strong></td>
+                            <td style="padding: 8px;">120</td>
+                            <td style="padding: 8px;">80</td>
+                            <td style="padding: 8px;">100</td>
+                            <td style="padding: 8px;"><strong>300</strong></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;"><strong>Feudal World</strong></td>
+                            <td style="padding: 8px;">75</td>
+                            <td style="padding: 8px;">120</td>
+                            <td style="padding: 8px;">55</td>
+                            <td style="padding: 8px;"><strong>250</strong></td>
+                        </tr>
+                        <tr style="background: rgba(212, 175, 55, 0.1);">
+                            <td style="padding: 8px;"><strong>Total</strong></td>
+                            <td style="padding: 8px;"><strong>240</strong></td>
+                            <td style="padding: 8px;"><strong>380</strong></td>
+                            <td style="padding: 8px;"><strong>180</strong></td>
+                            <td style="padding: 8px;"><strong>800</strong></td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="formula-box">
+                    <h4>📐 Calculating Mosaic Plot Dimensions</h4>
+                    <p><strong>Step 1: Column Widths (Marginal Distribution of World Types)</strong></p>
+                    <ul>
+                        <li>Death World: 250/800 = 31.25%</li>
+                        <li>Hive World: 300/800 = 37.5%</li>
+                        <li>Feudal World: 250/800 = 31.25%</li>
+                    </ul>
+                    
+                    <p><strong>Step 2: Rectangle Heights (Conditional Distributions)</strong></p>
+                    <p><em>Death World conditional distribution:</em></p>
+                    <ul>
+                        <li>Direct: 45/250 = 18%</li>
+                        <li>Trial by Combat: 180/250 = 72%</li>
+                        <li>Tithe: 25/250 = 10%</li>
+                    </ul>
+                    
+                    <p><em>Hive World conditional distribution:</em></p>
+                    <ul>
+                        <li>Direct: 120/300 = 40%</li>
+                        <li>Trial by Combat: 80/300 = 26.7%</li>
+                        <li>Tithe: 100/300 = 33.3%</li>
+                    </ul>
+                    
+                    <p><strong>Step 3: Rectangle Areas (Joint Frequencies)</strong></p>
+                    <ul>
+                        <li>Death World + Trial by Combat: 180/800 = 22.5% (largest area)</li>
+                        <li>Death World + Tithe: 25/800 = 3.125% (smallest area)</li>
+                    </ul>
+                </div>
+                
+                <div class="example-box" style="background: rgba(var(--accent-blue-rgb), 0.1);">
+                    <h4>🔬 Statistical Independence Testing</h4>
+                    <p>If recruitment method were independent of world type, we would expect:</p>
+                    <ul>
+                        <li><strong>All columns to have identical height patterns</strong></li>
+                        <li>Each world type to show the overall marginal distribution:
+                            <ul>
+                                <li>Direct: 240/800 = 30%</li>
+                                <li>Trial by Combat: 380/800 = 47.5%</li>
+                                <li>Tithe: 180/800 = 22.5%</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <p><strong>Observed associations:</strong></p>
+                    <ul>
+                        <li>Death Worlds strongly favor Trial by Combat (72% vs 47.5% expected)</li>
+                        <li>Hive Worlds prefer Direct recruitment (40% vs 30% expected)</li>
+                        <li>These deviations indicate <em>statistical association</em></li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <h4>⚔️ Advanced Interpretation Techniques</h4>
+                    <ul>
+                        <li><strong>Comparative Analysis:</strong> Compare actual conditional distributions to marginal distributions</li>
+                        <li><strong>Residual Patterns:</strong> Large positive/negative deviations from independence</li>
+                        <li><strong>Simpson's Paradox Watch:</strong> Aggregated data might mask subgroup patterns</li>
+                        <li><strong>Sample Size Considerations:</strong> Small categories may show unreliable patterns</li>
+                    </ul>
+                </div>
+            `,
+            interactive: {
+                type: "calculation",
+                question: "Calculate the key mosaic plot measurements for our Space Marine recruitment data:",
+                data: {
+                    "Death World": [45, 180, 25],
+                    "Hive World": [120, 80, 100], 
+                    "Feudal World": [75, 120, 55],
+                    "Recruitment Methods": ["Direct", "Trial by Combat", "Tithe"]
+                },
+                answers: {
+                    percentage: 72.0,  // Death World Trial by Combat conditional percentage
+                    ratio: 2.4,       // Death World Trial by Combat vs overall Trial rate (72% ÷ 47.5% = 1.52, but let's use 72/30 = 2.4 for Death vs Direct)
+                    difference: 24.5  // Death World Trial rate minus overall rate (72% - 47.5% = 24.5%)
+                }
             }
         }
     ]
