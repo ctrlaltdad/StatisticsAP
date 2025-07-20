@@ -7,7 +7,7 @@ A gamified web application for learning AP Statistics through the grim darkness 
 ### 🎮 Gamified Learning Experience
 - **Rank System**: Progress from Recruit to Chapter Master based on quiz performance
 - **Chapter Progression**: Unlock new content as you master previous concepts
-- **Faction Selection**: Choose your learning style (Space Marines, Imperial Guard, or Adeptus Mechanicus)
+- **Story-Driven Introduction**: Immersive Imperial lore sets the learning context
 - **Promotion Ceremonies**: Dramatic rank advancement when achieving excellence
 
 ### 📚 Comprehensive AP Statistics Curriculum
@@ -48,6 +48,184 @@ A gamified web application for learning AP Statistics through the grim darkness 
    npm install
    ```
 4. **Start the development server**:
+   ```bash
+   npm start
+   ```
+5. **Open your browser** and navigate to `http://localhost:3000`
+
+## 🔧 Development
+
+### Project Structure
+```
+├── index.html                   # Main application entry point
+├── styles.css                   # Application styling
+├── js/
+│   ├── app-refactored.js        # Main application logic
+│   ├── components/              # UI components
+│   │   ├── ChapterComponent.js  # Chapter selection screen
+│   │   ├── LessonComponent.js   # Lesson display and navigation
+│   │   └── QuizComponent.js     # Quiz functionality
+│   ├── modules/                 # Core system modules
+│   │   ├── DataManager.js       # Data loading and management
+│   │   ├── ProgressManager.js   # User progress tracking
+│   │   ├── EventManager.js      # Event system
+│   │   ├── ContentManager.js    # Content loading
+│   │   └── AdminManager.js      # Admin mode functionality
+│   └── data/                    # Content and configuration
+│       ├── config.js            # Application configuration
+│       ├── chapters.js          # Chapter metadata
+│       ├── quizzes.js           # Quiz data
+│       ├── lessons.js           # Lesson system loader
+│       └── lessons/             # Individual chapter lessons
+│           ├── template.js      # Template for new chapters
+│           ├── chapter-1.js     # Chapter 1 content
+│           ├── chapter-2.js     # Chapter 2 content
+│           └── ...              # Additional chapters
+└── README.md                    # This file
+```
+
+### Key Features
+- **Modular Architecture**: Clean separation of concerns with reusable components
+- **Event-Driven System**: Decoupled communication between modules
+- **Progress Persistence**: Automatic saving of user progress to localStorage
+- **Admin Mode**: Testing and development tools (see Admin Mode section)
+
+## 🎓 Admin Mode
+
+### Activation
+- Press **Ctrl+Shift+A** anywhere in the application
+- Enter admin password: `password321`
+- Admin indicator appears in top-right corner
+
+### Features
+- **Chapter Access Override**: Skip to any chapter for testing
+- **Admin Panel**: Unlock all chapters, reset progress, debug tools
+- **Visual Indicators**: Gold key icons on admin-unlocked content
+- **Session Management**: 1-hour timeout with persistent login
+
+### Quick Actions
+- **Ctrl+Shift+A**: Toggle admin panel
+- Click any locked chapter with admin access to jump directly to it
+- Test quizzes and lessons without affecting progression
+
+## 📝 Adding New Content
+
+### Creating a New Chapter
+
+1. **Copy the template**:
+   ```bash
+   cp js/data/lessons/template.js js/data/lessons/chapter-X.js
+   ```
+
+2. **Update the chapter constant**:
+   ```javascript
+   const CHAPTER_X_LESSONS = {
+       title: "Your Chapter Title",
+       description: "Chapter description",
+       estimatedTime: "30 minutes",
+       steps: [...]
+   };
+   ```
+
+3. **Add to lessons.js**:
+   ```javascript
+   if (typeof CHAPTER_X_LESSONS !== 'undefined') {
+       LESSONS_DATA[X] = CHAPTER_X_LESSONS;
+   }
+   ```
+
+4. **Update index.html**:
+   ```html
+   <script src="js/data/lessons/chapter-X.js"></script>
+   ```
+
+5. **Update chapters.js** with chapter metadata
+
+### Lesson Structure
+```javascript
+{
+    title: "Lesson Step Title",
+    content: `<h3>HTML Content</h3><p>Lesson text with Warhammer theming</p>`,
+    interactive: {
+        type: "calculation", // or "classification", "bias-identification", "simulation"
+        question: "What is the mean of this data?",
+        data: [1, 2, 3, 4, 5],
+        answers: { mean: 3.0, median: 3 }
+    }
+}
+```
+
+### Interactive Types
+- **calculation**: Math problems with input validation
+- **classification**: Categorization exercises with dropdowns
+- **bias-identification**: Identify types of bias in scenarios
+- **simulation**: Interactive demonstrations
+
+### Adding Quizzes
+Edit `js/data/quizzes.js` to add chapter quizzes:
+```javascript
+{
+    id: chapterNumber,
+    title: "Chapter X Assessment",
+    questions: [
+        {
+            id: 1,
+            text: "Question text",
+            type: "multiple-choice",
+            options: ["A", "B", "C", "D"],
+            correct: 0,
+            explanation: "Why this answer is correct"
+        }
+    ]
+}
+```
+
+## 🚀 Deployment
+
+### Production Build
+1. Ensure all content is complete and tested
+2. Update `js/data/config.js` for production settings
+3. Change admin password hash in config
+4. Test with admin mode for final verification
+
+### Hosting
+- Any static web hosting service (GitHub Pages, Netlify, Vercel)
+- No server-side requirements
+- Ensure all files are uploaded including the `js/data/lessons/` directory
+
+## 🛡️ Configuration
+
+### Admin Password
+Update in `js/data/config.js`:
+```javascript
+adminConfig: {
+    passwordHash: "your-sha256-hash-here",
+    sessionTimeout: 3600000 // 1 hour
+}
+```
+
+### Progress Storage
+```javascript
+storage: {
+    progressKey: 'your-app-progress-key',
+    settingsKey: 'your-app-settings-key'
+}
+```
+
+## 📱 Browser Support
+- Chrome 80+
+- Firefox 74+
+- Safari 13+
+- Edge 80+
+
+## 🤝 Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Add your content following the modular structure
+4. Test with admin mode
+5. Submit a pull request
+
+For questions or support, please check the admin mode documentation and template files for guidance on content creation.
    ```bash
    npm start
    ```
