@@ -137,8 +137,27 @@
         <div id="notification-container" class="notification-container"></div>
     </div>
 
-    <script src="js/app.js"></script>
-    <script src="js/lessons.js"></script>
-    <script src="js/quiz.js"></script>
+    <!-- Load Data Files -->
+    <script src="js/data/config.js"></script>
+    <script src="js/data/chapters.js"></script>
+    <script src="js/data/lessons.js"></script>
+    <script src="js/data/quizzes.js"></script>
+    
+    <!-- Load Core Modules -->
+    <script src="js/modules/EventManager.js"></script>
+    <script src="js/modules/DataManager.js"></script>
+    <script src="js/modules/ProgressManager.js"></script>
+    <script src="js/modules/ContentManager.js"></script>
+    
+    <!-- Load UI Components -->
+    <script src="js/components/ChapterComponent.js"></script>
+    <script src="js/components/LessonComponent.js"></script>
+    <script src="js/components/QuizComponent.js"></script>
+    
+    <!-- Load Legacy Components (for compatibility) -->
+    <!-- <script src="js/quiz.js"></script> -->
+    
+    <!-- Load Main Application -->
+    <script src="js/app-refactored.js"></script>
 </body>
 </html>
