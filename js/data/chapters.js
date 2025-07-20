@@ -4,12 +4,12 @@
 const CHAPTERS_DATA = {
     1: {
         id: 1,
-        title: "Data Collection & the Imperial Census",
-        description: "Learn how the Imperium gathers data across a million worlds. Master the basics of data types, sampling, and survey methods.",
+        title: "Exploring Categorical Data: The Imperial Classification System",
+        description: "Master the analysis of categorical data through bar graphs, two-way tables, and conditional distributions in service to the Emperor.",
         difficulty: "Novice Acolyte",
-        estimatedTime: "30 min",
-        topics: ["Data Types", "Sampling Methods", "Survey Design"],
-        concepts: ["Data Collection", "Quantitative vs Qualitative", "Sampling", "Bias", "Experiments vs Observational Studies"],
+        estimatedTime: "45 min",
+        topics: ["Bar Graphs", "Two-way Tables", "Marginal & Conditional Distributions"],
+        concepts: ["Categorical Data", "Frequency Tables", "Association vs Independence", "Data Visualization"],
         prerequisites: [],
         unlockRequirements: {
             previousChapters: [],

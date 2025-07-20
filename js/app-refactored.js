@@ -40,6 +40,9 @@ class StatisticsApp {
             // Load and restore user progress
             this.restoreUserState();
             
+            // Ensure start button is enabled (extra safety check)
+            this.enableStartButton();
+            
             // Mark as initialized
             this.initialized = true;
             
@@ -213,6 +216,10 @@ class StatisticsApp {
             this.adminJumpToChapter(data.chapterId);
         });
 
+        this.eventManager.on('admin:jump-to-lesson-step', (data) => {
+            this.adminJumpToLessonStep(data.chapterId, data.stepIndex);
+        });
+
         this.eventManager.on('admin:unlock-all-chapters', () => {
             this.adminUnlockAllChapters();
         });
@@ -228,6 +235,7 @@ class StatisticsApp {
      * Restore user state from saved progress
      */
     restoreUserState() {
+        console.log('🔄 Restoring user state...');
         // Update UI to reflect current progress
         this.updateUI();
         
@@ -236,6 +244,7 @@ class StatisticsApp {
         
         // Check if user has made progress and can skip welcome screen
         const totalProgress = this.progressManager.getTotalProgress();
+        console.log('📊 Total progress:', totalProgress);
         if (totalProgress > 0 && this.currentScreen === 'welcome-screen') {
             // User has made some progress, go to chapter selection
             this.showScreen('chapter-selection');
@@ -252,6 +261,9 @@ class StatisticsApp {
         const startButton = document.getElementById('start-journey');
         if (startButton) {
             startButton.disabled = false;
+            console.log('✅ Start button enabled');
+        } else {
+            console.error('❌ Start button not found');
         }
     }
 
@@ -598,6 +610,42 @@ class StatisticsApp {
         this.startChapter(chapterData);
         
         console.log(`🔑 Admin jumped to chapter ${chapterId}: ${chapterData.title}`);
+    }
+
+    /**
+     * Admin action: Jump to specific lesson step
+     */
+    adminJumpToLessonStep(chapterId, stepIndex) {
+        // Get chapter data first
+        const chapterData = this.dataManager.getChapterData(chapterId);
+        if (!chapterData) {
+            console.error(`Chapter ${chapterId} not found`);
+            return;
+        }
+
+        // Get lesson data to verify step exists
+        const lessonData = this.dataManager.getLesson(chapterId);
+        if (!lessonData || !lessonData.steps || stepIndex >= lessonData.steps.length) {
+            console.error(`Step ${stepIndex} not found in chapter ${chapterId}`);
+            this.showNotification(`❌ Step ${stepIndex + 1} not found in Chapter ${chapterId}`, 'error');
+            return;
+        }
+
+        // Update current chapter in progress
+        this.progressManager.currentChapter = chapterId;
+        
+        // Start the chapter first (this switches to lesson screen)
+        this.startChapter(chapterData);
+        
+        // Then jump to the specific step after a brief delay to ensure lesson component is ready
+        setTimeout(() => {
+            if (this.lessonComponent) {
+                this.lessonComponent.jumpToStep(stepIndex);
+                console.log(`🎯 Admin jumped to chapter ${chapterId}, step ${stepIndex + 1}: ${lessonData.steps[stepIndex].title}`);
+            } else {
+                console.error('Lesson component not available for step navigation');
+            }
+        }, 100);
     }
 
     /**

@@ -167,10 +167,9 @@ class LessonComponent {
                             <span class="item-text">${item.text}</span>
                             <select class="classification-select">
                                 <option value="">Choose classification...</option>
-                                <option value="Discrete Quantitative">Discrete Quantitative</option>
-                                <option value="Continuous Quantitative">Continuous Quantitative</option>
-                                <option value="Nominal Qualitative">Nominal Qualitative</option>
-                                <option value="Ordinal Qualitative">Ordinal Qualitative</option>
+                                ${interactive.categories.map(category => `
+                                    <option value="${category}">${category}</option>
+                                `).join('')}
                             </select>
                         </div>
                     `).join('')}
@@ -260,6 +259,10 @@ class LessonComponent {
                             '<label>Range: <input type="number" id="range-input" step="0.01" placeholder="Enter calculated range"></label>' : ''}
                         ${interactive.answers && interactive.answers.mode !== undefined ? 
                             '<label>Mode: <input type="text" id="mode-input" placeholder="Enter mode (or \'none\')"></label>' : ''}
+                        ${interactive.answers && interactive.answers.percentage !== undefined ? 
+                            '<label>Percentage: <input type="number" id="percentage-input" step="0.01" min="0" max="100" placeholder="Enter percentage (e.g., 5)"> %</label>' : ''}
+                        ${interactive.answers && interactive.answers.difference !== undefined ? 
+                            '<label>Difference: <input type="number" id="difference-input" step="1" placeholder="Enter the difference (e.g., 5)"></label>' : ''}
                     </div>
                     <button class="check-answers-btn" onclick="window.lessonComponent.checkCalculation()">
                         Check Answers
@@ -530,6 +533,25 @@ class LessonComponent {
         return this.lessonSteps.length;
     }
 
+    /**
+     * Jump to specific step (admin function)
+     */
+    jumpToStep(stepIndex) {
+        if (stepIndex >= 0 && stepIndex < this.lessonSteps.length) {
+            this.currentStepIndex = stepIndex;
+            this.activityCompleted = false; // Reset activity completion for new step
+            this.showCurrentStep();
+            this.updateNavigationButtons();
+            this.updateProgress();
+            
+            console.log(`📍 Jumped to step ${stepIndex + 1}/${this.lessonSteps.length}`);
+            return true;
+        } else {
+            console.warn(`Invalid step index: ${stepIndex}. Valid range: 0-${this.lessonSteps.length - 1}`);
+            return false;
+        }
+    }
+
     // Activity checking methods (called from HTML)
     checkClassification() {
         console.log('🔍 checkClassification called');
@@ -548,7 +570,7 @@ class LessonComponent {
 
         document.querySelectorAll('.classification-item').forEach((item, index) => {
             const select = item.querySelector('.classification-select');
-            const correct = items[index].type;
+            const correct = items[index].category;
             const selected = select.value;
             
             if (selected === correct) {
@@ -598,6 +620,8 @@ class LessonComponent {
         const medianInput = document.getElementById('median-input');
         const rangeInput = document.getElementById('range-input');
         const modeInput = document.getElementById('mode-input');
+        const percentageInput = document.getElementById('percentage-input');
+        const differenceInput = document.getElementById('difference-input');
         
         const results = {};
         let allCorrect = true;
@@ -661,6 +685,36 @@ class LessonComponent {
             } else {
                 feedback += `<li>❌ <strong>Mode:</strong> ${modeInput.value || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.mode}</li>`;
+            }
+        }
+        
+        // Check percentage if present
+        if (percentageInput && interactive.answers.percentage !== undefined) {
+            const percentageValue = parseFloat(percentageInput.value);
+            const percentageCorrect = Math.abs(percentageValue - interactive.answers.percentage) < 0.1;
+            results.percentage = percentageCorrect;
+            allCorrect = allCorrect && percentageCorrect;
+            
+            if (percentageCorrect) {
+                feedback += '<li>✅ <strong>Percentage:</strong> Correct!</li>';
+            } else {
+                feedback += `<li>❌ <strong>Percentage:</strong> ${percentageValue || 'Not provided'}%<br>
+                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.percentage}%</li>`;
+            }
+        }
+        
+        // Check difference if present
+        if (differenceInput && interactive.answers.difference !== undefined) {
+            const differenceValue = parseFloat(differenceInput.value);
+            const differenceCorrect = Math.abs(differenceValue - interactive.answers.difference) < 0.1;
+            results.difference = differenceCorrect;
+            allCorrect = allCorrect && differenceCorrect;
+            
+            if (differenceCorrect) {
+                feedback += '<li>✅ <strong>Difference:</strong> Correct!</li>';
+            } else {
+                feedback += `<li>❌ <strong>Difference:</strong> ${differenceValue || 'Not provided'}<br>
+                    &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.difference}</li>`;
             }
         }
         

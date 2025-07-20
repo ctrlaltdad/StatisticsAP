@@ -251,6 +251,9 @@ class AdminManager {
                         <div class="chapter-quick-nav">
                             ${this.generateChapterQuickNav()}
                         </div>
+                        <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 0.9em;">
+                            <strong>💡 Tip:</strong> Click "Show Steps" to access individual lesson steps within each chapter.
+                        </div>
                     </div>
                     
                     <div class="admin-section">
@@ -277,11 +280,53 @@ class AdminManager {
      */
     generateChapterQuickNav() {
         const chapters = this.dataManager.getAllChapters();
-        return chapters.map(chapter => 
-            `<button onclick="window.adminManager.jumpToChapter(${chapter.id})" class="admin-btn small">
-                Chapter ${chapter.id}: ${chapter.title}
+        return chapters.map(chapter => {
+            const lesson = this.dataManager.getLesson(chapter.id);
+            const hasSteps = lesson && lesson.steps && lesson.steps.length > 0;
+            
+            return `
+                <div class="chapter-nav-section">
+                    <button onclick="window.adminManager.jumpToChapter(${chapter.id})" class="admin-btn">
+                        Chapter ${chapter.id}: ${chapter.title}
+                    </button>
+                    ${hasSteps ? `
+                        <button onclick="window.adminManager.toggleStepsFor(${chapter.id})" class="admin-btn small secondary step-toggle" data-chapter="${chapter.id}">
+                            Show Steps
+                        </button>
+                        <div class="lesson-steps-nav" id="steps-${chapter.id}" style="display: none; margin-left: 20px; margin-top: 10px;">
+                            ${this.generateLessonStepsNav(chapter.id, lesson)}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
+    /**
+     * Generate navigation for individual lesson steps
+     */
+    generateLessonStepsNav(chapterId, lesson) {
+        if (!lesson || !lesson.steps) return '';
+        
+        return lesson.steps.map((step, index) => 
+            `<button onclick="window.adminManager.jumpToLessonStep(${chapterId}, ${index})" class="admin-btn small step-btn">
+                Step ${index + 1}: ${step.title}
              </button>`
         ).join('');
+    }
+
+    /**
+     * Toggle visibility of lesson steps for a chapter
+     */
+    toggleStepsFor(chapterId) {
+        const stepsDiv = document.getElementById(`steps-${chapterId}`);
+        const toggleBtn = document.querySelector(`.step-toggle[data-chapter="${chapterId}"]`);
+        
+        if (stepsDiv && toggleBtn) {
+            const isVisible = stepsDiv.style.display !== 'none';
+            stepsDiv.style.display = isVisible ? 'none' : 'block';
+            toggleBtn.textContent = isVisible ? 'Show Steps' : 'Hide Steps';
+        }
     }
 
     /**
@@ -302,6 +347,18 @@ class AdminManager {
         // Navigate to chapter
         this.eventManager.emit('admin:jump-to-chapter', { chapterId });
         this.showNotification(`🚀 Jumped to Chapter ${chapterId} (admin mode)`, 'info');
+    }
+
+    /**
+     * Admin action: Jump to specific lesson step
+     */
+    jumpToLessonStep(chapterId, stepIndex) {
+        // Close admin panel
+        document.querySelector('.admin-modal-overlay')?.remove();
+        
+        // Navigate to specific lesson step
+        this.eventManager.emit('admin:jump-to-lesson-step', { chapterId, stepIndex });
+        this.showNotification(`🎯 Jumped to Chapter ${chapterId}, Step ${stepIndex + 1} (admin mode)`, 'info');
     }
 
     /**

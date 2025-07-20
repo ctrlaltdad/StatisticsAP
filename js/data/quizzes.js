@@ -3,80 +3,94 @@
 
 const QUIZ_DATA = {
     1: {
-        title: "Data Collection & Imperial Census - Battle Assessment",
-        description: "Test your knowledge of data collection methods and sampling techniques.",
+        title: "Exploring Categorical Data - Battle Assessment",
+        description: "Test your knowledge of categorical data analysis, bar graphs, and two-way tables.",
         passingScore: 70,
         timeLimit: null, // minutes, null for no limit
         questions: [
             {
                 id: 1,
-                question: "A Planetary Governor wants to assess the morale of all Imperial Guard regiments in the sector. Due to time constraints, they decide to survey only the regiments stationed at the capital hive city. What type of bias does this introduce?",
+                question: "A Space Marine Chapter Master wants to display the number of Battle-Brothers in each Company (1st through 10th). Which type of graph would be most appropriate?",
                 options: [
-                    "Voluntary response bias",
-                    "Response bias",
-                    "Selection bias", 
-                    "Survivorship bias"
+                    "Scatter plot",
+                    "Bar graph",
+                    "Line graph", 
+                    "Histogram"
                 ],
-                correct: 2,
-                explanation: "This is selection bias because the sample (capital regiments) is not representative of the population (all regiments in the sector). Capital regiments might have different characteristics than those stationed elsewhere.",
-                difficulty: "medium",
-                concept: "Sampling Bias"
+                correct: 1,
+                explanation: "A bar graph is best for categorical data. Each company is a separate category, and the height of each bar represents the count of Battle-Brothers.",
+                difficulty: "easy",
+                concept: "Graph Selection"
             },
             {
                 id: 2,
-                question: "Which of the following represents discrete quantitative data in an Imperial context?",
+                question: "In a two-way table analyzing 500 Space Marine recruits by Chapter (Ultramarines, Blood Angels, Imperial Fists) and Training Status (Active, Graduated, Failed), what does the number in a single cell represent?",
                 options: [
-                    "The weight of a Space Marine's power armor",
-                    "The distance between forge worlds",
-                    "The time taken to complete a Warp jump",
-                    "The number of Titans in a Legion"
+                    "A marginal frequency",
+                    "A conditional probability",
+                    "A joint frequency",
+                    "The grand total"
                 ],
-                correct: 3,
-                explanation: "The number of Titans is discrete quantitative data because you can count individual Titans (1, 2, 3, etc.) but cannot have fractional Titans.",
-                difficulty: "easy",
-                concept: "Data Types"
+                correct: 2,
+                explanation: "Each cell contains a joint frequency - the count of individuals who belong to both categories (e.g., Ultramarine recruits who are Active).",
+                difficulty: "medium",
+                concept: "Two-way Tables"
             },
             {
                 id: 3,
-                question: "An Inquisitor surveys Space Marine chapters about their battle effectiveness by asking: 'Don't you agree that your chapter serves the Emperor with utmost efficiency?' This is an example of:",
+                question: "Given this data about Imperial Guard regiments:\n\nHive World Infantry: 120\nHive World Armor: 80\nTotal Hive World: 200\nTotal Infantry: 300\nGrand Total: 600\n\nWhat is the marginal distribution percentage for Infantry regiments?",
                 options: [
-                    "Response bias due to leading questions",
-                    "Good survey design",
-                    "Selection bias",
-                    "Voluntary response bias"
+                    "40%",
+                    "50%",
+                    "60%",
+                    "20%"
                 ],
-                correct: 0,
-                explanation: "This is response bias caused by a leading question. The question pushes respondents toward a positive answer rather than allowing them to express their true opinion.",
+                correct: 1,
+                explanation: "Marginal distribution for Infantry = 300/600 = 50%. This represents the overall percentage of Infantry regiments regardless of planet type.",
                 difficulty: "medium",
-                concept: "Response Bias"
+                concept: "Marginal Distribution"
             },
             {
                 id: 4,
-                question: "A study compares the combat effectiveness of Space Marines who volunteered for dangerous missions versus those who were assigned. What potential issue exists with this study design?",
+                question: "Using the same data from question 3, what percentage of Hive World regiments are Infantry? (This is a conditional distribution)",
                 options: [
-                    "This is a well-designed experiment",
-                    "The sample size is too small",
-                    "Response bias in the survey questions",
-                    "Selection bias - volunteers may be inherently different"
+                    "40%",
+                    "50%",
+                    "60%",
+                    "20%"
                 ],
-                correct: 3,
-                explanation: "This is an observational study with potential selection bias. Marines who volunteer for dangerous missions may be inherently braver, more skilled, or have different motivations than those who are assigned.",
+                correct: 2,
+                explanation: "Conditional distribution: Given Hive World regiments, 120/200 = 60% are Infantry. This conditions on planet type.",
                 difficulty: "hard",
-                concept: "Study Design"
+                concept: "Conditional Distribution"
             },
             {
                 id: 5,
-                question: "To estimate the average ammunition consumption across all Imperial Guard regiments, which sampling method would be most appropriate?",
+                question: "If planet type and regiment specialty were independent, what would we expect to see in their conditional distributions?",
                 options: [
-                    "Survey only the elite Cadian regiments",
-                    "Use simple random sampling from all regiments",
-                    "Only survey regiments currently in combat",
-                    "Let regiments volunteer to participate"
+                    "All conditional distributions would be identical",
+                    "Conditional distributions would vary significantly",
+                    "Only marginal distributions would matter",
+                    "The grand total would change"
+                ],
+                correct: 0,
+                explanation: "Independence means that knowing one variable doesn't help predict the other, so all conditional distributions would be identical to the marginal distribution.",
+                difficulty: "medium",
+                concept: "Independence vs Association"
+            },
+            {
+                id: 6,
+                question: "A Sector Marshal analyzes Space Marine deployment and finds that 70% of siege specialists come from defensive-oriented Chapters, while only 30% of assault specialists come from defensive-oriented Chapters. This suggests:",
+                options: [
+                    "Chapter origin and combat specialty are independent",
+                    "Chapter origin and combat specialty are associated",
+                    "There is no relationship between the variables",
+                    "The data contains errors"
                 ],
                 correct: 1,
-                explanation: "Simple random sampling gives every regiment an equal chance of selection, providing the most representative sample for estimating the population average.",
-                difficulty: "medium",
-                concept: "Sampling Methods"
+                explanation: "The different conditional distributions (70% vs 30%) indicate association between Chapter origin and combat specialty. If independent, these percentages would be equal.",
+                difficulty: "hard",
+                concept: "Association Analysis"
             }
         ]
     },
