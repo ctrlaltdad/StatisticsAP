@@ -277,6 +277,24 @@ class ProgressManager {
     }
 
     /**
+     * Get total progress as a percentage (0-100)
+     */
+    getTotalProgress() {
+        const totalChapters = this.dataManager.getTotalChapterCount();
+        const completedCount = this.completedChapters.size;
+        
+        if (totalChapters === 0) return 0;
+        return Math.round((completedCount / totalChapters) * 100);
+    }
+
+    /**
+     * Get completed chapter count
+     */
+    getCompletedChapterCount() {
+        return this.completedChapters.size;
+    }
+
+    /**
      * Update time spent
      */
     updateTimeSpent(minutes) {
@@ -286,25 +304,20 @@ class ProgressManager {
         }
     }
 
+    // Faction methods deprecated - UI simplified to remove faction selection
+    
     /**
-     * Get current faction data
+     * Get current faction data (deprecated)
      */
     getCurrentFaction() {
-        if (!this.selectedFaction) return null;
-        return this.dataManager.getFactionConfig()[this.selectedFaction] || null;
+        return null; // No faction selection in simplified UI
     }
 
     /**
-     * Set selected faction
+     * Set selected faction (deprecated)
      */
     setFaction(factionId) {
-        const factions = this.dataManager.getFactionConfig();
-        if (factions[factionId]) {
-            this.selectedFaction = factionId;
-            this.saveProgress();
-            return true;
-        }
-        return false;
+        return true; // Always return true to maintain compatibility
     }
 
     /**

@@ -101,6 +101,13 @@ class DataManager {
     }
 
     /**
+     * Get total number of chapters
+     */
+    getTotalChapterCount() {
+        return Object.keys(this.chapters).length;
+    }
+
+    /**
      * Get lesson data by ID
      */
     getLesson(id) {

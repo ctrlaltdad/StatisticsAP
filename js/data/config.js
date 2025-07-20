@@ -101,30 +101,7 @@ const APP_CONFIG = {
         }
     },
     
-    // Faction configuration
-    factions: {
-        "space-marines": {
-            name: "Space Marines",
-            description: "Tactical and methodical approach to statistics",
-            icon: "fas fa-shield-alt",
-            color: "#1d4ed8",
-            learningStyle: "methodical"
-        },
-        "imperial-guard": {
-            name: "Imperial Guard", 
-            description: "Learn through overwhelming data and examples",
-            icon: "fas fa-users",
-            color: "#059669",
-            learningStyle: "comprehensive"
-        },
-        "adeptus-mechanicus": {
-            name: "Adeptus Mechanicus",
-            description: "Technical and formula-focused learning",
-            icon: "fas fa-cog",
-            color: "#dc2626",
-            learningStyle: "technical"
-        }
-    },
+    // Faction configuration removed - simplified UI with story intro only
     
     // Interactive activity types
     activityTypes: {

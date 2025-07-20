@@ -129,12 +129,7 @@ class StatisticsApp {
      * Setup global event listeners
      */
     setupEventListeners() {
-        // Faction selection
-        document.querySelectorAll('.faction-card').forEach(card => {
-            card.addEventListener('click', (e) => this.selectFaction(e));
-        });
-
-        // Start journey button
+        // Start journey button - no faction selection needed
         const startButton = document.getElementById('start-journey');
         if (startButton) {
             startButton.addEventListener('click', () => {
@@ -236,55 +231,22 @@ class StatisticsApp {
         // Update UI to reflect current progress
         this.updateUI();
         
-        // If user has selected a faction, skip welcome screen
-        if (this.progressManager.selectedFaction) {
-            this.markSelectedFaction();
-            this.enableStartButton();
-            
-            // Auto-navigate to chapter selection if appropriate
-            if (this.currentScreen === 'welcome-screen') {
-                this.showScreen('chapter-selection');
-            }
-        }
-    }
-
-    /**
-     * Handle faction selection
-     */
-    selectFaction(event) {
-        // Remove previous selection
-        document.querySelectorAll('.faction-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-
-        // Add selection to clicked card
-        event.currentTarget.classList.add('selected');
-        const factionId = event.currentTarget.dataset.faction;
-        
-        // Update progress manager
-        this.progressManager.setFaction(factionId);
-        
-        // Enable start button
+        // Enable start button (no faction selection needed)
         this.enableStartButton();
         
-        this.eventManager.emit(EVENTS.FACTION_SELECTED, factionId);
-    }
-
-    /**
-     * Mark the selected faction in UI
-     */
-    markSelectedFaction() {
-        const factionId = this.progressManager.selectedFaction;
-        if (factionId) {
-            const factionCard = document.querySelector(`[data-faction="${factionId}"]`);
-            if (factionCard) {
-                factionCard.classList.add('selected');
-            }
+        // Check if user has made progress and can skip welcome screen
+        const totalProgress = this.progressManager.getTotalProgress();
+        if (totalProgress > 0 && this.currentScreen === 'welcome-screen') {
+            // User has made some progress, go to chapter selection
+            this.showScreen('chapter-selection');
         }
     }
 
+    // Faction selection methods removed - no longer needed for simplified UI
+    // Story intro leads directly to chapters without faction choice
+
     /**
-     * Enable start journey button
+     * Enable start journey button (always enabled now)
      */
     enableStartButton() {
         const startButton = document.getElementById('start-journey');
@@ -406,8 +368,7 @@ class StatisticsApp {
         // Update chapter progress
         this.updateChapterProgress();
         
-        // Apply faction-specific styling
-        this.applyFactionStyling();
+        // Faction styling removed - simplified UI
     }
 
     /**
@@ -439,18 +400,7 @@ class StatisticsApp {
         }
     }
 
-    /**
-     * Apply faction-specific styling
-     */
-    applyFactionStyling() {
-        const faction = this.progressManager.selectedFaction;
-        if (faction) {
-            // Remove existing faction classes
-            document.body.classList.remove('faction-space-marines', 'faction-imperial-guard', 'faction-adeptus-mechanicus');
-            // Add current faction class
-            document.body.classList.add(`faction-${faction}`);
-        }
-    }
+    // Faction styling removed - simplified UI without faction selection
 
     /**
      * Show rank promotion

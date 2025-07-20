@@ -108,3 +108,49 @@ Created `debug-test.html` to test various data scenarios:
 ## Related Issues
 - None currently identified
 - Monitor for similar issues in other interactive types (classification, bias-identification, simulation)
+
+## Update: Additional Fix (July 20, 2025)
+
+### Issue: Missing getTotalProgress Method
+**Error:** `TypeError: this.progressManager.getTotalProgress is not a function`  
+**Location:** app-refactored.js:238 in `restoreUserState` method
+
+### Root Cause
+During the UI simplification to remove faction selection, the code was updated to call `this.progressManager.getTotalProgress()` to determine if the user had made progress and could skip the welcome screen. However, this method didn't exist in the ProgressManager class.
+
+### Solution
+1. **Added `getTotalProgress()` method to ProgressManager:**
+   - Calculates progress as a percentage (0-100)
+   - Uses completed chapters vs total chapters
+   - Returns 0 if no chapters exist
+
+2. **Added `getTotalChapterCount()` method to DataManager:**
+   - Returns total number of available chapters
+   - Used by ProgressManager to calculate progress percentage
+
+3. **Added `getCompletedChapterCount()` helper method:**
+   - Returns number of completed chapters
+   - Provides easy access to completion count
+
+### Code Added
+```javascript
+// ProgressManager.js
+getTotalProgress() {
+    const totalChapters = this.dataManager.getTotalChapterCount();
+    const completedCount = this.completedChapters.size;
+    
+    if (totalChapters === 0) return 0;
+    return Math.round((completedCount / totalChapters) * 100);
+}
+
+// DataManager.js
+getTotalChapterCount() {
+    return Object.keys(this.chapters).length;
+}
+```
+
+### Files Modified
+- `js/modules/ProgressManager.js` - Added getTotalProgress and getCompletedChapterCount methods
+- `js/modules/DataManager.js` - Added getTotalChapterCount method
+
+This fix ensures the application initializes properly after the UI simplification changes.
