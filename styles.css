@@ -413,7 +413,7 @@ body {
 
 /* Lesson Screen */
 .lesson-container {
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -508,6 +508,131 @@ body {
 .lesson-step p {
     margin-bottom: 1rem;
     line-height: 1.8;
+}
+
+/* 2x2 Grid Lesson Layout */
+.lesson-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    min-height: 600px;
+}
+
+/* Theory Section - Top Left */
+.lesson-theory {
+    background: rgba(30, 58, 138, 0.1);
+    border: 2px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 1.5rem;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.lesson-theory h4 {
+    color: var(--accent-blue);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Examples Section - Bottom Left */
+.lesson-examples {
+    background: rgba(22, 163, 74, 0.1);
+    border: 2px solid var(--success-green);
+    border-radius: 12px;
+    padding: 1.5rem;
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.lesson-examples h4 {
+    color: var(--success-green);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Warhammer Application - Top Right */
+.lesson-application {
+    background: rgba(139, 0, 0, 0.1);
+    border: 2px solid var(--primary-red);
+    border-radius: 12px;
+    padding: 1.5rem;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.lesson-application h4 {
+    color: var(--primary-red);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Interactive Question - Bottom Right */
+.lesson-interactive {
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid var(--secondary-gold);
+    border-radius: 12px;
+    padding: 1.5rem;
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.lesson-interactive h4 {
+    color: var(--secondary-gold);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lesson-interactive .interactive-element {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+    .lesson-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap: 1rem;
+    }
+    
+    .lesson-theory {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    .lesson-examples {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    
+    .lesson-application {
+        grid-column: 1;
+        grid-row: 3;
+    }
+    
+    .lesson-interactive {
+        grid-column: 1;
+        grid-row: 4;
+    }
 }
 
 .example-box {

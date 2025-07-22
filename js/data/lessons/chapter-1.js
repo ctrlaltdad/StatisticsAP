@@ -160,70 +160,121 @@ const CHAPTER_1_LESSONS = {
             title: "Reading Bar Graphs: Imperial Intelligence Analysis",
             content: `
                 <h3>Interpreting Visual Data for Strategic Decisions</h3>
-                <p>Now that you understand how to create bar graphs, let's master the art of <strong>reading and interpreting</strong> them. Imperial commanders must quickly extract critical information from visual data to make tactical decisions.</p>
+                <p>Imperial commanders must quickly extract critical information from visual data to make tactical decisions. Master the art of reading and interpreting bar graphs through structured analysis.</p>
                 
-                <div class="example-box">
-                    <h4>📊 Space Marine Chapter Strength Analysis</h4>
-                    <p>The High Lords of Terra have commissioned a strength assessment of key Space Marine Chapters. Study this bar graph showing current battle-ready forces:</p>
+                <div class="lesson-grid">
+                    <!-- Theory Section - Top Left -->
+                    <div class="lesson-theory">
+                        <h4>📚 Core Theory & Method</h4>
+                        
+                        <div class="formula-box">
+                            <strong>Reading Bar Graphs - Key Steps:</strong><br>
+                            1. <strong>Read the title</strong> - What is being measured?<br>
+                            2. <strong>Check the axes</strong> - What categories and scale are used?<br>
+                            3. <strong>Compare heights</strong> - Which bars are tallest/shortest?<br>
+                            4. <strong>Calculate differences</strong> - Find specific numerical comparisons<br>
+                            5. <strong>Draw conclusions</strong> - What patterns do you see?
+                        </div>
+                        
+                        <p><strong>Essential Skills:</strong></p>
+                        <ul>
+                            <li>Identify highest and lowest values</li>
+                            <li>Calculate differences between categories</li>
+                            <li>Find totals and percentages</li>
+                            <li>Recognize patterns and trends</li>
+                        </ul>
+                    </div>
                     
-                    <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-                        <div style="text-align: center; font-weight: bold; margin-bottom: 1rem; color: var(--secondary-gold);">
-                            Active Battle-Brothers by Chapter
-                        </div>
-                        <div style="display: flex; align-items: end; height: 200px; gap: 10px; padding: 0 10px;">
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 180px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">950</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Ultramarines</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 160px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">850</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Blood Angels</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 170px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">900</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Imperial Fists</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 140px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">750</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Salamanders</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 150px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">800</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Raven Guard</div>
-                            </div>
-                        </div>
-                        <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
-                            Number of Battle-Brothers
+                    <!-- Examples Section - Bottom Left -->
+                    <div class="lesson-examples">
+                        <h4>💡 Key Calculations</h4>
+                        
+                        <p><strong>Common Calculations:</strong></p>
+                        <ul>
+                            <li><strong>Difference:</strong> Value A - Value B</li>
+                            <li><strong>Total:</strong> Sum of all categories</li>
+                            <li><strong>Percentage:</strong> (Category ÷ Total) × 100%</li>
+                            <li><strong>Ratio:</strong> Value A ÷ Value B</li>
+                        </ul>
+                        
+                        <div class="formula-box" style="background: rgba(22, 163, 74, 0.1); border-color: var(--success-green);">
+                            <strong>Example Analysis:</strong><br>
+                            If Chapter A has 950 marines and Chapter B has 750:<br>
+                            • <strong>Difference:</strong> 950 - 750 = 200<br>
+                            • <strong>Ratio:</strong> 950 ÷ 750 = 1.27<br>
+                            • <strong>Percentage of total:</strong> 950 ÷ 4,250 × 100% = 22.4%
                         </div>
                     </div>
-                </div>
-                
-                <div class="formula-box">
-                    <strong>Reading Bar Graphs - Key Steps:</strong><br>
-                    1. <strong>Read the title</strong> - What is being measured?<br>
-                    2. <strong>Check the axes</strong> - What categories and scale are used?<br>
-                    3. <strong>Compare heights</strong> - Which bars are tallest/shortest?<br>
-                    4. <strong>Calculate differences</strong> - Find specific numerical comparisons<br>
-                    5. <strong>Draw conclusions</strong> - What patterns do you see?
-                </div>
-                
-                <div class="example-box">
-                    <h4>🎯 Practice Questions</h4>
-                    <p>Using the bar graph above, answer these tactical intelligence questions:</p>
-                    <ul>
-                        <li><strong>Which Chapter has the most battle-brothers?</strong> Ultramarines (950)</li>
-                        <li><strong>Which Chapter has the fewest?</strong> Salamanders (750)</li>
-                        <li><strong>What's the difference between Ultramarines and Blood Angels?</strong> 950 - 850 = 100</li>
-                        <li><strong>How many total battle-brothers across all chapters?</strong> 950 + 850 + 900 + 750 + 800 = 4,250</li>
-                        <li><strong>What percentage of total forces do the Blood Angels represent?</strong> 850 ÷ 4,250 × 100% = 20%</li>
-                        <li><strong>How many more battle-brothers do the top 3 chapters have than the bottom 2?</strong> (950 + 900 + 850) - (800 + 750) = 1,150</li>
-                    </ul>
+                    
+                    <!-- Warhammer Application - Top Right -->
+                    <div class="lesson-application">
+                        <h4>⚔️ Space Marine Chapter Analysis</h4>
+                        
+                        <p><strong>High Lords Strength Assessment:</strong></p>
+                        
+                        <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <div style="text-align: center; font-weight: bold; margin-bottom: 1rem; color: var(--secondary-gold);">
+                                Battle-Brothers by Chapter
+                            </div>
+                            <div style="display: flex; align-items: end; height: 160px; gap: 8px; padding: 0 10px;">
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 140px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px; font-size: 0.8rem;">950</div>
+                                    <div style="margin-top: 8px; text-align: center; font-size: 0.8rem;">Ultramarines</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 120px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px; font-size: 0.8rem;">850</div>
+                                    <div style="margin-top: 8px; text-align: center; font-size: 0.8rem;">Blood Angels</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 130px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px; font-size: 0.8rem;">900</div>
+                                    <div style="margin-top: 8px; text-align: center; font-size: 0.8rem;">Imperial Fists</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 100px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px; font-size: 0.8rem;">750</div>
+                                    <div style="margin-top: 8px; text-align: center; font-size: 0.8rem;">Salamanders</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 110px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px; font-size: 0.8rem;">800</div>
+                                    <div style="margin-top: 8px; text-align: center; font-size: 0.8rem;">Raven Guard</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p style="font-size: 0.9rem;"><strong>Data Analysis:</strong> Total Forces = 4,250 Battle-Brothers across 5 Chapters. Ultramarines have the highest strength, Salamanders the lowest.</p>
+                    </div>
+                    
+                    <!-- Interactive Question - Bottom Right -->
+                    <div class="lesson-interactive">
+                        <h4>🎯 Tactical Intelligence Question</h4>
+                        
+                        <div class="interactive-element">
+                            <p><strong>Mission Briefing:</strong> Calculate the difference in battle-brothers between the Imperial Fists and the Salamanders for force deployment planning.</p>
+                            
+                            <div style="background: rgba(var(--secondary-gold), 0.1); padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                                <p><strong>Data Reference:</strong></p>
+                                <ul style="font-size: 0.9rem; margin: 0;">
+                                    <li>Imperial Fists: 900 battle-brothers</li>
+                                    <li>Salamanders: 750 battle-brothers</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="calculation-inputs">
+                                <label>Difference: <input type="number" id="difference-input" step="1" placeholder="Enter the difference"></label>
+                            </div>
+                            <button class="check-answers-btn" onclick="window.lessonComponent.checkCalculation()">
+                                Check Answer
+                            </button>
+                            <div class="feedback-area"></div>
+                        </div>
+                    </div>
                 </div>
             `,
             interactive: {
                 type: "calculation",
-                question: "Based on the Space Marine Chapter strength bar graph above, calculate the difference in battle-brothers between the Imperial Fists and the Salamanders.",
+                question: "Calculate the difference in battle-brothers between the Imperial Fists and the Salamanders.",
                 data: {
+                    "Imperial Fists": 900,
+                    "Salamanders": 750
                 },
                 answers: {
                     difference: 150
@@ -234,75 +285,133 @@ const CHAPTER_1_LESSONS = {
             title: "Advanced Bar Graph Analysis: Percentage Calculations",
             content: `
                 <h3>Converting Counts to Percentages for Strategic Planning</h3>
-                <p>Imperial commanders often need to understand not just raw numbers, but what percentage each force represents of the total. This helps with resource allocation and strategic planning.</p>
+                <p>Imperial commanders need to understand proportional relationships and relative strengths. Learn the theory and practice of percentage calculations for tactical decision-making.</p>
                 
-                <div class="example-box">
-                    <h4>📊 Space Marine Chapter Strength - Visual Reference</h4>
-                    <p>Let's review our Chapter strength data with the visual bar graph for percentage calculations:</p>
+                <div class="lesson-grid">
+                    <!-- Theory Section - Top Left -->
+                    <div class="lesson-theory">
+                        <h4>📚 Percentage Theory</h4>
+                        
+                        <div class="formula-box">
+                            <strong>Percentage Formula:</strong><br>
+                            Percentage = (Individual Value ÷ Total Value) × 100%<br>
+                            <em>Shows what portion each category represents of the whole</em>
+                        </div>
+                        
+                        <p><strong>Why Use Percentages?</strong></p>
+                        <ul>
+                            <li>Compare different sized groups fairly</li>
+                            <li>Understand relative importance</li>
+                            <li>Make proportional comparisons</li>
+                            <li>Standardize data for analysis</li>
+                        </ul>
+                        
+                        <p><strong>Strategic Applications:</strong></p>
+                        <ul>
+                            <li>Resource allocation decisions</li>
+                            <li>Force distribution analysis</li>
+                            <li>Comparative strength assessment</li>
+                        </ul>
+                    </div>
                     
-                    <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-                        <div style="text-align: center; font-weight: bold; margin-bottom: 1rem; color: var(--secondary-gold);">
-                            Active Battle-Brothers by Chapter
-                        </div>
-                        <div style="display: flex; align-items: end; height: 200px; gap: 10px; padding: 0 10px;">
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 180px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">950</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Ultramarines</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 160px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">850</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Blood Angels</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 170px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">900</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Imperial Fists</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 140px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">750</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Salamanders</div>
-                            </div>
-                            <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                                <div style="background: var(--primary-red); width: 100%; height: 150px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 5px;">800</div>
-                                <div style="margin-top: 8px; text-align: center; font-size: 0.9rem;">Raven Guard</div>
-                            </div>
-                        </div>
-                        <div style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: var(--text-muted);">
-                            Number of Battle-Brothers
+                    <!-- Examples Section - Bottom Left -->
+                    <div class="lesson-examples">
+                        <h4>💡 Step-by-Step Process</h4>
+                        
+                        <p><strong>Calculation Steps:</strong></p>
+                        <ol>
+                            <li><strong>Find the total</strong> - Add all values</li>
+                            <li><strong>Select the category</strong> - Choose what to calculate</li>
+                            <li><strong>Divide and multiply</strong> - (Category ÷ Total) × 100</li>
+                            <li><strong>Round appropriately</strong> - Usually to 1 decimal place</li>
+                        </ol>
+                        
+                        <div class="formula-box" style="background: rgba(22, 163, 74, 0.1); border-color: var(--success-green);">
+                            <strong>Example Calculation:</strong><br>
+                            If Raven Guard has 800 marines out of 4,250 total:<br>
+                            • <strong>Step 1:</strong> Total = 4,250<br>
+                            • <strong>Step 2:</strong> Raven Guard = 800<br>
+                            • <strong>Step 3:</strong> 800 ÷ 4,250 × 100 = 18.8%<br>
+                            • <strong>Step 4:</strong> Round to 18.8%
                         </div>
                     </div>
-                </div>
-                
-                <div class="example-box">
-                    <h4>📊 Percentage Analysis of Chapter Strength</h4>
-                    <p>Using our Space Marine Chapter data, let's calculate what percentage a few chapters represents:</p>
-                    <ul>
-                        <li><strong>Total Battle-Brothers:</strong> 950 + 850 + 900 + 750 + 800 = 4,250</li>
-                        <li><strong>Ultramarines:</strong> 950 ÷ 4,250 × 100% = 22.4%</li>
-                        <li><strong>Blood Angels:</strong> 850 ÷ 4,250 × 100% = 20.0%</li>
-                    </ul>
-                </div>
-                
-                <div class="formula-box">
-                    <strong>Percentage Formula:</strong><br>
-                    Percentage = (Individual Value ÷ Total Value) × 100%<br>
-                    <em>This shows what portion each category represents of the whole</em>
-                </div>
-                
-                <div class="example-box">
-                    <h4>⚡ Strategic Implications</h4>
-                    <p>Understanding percentages helps commanders:</p>
-                    <ul>
-                        <li>Determine relative strength distribution across forces</li>
-                        <li>Identify if one chapter is disproportionately large or small</li>
-                        <li>Make decisions about resource allocation and deployment</li>
-                        <li>Compare current strength to ideal distributions</li>
-                    </ul>
+                    
+                    <!-- Warhammer Application - Top Right -->
+                    <div class="lesson-application">
+                        <h4>⚔️ Chapter Distribution Analysis</h4>
+                        
+                        <p><strong>Force Composition Assessment:</strong></p>
+                        
+                        <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <div style="text-align: center; font-weight: bold; margin-bottom: 1rem; color: var(--secondary-gold);">
+                                Chapter Battle-Brothers (Total: 4,250)
+                            </div>
+                            <div style="display: flex; align-items: end; height: 120px; gap: 6px; padding: 0 8px;">
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 100px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 3px; font-size: 0.7rem;">950</div>
+                                    <div style="margin-top: 5px; text-align: center; font-size: 0.7rem;">Ultramarines</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 85px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 3px; font-size: 0.7rem;">850</div>
+                                    <div style="margin-top: 5px; text-align: center; font-size: 0.7rem;">Blood Angels</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 90px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 3px; font-size: 0.7rem;">900</div>
+                                    <div style="margin-top: 5px; text-align: center; font-size: 0.7rem;">Imperial Fists</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 70px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 3px; font-size: 0.7rem;">750</div>
+                                    <div style="margin-top: 5px; text-align: center; font-size: 0.7rem;">Salamanders</div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
+                                    <div style="background: var(--primary-red); width: 100%; height: 75px; display: flex; align-items: end; justify-content: center; color: white; font-weight: bold; padding-bottom: 3px; font-size: 0.7rem;">800</div>
+                                    <div style="margin-top: 5px; text-align: center; font-size: 0.7rem;">Raven Guard</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: rgba(var(--secondary-gold), 0.1); padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                            <p><strong>📊 Example Calculations:</strong></p>
+                            <ul style="font-size: 0.85rem; line-height: 1.5; margin: 0;">
+                                <li><strong>Ultramarines:</strong> 950 ÷ 4,250 × 100% = 22.4%</li>
+                                <li><strong>Blood Angels:</strong> 850 ÷ 4,250 × 100% = 20.0%</li>
+                                <li><strong>Imperial Fists:</strong> 900 ÷ 4,250 × 100% = 21.2%</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive Question - Bottom Right -->
+                    <div class="lesson-interactive">
+                        <h4>🎯 Strategic Calculation</h4>
+                        
+                        <div class="interactive-element">
+                            <p><strong>Mission Briefing:</strong> Calculate what percentage of total Space Marine forces the Raven Guard represents for resource allocation planning.</p>
+                            
+                            <div style="background: rgba(var(--secondary-gold), 0.1); padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                                <p><strong>Data Reference:</strong></p>
+                                <ul style="font-size: 0.9rem; margin: 0;">
+                                    <li>Raven Guard: 800 battle-brothers</li>
+                                    <li>Total Forces: 4,250 battle-brothers</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="calculation-inputs">
+                                <label>Percentage: <input type="number" id="percentage-input" step="0.1" min="0" max="100" placeholder="Enter percentage"> %</label>
+                            </div>
+                            <button class="check-answers-btn" onclick="window.lessonComponent.checkCalculation()">
+                                Check Answer
+                            </button>
+                            <div class="feedback-area"></div>
+                        </div>
+                    </div>
                 </div>
             `,
             interactive: {
                 type: "calculation",
                 question: "What percentage of the total Space Marine forces do the Raven Guard represent? (Round to 1 decimal place)",
                 data: {
+                    "Raven Guard": 800,
+                    "Total Forces": 4250
                 },
                 answers: {
                     percentage: 18.8
@@ -394,62 +503,111 @@ const CHAPTER_1_LESSONS = {
             title: "Two-Way Tables: The Imperial Cross-Reference",
             content: `
                 <h3>Analyzing Relationships Between Categories</h3>
-                <p>When the Administratum needs to analyze the relationship between two categorical variables, they use the sacred <strong>two-way tables</strong> (also called contingency tables).</p>
+                <p>When the Administratum needs to analyze the relationship between two categorical variables, they use two-way tables. Learn the theory and practice of cross-tabulation analysis.</p>
                 
-                <div class="example-box">
-                    <h4>📊 Imperial Guard Regiment Analysis</h4>
-                    <p>Analyzing 1,000 Imperial Guard regiments by planet type and combat specialty:</p>
-                    <table border="1" style="margin: 1rem 0; border-collapse: collapse;">
-                        <tr style="background: rgba(212, 175, 55, 0.2);">
-                            <th style="padding: 8px;">Combat Role</th>
-                            <th style="padding: 8px;">Hive World</th>
-                            <th style="padding: 8px;">Agri World</th>
-                            <th style="padding: 8px;">Death World</th>
-                            <th style="padding: 8px;"><strong>Total</strong></th>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px;"><strong>Infantry</strong></td>
-                            <td style="padding: 8px;">180</td>
-                            <td style="padding: 8px;">120</td>
-                            <td style="padding: 8px;">100</td>
-                            <td style="padding: 8px;"><strong>400</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px;"><strong>Armored</strong></td>
-                            <td style="padding: 8px;">150</td>
-                            <td style="padding: 8px;">100</td>
-                            <td style="padding: 8px;">50</td>
-                            <td style="padding: 8px;"><strong>300</strong></td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 8px;"><strong>Artillery</strong></td>
-                            <td style="padding: 8px;">120</td>
-                            <td style="padding: 8px;">80</td>
-                            <td style="padding: 8px;">100</td>
-                            <td style="padding: 8px;"><strong>300</strong></td>
-                        </tr>
-                        <tr style="background: rgba(212, 175, 55, 0.2);">
-                            <td style="padding: 8px;"><strong>Total</strong></td>
-                            <td style="padding: 8px;"><strong>450</strong></td>
-                            <td style="padding: 8px;"><strong>300</strong></td>
-                            <td style="padding: 8px;"><strong>250</strong></td>
-                            <td style="padding: 8px;"><strong>1,000</strong></td>
-                        </tr>
-                    </table>
-                </div>
-                
-                <div class="formula-box">
-                    <strong>Two-Way Table Components:</strong><br>
-                    • <strong>Joint Frequencies:</strong> Counts in individual cells<br>
-                    • <strong>Marginal Frequencies:</strong> Row and column totals<br>
-                    • <strong>Grand Total:</strong> Total count in bottom-right corner
+                <div class="lesson-two-column">
+                    <div class="lesson-theory">
+                        <h4>📚 Theory & Method</h4>
+                        
+                        <div class="formula-box">
+                            <strong>Two-Way Table Components:</strong><br>
+                            • <strong>Joint Frequencies:</strong> Counts in individual cells<br>
+                            • <strong>Marginal Frequencies:</strong> Row and column totals<br>
+                            • <strong>Grand Total:</strong> Total count in bottom-right corner
+                        </div>
+                        
+                        <p><strong>What Two-Way Tables Show:</strong></p>
+                        <ul>
+                            <li>How two categorical variables relate</li>
+                            <li>Distribution patterns within categories</li>
+                            <li>Overall frequency breakdowns</li>
+                            <li>Joint occurrence patterns</li>
+                        </ul>
+                        
+                        <p><strong>Key Calculations:</strong></p>
+                        <ul>
+                            <li><strong>Cell Percentage:</strong> (Cell Count ÷ Grand Total) × 100%</li>
+                            <li><strong>Row Percentage:</strong> (Cell Count ÷ Row Total) × 100%</li>
+                            <li><strong>Column Percentage:</strong> (Cell Count ÷ Column Total) × 100%</li>
+                        </ul>
+                        
+                        <p><strong>Reading Strategy:</strong></p>
+                        <ol>
+                            <li>Identify the variables being compared</li>
+                            <li>Locate the cell of interest</li>
+                            <li>Find the appropriate total for percentage calculations</li>
+                            <li>Interpret the relationship pattern</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="lesson-practice">
+                        <h4>⚔️ Warhammer 40K Application</h4>
+                        
+                        <p><strong>Imperial Guard Regiment Analysis</strong></p>
+                        <p>Analyzing 1,000 Imperial Guard regiments by planet type and combat specialty:</p>
+                        
+                        <table border="1" style="margin: 1rem 0; border-collapse: collapse; width: 100%; font-size: 0.85rem;">
+                            <tr style="background: rgba(212, 175, 55, 0.2);">
+                                <th style="padding: 6px;">Combat Role</th>
+                                <th style="padding: 6px;">Hive World</th>
+                                <th style="padding: 6px;">Agri World</th>
+                                <th style="padding: 6px;">Death World</th>
+                                <th style="padding: 6px;"><strong>Total</strong></th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px;"><strong>Infantry</strong></td>
+                                <td style="padding: 6px; text-align: center;">180</td>
+                                <td style="padding: 6px; text-align: center;">120</td>
+                                <td style="padding: 6px; text-align: center;">100</td>
+                                <td style="padding: 6px; text-align: center;"><strong>400</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px;"><strong>Armored</strong></td>
+                                <td style="padding: 6px; text-align: center;">150</td>
+                                <td style="padding: 6px; text-align: center;">100</td>
+                                <td style="padding: 6px; text-align: center;">50</td>
+                                <td style="padding: 6px; text-align: center;"><strong>300</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 6px;"><strong>Artillery</strong></td>
+                                <td style="padding: 6px; text-align: center;">120</td>
+                                <td style="padding: 6px; text-align: center;">80</td>
+                                <td style="padding: 6px; text-align: center;">100</td>
+                                <td style="padding: 6px; text-align: center;"><strong>300</strong></td>
+                            </tr>
+                            <tr style="background: rgba(212, 175, 55, 0.2);">
+                                <td style="padding: 6px;"><strong>Total</strong></td>
+                                <td style="padding: 6px; text-align: center;"><strong>450</strong></td>
+                                <td style="padding: 6px; text-align: center;"><strong>300</strong></td>
+                                <td style="padding: 6px; text-align: center;"><strong>250</strong></td>
+                                <td style="padding: 6px; text-align: center;"><strong>1,000</strong></td>
+                            </tr>
+                        </table>
+                        
+                        <div style="background: rgba(var(--secondary-gold), 0.1); padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                            <p><strong>📊 Key Insights from the Table:</strong></p>
+                            <ul style="font-size: 0.9rem; line-height: 1.6;">
+                                <li><strong>Most common combination:</strong> Hive World Infantry (180 regiments)</li>
+                                <li><strong>Least common combination:</strong> Death World Armored (50 regiments)</li>
+                                <li><strong>Planet distribution:</strong> 45% Hive, 30% Agri, 25% Death Worlds</li>
+                                <li><strong>Role distribution:</strong> 40% Infantry, 30% Armored, 30% Artillery</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: rgba(var(--accent-blue), 0.1); padding: 1rem; border-radius: 6px;">
+                            <p><strong>🎯 Practice Question:</strong></p>
+                            <p style="font-size: 0.9rem;">What percentage of all 1,000 regiments are Infantry from Hive Worlds?</p>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Answer: 180 ÷ 1,000 × 100% = 18%</p>
+                        </div>
+                    </div>
                 </div>
             `,
             interactive: {
                 type: "calculation",
                 question: "Based on the Imperial Guard table above, what percentage of all regiments are Infantry from Hive Worlds?",
                 data: {
-
+                    "Infantry from Hive Worlds": 180,
+                    "Total Regiments": 1000
                 },
                 answers: {
                     percentage: 18

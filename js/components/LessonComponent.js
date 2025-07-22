@@ -111,10 +111,13 @@ class LessonComponent {
             </div>
         `;
 
-        // Add interactive element if present
-        if (step.interactive) {
+        // Only add interactive element if not already embedded in content
+        if (step.interactive && !step.content.includes('lesson-interactive')) {
             console.log('Processing interactive element for step:', this.currentStepIndex, step.interactive);
             stepHTML += this.generateInteractiveElement(step.interactive);
+            this.activityCompleted = false;
+        } else if (step.interactive) {
+            // Interactive element is embedded in content, just set completion state
             this.activityCompleted = false;
         } else {
             this.activityCompleted = true;
