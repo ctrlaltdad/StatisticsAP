@@ -214,10 +214,10 @@ class LessonComponent {
             if (Array.isArray(interactive.data) && typeof interactive.data.join === 'function') {
                 // Simple array format - additional safety check
                 try {
-                    dataDisplay = `<p><strong>Data:</strong> ${interactive.data.join(', ')}</p>`;
+                    dataDisplay = `<p><span class="text-key">Data:</span> ${interactive.data.join(', ')}</p>`;
                 } catch (joinError) {
                     console.warn('Error calling join on array:', joinError, interactive.data);
-                    dataDisplay = `<p><strong>Data:</strong> ${interactive.data.toString()}</p>`;
+                    dataDisplay = `<p><span class="text-key">Data:</span> ${interactive.data.toString()}</p>`;
                 }
             } else if (typeof interactive.data === 'object' && interactive.data !== null) {
                 // Object format (e.g., multiple datasets)
@@ -230,23 +230,23 @@ class LessonComponent {
                         
                         if (Array.isArray(values) && typeof values.join === 'function') {
                             try {
-                                dataDisplay += `<p><strong>${key}:</strong> ${values.join(', ')}</p>`;
+                                dataDisplay += `<p><span class="text-key">${key}:</span> ${values.join(', ')}</p>`;
                             } catch (joinError) {
                                 console.warn('Error calling join on nested array:', joinError, values);
-                                dataDisplay += `<p><strong>${key}:</strong> ${values.toString()}</p>`;
+                                dataDisplay += `<p><span class="text-key">${key}:</span> ${values.toString()}</p>`;
                             }
                         } else {
-                            dataDisplay += `<p><strong>${key}:</strong> ${values}</p>`;
+                            dataDisplay += `<p><span class="text-key">${key}:</span> ${values}</p>`;
                         }
                     }
                 } catch (error) {
                     console.warn('Error processing interactive data:', error);
-                    dataDisplay += `<p><strong>Data:</strong> ${JSON.stringify(interactive.data)}</p>`;
+                    dataDisplay += `<p><span class="text-key">Data:</span> ${JSON.stringify(interactive.data)}</p>`;
                 }
                 dataDisplay += '</div>';
             } else {
                 // Fallback for other data types
-                dataDisplay = `<p><strong>Data:</strong> ${interactive.data}</p>`;
+                dataDisplay = `<p><span class="text-key">Data:</span> ${interactive.data}</p>`;
             }
 
             return `
@@ -589,11 +589,11 @@ class LessonComponent {
             if (selected === correct) {
                 item.style.backgroundColor = 'rgba(22, 163, 74, 0.2)';
                 item.style.borderColor = 'var(--success-green)';
-                feedback += `<li>✅ <strong>${items[index].text}</strong> - Correct! (${correct})</li>`;
+                feedback += `<li>✅ <span class="text-emphasis">${items[index].text}</span> - Correct! (${correct})</li>`;
             } else {
                 item.style.backgroundColor = 'rgba(234, 88, 12, 0.2)';
                 item.style.borderColor = 'var(--warning-orange)';
-                feedback += `<li>❌ <strong>${items[index].text}</strong><br>
+                feedback += `<li>❌ <span class="text-emphasis">${items[index].text}</span><br>
                     &nbsp;&nbsp;&nbsp;Your answer: ${selected || 'Not selected'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${correct}</li>`;
                 allCorrect = false;
@@ -649,9 +649,9 @@ class LessonComponent {
             allCorrect = allCorrect && meanCorrect;
             
             if (meanCorrect) {
-                feedback += '<li>✅ <strong>Mean:</strong> Correct!</li>';
+                feedback += '<li>✅ <span class="text-key">Mean:</span> Correct!</li>';
             } else {
-                feedback += `<li>❌ <strong>Mean:</strong> ${meanValue || 'Not provided'}<br>
+                feedback += `<li>❌ <span class="text-key">Mean:</span> ${meanValue || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.mean}</li>`;
             }
         }
@@ -664,9 +664,9 @@ class LessonComponent {
             allCorrect = allCorrect && medianCorrect;
             
             if (medianCorrect) {
-                feedback += '<li>✅ <strong>Median:</strong> Correct!</li>';
+                feedback += '<li>✅ <span class="text-key">Median:</span> Correct!</li>';
             } else {
-                feedback += `<li>❌ <strong>Median:</strong> ${medianValue || 'Not provided'}<br>
+                feedback += `<li>❌ <span class="text-key">Median:</span> ${medianValue || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.median}</li>`;
             }
         }
@@ -679,9 +679,9 @@ class LessonComponent {
             allCorrect = allCorrect && rangeCorrect;
             
             if (rangeCorrect) {
-                feedback += '<li>✅ <strong>Range:</strong> Correct!</li>';
+                feedback += '<li>✅ <span class="text-key">Range:</span> Correct!</li>';
             } else {
-                feedback += `<li>❌ <strong>Range:</strong> ${rangeValue || 'Not provided'}<br>
+                feedback += `<li>❌ <span class="text-key">Range:</span> ${rangeValue || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.range}</li>`;
             }
         }
@@ -695,9 +695,9 @@ class LessonComponent {
             allCorrect = allCorrect && modeCorrect;
             
             if (modeCorrect) {
-                feedback += '<li>✅ <strong>Mode:</strong> Correct!</li>';
+                feedback += '<li>✅ <span class="text-key">Mode:</span> Correct!</li>';
             } else {
-                feedback += `<li>❌ <strong>Mode:</strong> ${modeInput.value || 'Not provided'}<br>
+                feedback += `<li>❌ <span class="text-key">Mode:</span> ${modeInput.value || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.mode}</li>`;
             }
         }
@@ -710,9 +710,9 @@ class LessonComponent {
             allCorrect = allCorrect && percentageCorrect;
             
             if (percentageCorrect) {
-                feedback += '<li>✅ <strong>Percentage:</strong> Correct!</li>';
+                feedback += '<li>✅ <span class="text-key">Percentage:</span> Correct!</li>';
             } else {
-                feedback += `<li>❌ <strong>Percentage:</strong> ${percentageValue || 'Not provided'}%<br>
+                feedback += `<li>❌ <span class="text-key">Percentage:</span> ${percentageValue || 'Not provided'}%<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.percentage}%</li>`;
             }
         }
@@ -725,9 +725,9 @@ class LessonComponent {
             allCorrect = allCorrect && differenceCorrect;
             
             if (differenceCorrect) {
-                feedback += '<li>✅ <strong>Difference:</strong> Correct!</li>';
+                feedback += '<li>✅ <span class="text-key">Difference:</span> Correct!</li>';
             } else {
-                feedback += `<li>❌ <strong>Difference:</strong> ${differenceValue || 'Not provided'}<br>
+                feedback += `<li>❌ <span class="text-key">Difference:</span> ${differenceValue || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.difference}</li>`;
             }
         }
@@ -740,9 +740,9 @@ class LessonComponent {
             allCorrect = allCorrect && ratioCorrect;
             
             if (ratioCorrect) {
-                feedback += '<li>✅ <strong>Ratio:</strong> Correct!</li>';
+                feedback += '<li>✅ <span class="text-key">Ratio:</span> Correct!</li>';
             } else {
-                feedback += `<li>❌ <strong>Ratio:</strong> ${ratioValue || 'Not provided'}<br>
+                feedback += `<li>❌ <span class="text-key">Ratio:</span> ${ratioValue || 'Not provided'}<br>
                     &nbsp;&nbsp;&nbsp;Correct answer: ${interactive.answers.ratio}</li>`;
             }
         }
@@ -828,10 +828,10 @@ class LessonComponent {
         resultsDiv.innerHTML = `
             <div class="simulation-result">
                 <h5>Simulation Results:</h5>
-                <p><strong>Trials:</strong> ${trials}</p>
-                <p><strong>Successes:</strong> ${successes}</p>
-                <p><strong>Probability:</strong> ${probability.toFixed(3)}</p>
-                <p><strong>Expected:</strong> 0.500</p>
+                <p><span class="text-key">Trials:</span> ${trials}</p>
+                <p><span class="text-key">Successes:</span> ${successes}</p>
+                <p><span class="text-key">Probability:</span> ${probability.toFixed(3)}</p>
+                <p><span class="text-key">Expected:</span> 0.500</p>
                 <p class="simulation-note">The more trials you run, the closer the result should get to 0.5!</p>
             </div>
         `;

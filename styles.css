@@ -413,7 +413,7 @@ body {
 
 /* Lesson Screen */
 .lesson-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -649,7 +649,7 @@ body {
     padding: 1.5rem;
     margin: 1.5rem 0;
     border-radius: 8px;
-    text-align: center;
+    text-align: left;
     font-family: 'Courier New', monospace;
     font-size: 1.1rem;
 }
@@ -1533,6 +1533,36 @@ body {
 
 .admin-panel-btn:hover, .admin-logout-btn:hover {
     background: var(--hover-red);
+}
+
+/* Alternative text emphasis without bold (to avoid blur) */
+.text-emphasis {
+    color: var(--secondary-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.text-highlight {
+    color: var(--primary-red);
+    font-style: italic;
+}
+
+.text-important {
+    color: var(--accent-blue);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-blue);
+}
+
+.text-key {
+    color: var(--success-green);
+    background: rgba(22, 163, 74, 0.1);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+}
+
+.text-category {
+    color: var(--warning-orange);
+    text-transform: capitalize;
 }
 
 /* Table Styling for Categorical Data */

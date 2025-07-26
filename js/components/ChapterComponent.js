@@ -228,13 +228,13 @@ class ChapterComponent {
                     <p>${chapter.description}</p>
                     <div class="chapter-details">
                         <div class="detail-item">
-                            <strong>Difficulty:</strong> ${chapter.difficulty}
+                            <span class="text-key">Difficulty:</span> ${chapter.difficulty}
                         </div>
                         <div class="detail-item">
-                            <strong>Estimated Time:</strong> ${chapter.estimatedTime}
+                            <span class="text-key">Estimated Time:</span> ${chapter.estimatedTime}
                         </div>
                         <div class="detail-item">
-                            <strong>Prerequisites:</strong> 
+                            <span class="text-key">Prerequisites:</span> 
                             ${chapter.prerequisites?.length ? 
                                 chapter.prerequisites.map(id => `Chapter ${id}`).join(', ') : 
                                 'None'}

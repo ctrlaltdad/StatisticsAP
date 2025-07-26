@@ -33,23 +33,23 @@ const CHAPTER_2_LESSONS = {
                 <p>When the Adeptus Administratum needs to understand "typical" values, they use measures of central tendency:</p>
                 
                 <div class="formula-box">
-                    <strong>Mean (μ or x̄):</strong> The average value<br>
+                    <span class="text-key">Mean (μ or x̄):</span> The average value<br>
                     Formula: Sum of all values ÷ Number of values
                 </div>
                 
                 <div class="example-box">
                     <h4>⚡ Space Marine Kill Counts</h4>
                     <p>5 Ultramarines report: 12, 15, 18, 20, 25 enemy kills</p>
-                    <p><strong>Mean:</strong> (12+15+18+20+25) ÷ 5 = 18 kills per Marine</p>
-                    <p><strong>Median:</strong> Middle value when ordered = 18 kills</p>
-                    <p><strong>Mode:</strong> Most frequent value (none in this case)</p>
+                    <p><span class="text-key">Mean:</span> (12+15+18+20+25) ÷ 5 = 18 kills per Marine</p>
+                    <p><span class="text-key">Median:</span> Middle value when ordered = 18 kills</p>
+                    <p><span class="text-key">Mode:</span> Most frequent value (none in this case)</p>
                 </div>
                 
                 <div class="formula-box">
-                    <strong>When to use each:</strong><br>
-                    <li><strong>Mean:</strong> Best for symmetric data without outliers</li>
-                    <li><strong>Median:</strong> Best for skewed data or data with outliers</li>
-                    <li><strong>Mode:</strong> Useful for categorical data or finding most common value</li>
+                    <span class="text-key">When to use each:</span><br>
+                    <li><span class="text-key">Mean:</span> Best for symmetric data without outliers</li>
+                    <li><span class="text-key">Median:</span> Best for skewed data or data with outliers</li>
+                    <li><span class="text-key">Mode:</span> Useful for categorical data or finding most common value</li>
                 </div>
             `,
             interactive: {
@@ -69,20 +69,20 @@ const CHAPTER_2_LESSONS = {
                 <p>Central tendency tells us where the center is, but variability tells us how much the data is scattered. This is crucial for understanding the reliability of our measurements.</p>
                 
                 <div class="formula-box">
-                    <strong>Range:</strong> Maximum - Minimum<br>
-                    <strong>Standard Deviation (σ or s):</strong> Average distance from the mean<br>
-                    <strong>Variance (σ² or s²):</strong> Standard deviation squared
+                    <span class="text-key">Range:</span> Maximum - Minimum<br>
+                    <span class="text-key">Standard Deviation (σ or s):</span> Average distance from the mean<br>
+                    <span class="text-key">Variance (σ² or s²):</span> Standard deviation squared
                 </div>
                 
                 <div class="example-box">
                     <h4>⚔️ Two Guard Regiments</h4>
-                    <p><strong>Regiment A scores:</strong> 75, 78, 80, 82, 85 (mean = 80, std = 3.16)</p>
-                    <p><strong>Regiment B scores:</strong> 65, 75, 80, 85, 95 (mean = 80, std = 10.95)</p>
+                    <p><span class="text-key">Regiment A scores:</span> 75, 78, 80, 82, 85 (mean = 80, std = 3.16)</p>
+                    <p><span class="text-key">Regiment B scores:</span> 65, 75, 80, 85, 95 (mean = 80, std = 10.95)</p>
                     <p>Both have the same mean, but Regiment A is much more consistent!</p>
                 </div>
                 
                 <div class="formula-box">
-                    <strong>Interpretation:</strong><br>
+                    <span class="text-key">Interpretation:</span><br>
                     • Low variability = Consistent performance<br>
                     • High variability = Unpredictable performance
                 </div>

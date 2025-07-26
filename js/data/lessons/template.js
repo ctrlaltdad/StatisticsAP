@@ -18,7 +18,7 @@ const CHAPTER_TEMPLATE = {
                 </div>
                 
                 <div class="formula-box">
-                    <strong>Key Formula or Concept:</strong><br>
+                    <span class="text-key">Key Formula or Concept:</span><br>
                     Mathematical formula or important rule
                 </div>
                 
