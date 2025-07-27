@@ -124,6 +124,96 @@ class LessonComponent {
         }
 
         this.container.innerHTML = stepHTML;
+        
+        // Inject standardized charts after content is rendered
+        this.injectStandardizedCharts();
+        
+        // Inject interactive elements into lesson-interactive divs
+        if (step.interactive && step.content.includes('lesson-interactive')) {
+            this.injectInteractiveElement(step.interactive);
+        }
+    }
+
+    /**
+     * Inject standardized charts using the new LessonChart system
+     */
+    injectStandardizedCharts() {
+        // Legacy chart injection for backward compatibility
+        this.injectLegacyCharts();
+        
+        // New modular chart injection
+        LessonChart.injectRegisteredCharts();
+    }
+
+    /**
+     * Legacy chart injection method (for existing charts)
+     */
+    injectLegacyCharts() {
+        // Vehicle Production Chart
+        const vehicleChartElement = document.getElementById('vehicle-production-chart');
+        if (vehicleChartElement) {
+            vehicleChartElement.innerHTML = BarChart.generate({
+                title: 'Monthly Vehicle Production',
+                data: [
+                    { label: 'Rhinos', value: 45, color: 'rgba(220, 38, 127, 0.8)' },
+                    { label: 'Predators', value: 30, color: 'rgba(77, 171, 247, 0.8)' },
+                    { label: 'Land Raiders', value: 15, color: 'rgba(218, 165, 32, 0.8)' },
+                    { label: 'Dreadnoughts', value: 25, color: 'rgba(81, 207, 102, 0.8)' }
+                ],
+                maxValue: 50,
+                height: 200,
+                yAxisLabel: 'Units per Month'
+            });
+        }
+        
+        // Space Marine Chapter Strength Chart
+        const chapterChartElement = document.getElementById('chapterVisualizationChart');
+        if (chapterChartElement) {
+            chapterChartElement.innerHTML = BarChart.generate({
+                title: 'Space Marine Chapter Strength',
+                data: [
+                    { label: 'Ultramarines', value: 1000, color: 'rgba(220, 38, 127, 0.8)' },
+                    { label: 'Imperial Fists', value: 980, color: 'rgba(77, 171, 247, 0.8)' },
+                    { label: 'Blood Angels', value: 950, color: 'rgba(218, 165, 32, 0.8)' },
+                    { label: 'Salamanders', value: 740, color: 'rgba(81, 207, 102, 0.8)' }
+                ],
+                maxValue: 1100,
+                height: 200,
+                yAxisLabel: 'Battle-Brothers'
+            });
+        }
+        
+        // Chapter Distribution Analysis Chart
+        const chapterDistributionElement = document.getElementById('chapterDistributionChart');
+        if (chapterDistributionElement) {
+            chapterDistributionElement.innerHTML = BarChart.generate({
+                title: 'Chapter Battle-Brothers Distribution',
+                data: [
+                    { label: 'Ultramarines', value: 950, color: 'rgba(220, 38, 127, 0.8)' },
+                    { label: 'Blood Angels', value: 850, color: 'rgba(77, 171, 247, 0.8)' },
+                    { label: 'Imperial Fists', value: 900, color: 'rgba(218, 165, 32, 0.8)' },
+                    { label: 'Salamanders', value: 750, color: 'rgba(81, 207, 102, 0.8)' },
+                    { label: 'Raven Guard', value: 800, color: 'rgba(156, 39, 176, 0.8)' }
+                ],
+                maxValue: 1000,
+                height: 200,
+                yAxisLabel: 'Battle-Brothers'
+            });
+        }
+    }
+
+    /**
+     * Inject interactive element into existing lesson-interactive div
+     */
+    injectInteractiveElement(interactive) {
+        const interactiveDiv = this.container.querySelector('.lesson-interactive');
+        if (interactiveDiv) {
+            console.log('Injecting interactive element into lesson-interactive div:', interactive);
+            const interactiveHTML = this.generateInteractiveElement(interactive);
+            interactiveDiv.innerHTML += interactiveHTML;
+        } else {
+            console.warn('lesson-interactive div not found for injection');
+        }
     }
 
     /**

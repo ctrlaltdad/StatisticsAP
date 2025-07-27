@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -162,7 +163,13 @@
     <script src="js/data/config.js"></script>
     <script src="js/data/chapters.js"></script>
     
-    <!-- Load Individual Chapter Lessons -->
+    <!-- Load Modular UI Components FIRST (required by lesson data) -->
+    <script src="js/components/BarChart.js"></script>
+    <script src="js/components/LessonGridBuilder.js"></script>
+    <script src="js/components/StandardTable.js"></script>
+    <script src="js/components/LessonChart.js"></script>
+    
+    <!-- Load Individual Chapter Lessons (now that components are available) -->
     <script src="js/data/lessons/chapter-1.js"></script>
     <script src="js/data/lessons/chapter-2.js"></script>
     <!-- Add new chapter lesson files here as they're created -->
@@ -178,7 +185,7 @@
     <script src="js/modules/ContentManager.js"></script>
     <script src="js/modules/AdminManager.js"></script>
     
-    <!-- Load UI Components -->
+    <!-- Load Remaining UI Components -->
     <script src="js/components/ChapterComponent.js"></script>
     <script src="js/components/LessonComponent.js"></script>
     <script src="js/components/QuizComponent.js"></script>

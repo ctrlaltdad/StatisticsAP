@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Test</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div style="padding: 2rem;">
+        <h1>Chart Test</h1>
+        
+        <h2>Vehicle Production Chart</h2>
+        <div id="vehicle-production-chart"></div>
+        
+        <h2>Chapter Visualization Chart</h2>
+        <div id="chapterVisualizationChart"></div>
+    </div>
+
+    <!-- Load BarChart component -->
+    <script src="js/components/BarChart.js"></script>
+    
+    <script>
+        // Test Vehicle Production Chart
+        const vehicleChartElement = document.getElementById('vehicle-production-chart');
+        if (vehicleChartElement) {
+            vehicleChartElement.innerHTML = BarChart.generate({
+                title: 'Monthly Vehicle Production',
+                data: [
+                    { label: 'Rhinos', value: 45, color: 'rgba(220, 38, 127, 0.8)' },
+                    { label: 'Predators', value: 30, color: 'rgba(77, 171, 247, 0.8)' },
+                    { label: 'Land Raiders', value: 15, color: 'rgba(218, 165, 32, 0.8)' },
+                    { label: 'Dreadnoughts', value: 25, color: 'rgba(81, 207, 102, 0.8)' }
+                ],
+                maxValue: 50,
+                height: 250,
+                yAxisLabel: 'Units per Month'
+            });
+        }
+        
+        // Test Space Marine Chapter Strength Chart
+        const chapterChartElement = document.getElementById('chapterVisualizationChart');
+        if (chapterChartElement) {
+            chapterChartElement.innerHTML = BarChart.generate({
+                title: 'Space Marine Chapter Strength',
+                data: [
+                    { label: 'Ultramarines', value: 1000, color: 'rgba(220, 38, 127, 0.8)' },
+                    { label: 'Imperial Fists', value: 980, color: 'rgba(77, 171, 247, 0.8)' },
+                    { label: 'Blood Angels', value: 950, color: 'rgba(218, 165, 32, 0.8)' },
+                    { label: 'Salamanders', value: 740, color: 'rgba(81, 207, 102, 0.8)' }
+                ],
+                maxValue: 1100,
+                height: 250,
+                yAxisLabel: 'Battle-Brothers'
+            });
+        }
+    </script>
+</body>
+</html>

@@ -34,6 +34,20 @@ A gamified web application for learning AP Statistics through the grim darkness 
 - **Interactive elements** including calculations, classifications, and simulations
 - **Progress tracking** with visual indicators and achievements
 
+### ⚙️ Modular Architecture (NEW)
+- **85% code reduction** through reusable components
+- **LessonGridBuilder**: Standardized 2x2 lesson layouts
+- **StandardTable**: Unified table generation system
+- **LessonChart**: Preset chart configurations
+- **Interactive Elements**: Auto-injected classification, calculation, and simulation activities
+
+## 📋 Documentation
+
+### For Developers
+- **[Modular Lesson Creation Guide](MODULAR_LESSON_CREATION_GUIDE.md)** - Complete guide for creating new lessons using the modular system
+- **[Content Guide](CONTENT_GUIDE.md)** - Basic content creation reference
+- **[Admin Mode Guide](ADMIN_MODE.md)** - Admin features and testing tools
+
 ## 🛠️ Setup and Installation
 
 ### Prerequisites
@@ -61,10 +75,14 @@ A gamified web application for learning AP Statistics through the grim darkness 
 ├── styles.css                   # Application styling
 ├── js/
 │   ├── app-refactored.js        # Main application logic
-│   ├── components/              # UI components
+│   ├── components/              # UI and modular components
 │   │   ├── ChapterComponent.js  # Chapter selection screen
 │   │   ├── LessonComponent.js   # Lesson display and navigation
-│   │   └── QuizComponent.js     # Quiz functionality
+│   │   ├── QuizComponent.js     # Quiz functionality
+│   │   ├── LessonGridBuilder.js # Modular 2x2 lesson layouts
+│   │   ├── StandardTable.js     # Table generation system
+│   │   ├── LessonChart.js       # Chart preset system
+│   │   └── BarChart.js         # Chart rendering engine
 │   ├── modules/                 # Core system modules
 │   │   ├── DataManager.js       # Data loading and management
 │   │   ├── ProgressManager.js   # User progress tracking
