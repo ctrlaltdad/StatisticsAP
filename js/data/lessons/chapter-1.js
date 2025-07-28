@@ -131,7 +131,20 @@ const CHAPTER_1_LESSONS = {
                     }) },
                     interactive: { title: "Protocol Mastery", prompt: "Understanding complete - proceed to bar graphs" }
                 })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Evaluate each classification system for categorical data compliance:",
+                items: [
+                    { text: "Planet Types: Hive, Agri, Death, Fortress, Mining (all worlds fit exactly one type)", category: "Valid Categorical System" },
+                    { text: "Space Marine Ages: Young, Middle-aged, Old, Ancient (overlapping ranges, unclear boundaries)", category: "Invalid Categorical System" },
+                    { text: "Battle Outcomes: Victory, Defeat, Draw (covers all possible results, no overlap)", category: "Valid Categorical System" },
+                    { text: "Threat Levels: Low, Medium, High (missing 'Extreme' category, some threats don't fit)", category: "Invalid Categorical System" },
+                    { text: "Chapter Specialties: Assault, Defense, Reconnaissance, Support (mutually exclusive roles)", category: "Valid Categorical System" },
+                    { text: "Weapon Effectiveness: Good, Bad, Okay, Decent (subjective, overlapping meanings)", category: "Invalid Categorical System" }
+                ],
+                categories: ["Valid Categorical System", "Invalid Categorical System"]
+            }
         },
 
         {
@@ -159,7 +172,20 @@ const CHAPTER_1_LESSONS = {
                     },
                     interactive: { title: "Bar Graph Appropriateness", prompt: "Which scenarios are best displayed with a bar graph?" }
                 })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Classify each data scenario as 'Appropriate for Bar Graph' or 'Not Appropriate for Bar Graph':",
+                items: [
+                    { text: "Number of Space Marines in each Chapter (Ultramarines: 950, Blood Angels: 850, Imperial Fists: 900)", category: "Appropriate for Bar Graph" },
+                    { text: "Temperature readings over 24 hours (continuous measurements every hour)", category: "Not Appropriate for Bar Graph" },
+                    { text: "Types of weapons used by Imperial Guard regiments (Lasgun, Plasma, Melta, Flamer)", category: "Appropriate for Bar Graph" },
+                    { text: "Battle-brother height measurements in centimeters (185.3, 187.1, 189.8, etc.)", category: "Not Appropriate for Bar Graph" },
+                    { text: "Threat levels by sector (Low: 12 sectors, Medium: 8 sectors, High: 5 sectors)", category: "Appropriate for Bar Graph" },
+                    { text: "Relationship between training hours and battle effectiveness scores", category: "Not Appropriate for Bar Graph" }
+                ],
+                categories: ["Appropriate for Bar Graph", "Not Appropriate for Bar Graph"]
+            }
         },
 
         {
@@ -188,199 +214,745 @@ const CHAPTER_1_LESSONS = {
                     },
                     interactive: { title: "Strategic Calculation", prompt: "Calculate differences and percentages from the chart" }
                 })}
-            `
-        },
-
-        {
-            title: "Advanced Bar Graph Analysis: Tactical Intelligence",
-            content: `
-                <h3>Advanced Pattern Recognition</h3>
-                ${LessonGridBuilder.create({
-                    theory: { title: "Advanced Techniques", definitions: [
-                        { term: "Comparative Analysis", definition: "Identifying patterns and relationships between categories" }
-                    ] },
-                    application: { title: "Multi-Sector Force Analysis",
-                        customContent: LessonChart.create(LessonChart.presets.multiSectorForces()),
-                        insights: { title: "Strategic Insights", items: [
-                            "Sector Alpha has 40% more forces than Sector Beta",
-                            "Combined Sectors Alpha and Gamma equal 65% of total forces"
-                        ]}
-                    }
-                })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Based on the Chapter Distribution data above, classify each statement as 'True' or 'False':",
+                items: [
+                    { text: "The Ultramarines have 100 more battle-brothers than the Blood Angels", category: "True" },
+                    { text: "The Imperial Fists represent exactly 21.2% of the total force", category: "True" },
+                    { text: "The Blood Angels have the smallest number of battle-brothers", category: "True" },
+                    { text: "The total force contains more than 5,000 battle-brothers", category: "False" },
+                    { text: "The Ultramarines and Imperial Fists combined have 1,850 battle-brothers", category: "True" },
+                    { text: "The Blood Angels represent more than 25% of the total force", category: "False" }
+                ],
+                categories: ["True", "False"]
+            }
         },
 
         {
             title: "Two-Way Tables: Imperial Cross-Classification",
             content: `
                 <h3>Analyzing Two Variables Simultaneously</h3>
+                <p>The Adeptus Administratum must analyze relationships between multiple categorical variables to understand complex patterns across the Imperium.</p>
+                
                 ${LessonGridBuilder.create({
-                    theory: { title: "Two-Way Table Structure", definitions: [
-                        { term: "Two-Way Table", definition: "Displays counts for two categorical variables simultaneously" }
-                    ] },
-                    application: { title: "Chapter Homeworld Analysis",
+                    theory: { 
+                        title: "Two-Way Table Structure", 
+                        definitions: [
+                            { term: "Two-Way Table", definition: "Displays counts for two categorical variables simultaneously" },
+                            { term: "Rows", definition: "Represent categories of one variable" },
+                            { term: "Columns", definition: "Represent categories of the second variable" },
+                            { term: "Cells", definition: "Show the count for each combination of categories" }
+                        ],
+                        lists: [{
+                            title: "Essential Components",
+                            items: [
+                                { category: "Row Totals", description: "Sum of counts across each row" },
+                                { category: "Column Totals", description: "Sum of counts down each column" },
+                                { category: "Grand Total", description: "Total count of all observations" }
+                            ]
+                        }]
+                    },
+                    examples: {
+                        title: "Construction Process",
+                        steps: [
+                            { action: "Identify two categorical variables", description: "Choose what characteristics to analyze" },
+                            { action: "Create row and column headers", description: "Label categories for each variable" },
+                            { action: "Count combinations", description: "Tally observations for each cell" },
+                            { action: "Calculate totals", description: "Add row totals, column totals, and grand total" },
+                            { action: "Verify accuracy", description: "Ensure all totals match the grand total" }
+                        ],
+                        highlights: {
+                            title: "Key Relationships",
+                            items: [
+                                "Each cell represents a specific combination of categories",
+                                "Totals provide marginal distributions for each variable"
+                            ]
+                        }
+                    },
+                    application: { 
+                        title: "Chapter Homeworld Analysis",
+                        subtitle: "Recruitment Patterns by Chapter and World Type:",
                         customContent: StandardTable.generate({
                             headers: ["Chapter", "Hive World", "Death World", "Fortress World", "Total"],
-                            rows: [["Ultramarines", "12", "3", "8", "23"], ["Blood Angels", "8", "7", "5", "20"], ["Total", "35", "12", "23", "70"]]
-                        })
+                            rows: [
+                                ["Ultramarines", "12", "3", "8", "23"], 
+                                ["Blood Angels", "8", "7", "5", "20"], 
+                                ["Imperial Fists", "5", "2", "15", "22"],
+                                ["Total", "25", "12", "28", "65"]
+                            ],
+                            caption: "Recruitment sources for three major Space Marine Chapters"
+                        }),
+                        insights: {
+                            title: "Strategic Observations",
+                            items: [
+                                "Imperial Fists heavily favor Fortress World recruitment (68%)",
+                                "Blood Angels show highest Death World recruitment rate (35%)",
+                                "Fortress Worlds provide the most recruits overall (43%)"
+                            ]
+                        }
+                    },
+                    interactive: { 
+                        title: "Table Analysis Practice", 
+                        prompt: "Test your understanding of two-way table relationships" 
                     }
                 })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Based on the Chapter Homeworld Analysis table, classify each statement as 'True' or 'False':",
+                items: [
+                    { text: "The Imperial Fists recruit more from Fortress Worlds than the other two chapters combined", category: "True" },
+                    { text: "Death Worlds provide the smallest number of total recruits across all chapters", category: "True" },
+                    { text: "The Ultramarines have the highest total recruitment numbers", category: "True" },
+                    { text: "More than half of Blood Angels recruits come from Hive Worlds", category: "False" },
+                    { text: "The total number of recruits from all sources is 65", category: "True" },
+                    { text: "Each chapter recruits equally from all world types", category: "False" }
+                ],
+                categories: ["True", "False"]
+            }
         },
 
         {
             title: "Marginal Distributions: Force Distribution Analysis",
             content: `
                 <h3>Understanding Overall Patterns</h3>
+                <p>Marginal distributions reveal the overall patterns of individual variables, essential for strategic planning across the Imperium.</p>
+                
                 ${LessonGridBuilder.create({
-                    theory: { title: "Marginal Distribution Concepts", definitions: [
-                        { term: "Marginal Distribution", definition: "Distribution of one variable ignoring the other" }
-                    ] },
-                    application: { title: "Chapter Recruitment Analysis",
-                        customContent: StandardTable.fromData({
-                            title: "Recruitment by Chapter and World Type",
-                            data: [["Chapter", "Hive", "Death", "Fortress", "Total"], ["Ultramarines", "45%", "15%", "40%", "100%"], ["Marginal %", "47%", "20%", "33%", "100%"]]
-                        })
+                    theory: { 
+                        title: "Marginal Distribution Concepts", 
+                        definitions: [
+                            { term: "Marginal Distribution", definition: "Distribution of one variable ignoring the other" },
+                            { term: "Row Marginals", definition: "Totals or percentages for each row category" },
+                            { term: "Column Marginals", definition: "Totals or percentages for each column category" },
+                            { term: "Overall Pattern", definition: "General distribution across all categories of one variable" }
+                        ],
+                        lists: [{
+                            title: "Key Characteristics",
+                            items: [
+                                { category: "Independence", description: "Shows distribution without considering other variables" },
+                                { category: "Summary View", description: "Provides overall picture of single variable patterns" },
+                                { category: "Comparison Tool", description: "Allows comparison of different categories' prevalence" }
+                            ]
+                        }]
+                    },
+                    examples: {
+                        title: "Calculation Process",
+                        steps: [
+                            { action: "Extract row totals", description: "Sum counts across each row (or use existing totals)" },
+                            { action: "Extract column totals", description: "Sum counts down each column (or use existing totals)" },
+                            { action: "Calculate percentages", description: "Divide each total by grand total × 100%" },
+                            { action: "Create marginal table", description: "Display just the single variable distribution" },
+                            { action: "Interpret patterns", description: "Identify most/least common categories" }
+                        ],
+                        highlights: {
+                            title: "Strategic Applications",
+                            items: [
+                                "Resource allocation based on overall demand patterns",
+                                "Identifying most common recruitment sources"
+                            ]
+                        }
+                    },
+                    application: { 
+                        title: "Chapter Recruitment Analysis",
+                        subtitle: "Marginal Distribution Comparison:",
+                        customContent: StandardTable.generate({
+                            headers: ["Category", "Hive Worlds", "Death Worlds", "Fortress Worlds", "Total"],
+                            rows: [
+                                ["Ultramarines", "52%", "13%", "35%", "100%"],
+                                ["Blood Angels", "40%", "35%", "25%", "100%"],
+                                ["Imperial Fists", "23%", "9%", "68%", "100%"],
+                                ["Marginal Distribution", "38%", "18%", "44%", "100%"]
+                            ],
+                            caption: "Percentage distributions showing individual chapter patterns vs. overall pattern"
+                        }),
+                        insights: {
+                            title: "Distribution Analysis",
+                            items: [
+                                "Overall: Fortress Worlds dominate recruitment (44%)",
+                                "Hive Worlds provide steady recruitment across chapters (38%)",
+                                "Death World recruitment varies significantly by chapter"
+                            ]
+                        }
+                    },
+                    interactive: { 
+                        title: "Marginal Analysis Practice", 
+                        prompt: "Test your understanding of marginal distributions" 
                     }
                 })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Based on the marginal distribution data, classify each statement as 'True' or 'False':",
+                items: [
+                    { text: "Fortress Worlds provide the highest percentage of overall recruitment (44%)", category: "True" },
+                    { text: "Death Worlds have the lowest marginal distribution percentage", category: "True" },
+                    { text: "Imperial Fists recruit more heavily from Fortress Worlds than the overall average", category: "True" },
+                    { text: "The marginal distribution shows equal recruitment from all world types", category: "False" },
+                    { text: "Blood Angels have the highest Death World recruitment rate among all chapters", category: "True" },
+                    { text: "Hive Worlds account for more than half of total recruitment", category: "False" }
+                ],
+                categories: ["True", "False"]
+            }
         },
 
         {
             title: "Conditional Distributions: Tactical Assessment Protocols",
             content: `
                 <h3>Analyzing Relationships Between Variables</h3>
+                <p>Conditional distributions reveal how one variable behaves when we know the value of another variable—critical for tactical decision-making.</p>
+                
                 ${LessonGridBuilder.create({
-                    theory: { title: "Conditional Analysis", definitions: [
-                        { term: "Conditional Distribution", definition: "Distribution of one variable given a specific value of another" }
-                    ] },
-                    application: { title: "Battle Effectiveness by Training",
+                    theory: { 
+                        title: "Conditional Analysis", 
+                        definitions: [
+                            { term: "Conditional Distribution", definition: "Distribution of one variable given a specific value of another" },
+                            { term: "Given Condition", definition: "The known value of one variable that defines the subset" },
+                            { term: "Conditional Percentages", definition: "Percentages calculated within each condition/row" },
+                            { term: "Pattern Comparison", definition: "Comparing distributions across different conditions" }
+                        ],
+                        lists: [{
+                            title: "Key Principles",
+                            items: [
+                                { category: "Subset Focus", description: "Look at distribution within specific groups only" },
+                                { category: "Row Percentages", description: "Calculate percentages across each row separately" },
+                                { category: "Pattern Detection", description: "Compare distributions to identify relationships" }
+                            ]
+                        }]
+                    },
+                    examples: {
+                        title: "Calculation Process",
+                        steps: [
+                            { action: "Select the condition", description: "Choose which variable's categories define the groups" },
+                            { action: "Calculate row percentages", description: "For each row: (cell ÷ row total) × 100%" },
+                            { action: "Compare across conditions", description: "Look for differences between row distributions" },
+                            { action: "Interpret relationships", description: "Identify patterns and dependencies" },
+                            { action: "Draw tactical conclusions", description: "Apply findings to strategic decisions" }
+                        ],
+                        highlights: {
+                            title: "Strategic Questions",
+                            items: [
+                                "Does training level affect battle outcomes?",
+                                "Do different chapters have varying success patterns?"
+                            ]
+                        }
+                    },
+                    application: { 
+                        title: "Battle Effectiveness by Training",
+                        subtitle: "Conditional Victory Rates by Training Level:",
                         customContent: StandardTable.comparison({
                             title: "Victory Rate by Training Level",
                             categories: ["Elite Training", "Standard Training", "Basic Training"],
                             outcomes: ["Victory", "Draw", "Defeat"],
                             data: [[85, 10, 5], [65, 20, 15], [45, 25, 30]]
-                        })
+                        }),
+                        insights: {
+                            title: "Tactical Analysis",
+                            items: [
+                                "Elite Training: 85% victory rate (strong performance)",
+                                "Standard Training: 65% victory rate (moderate effectiveness)",
+                                "Basic Training: 45% victory rate with 30% defeat rate",
+                                "Clear positive relationship between training and success"
+                            ]
+                        }
+                    },
+                    interactive: { 
+                        title: "Conditional Analysis Practice", 
+                        prompt: "Test your understanding of conditional distributions" 
                     }
                 })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Based on the Battle Effectiveness data, classify each statement as 'True' or 'False':",
+                items: [
+                    { text: "Elite Training units have an 85% victory rate", category: "True" },
+                    { text: "Basic Training units are more likely to be defeated than to achieve victory", category: "False" },
+                    { text: "Standard Training units have a higher draw rate than Elite Training units", category: "True" },
+                    { text: "Training level shows no relationship to battle outcomes", category: "False" },
+                    { text: "Elite Training units have the lowest defeat rate (5%)", category: "True" },
+                    { text: "Basic Training units have a 45% victory rate", category: "True" }
+                ],
+                categories: ["True", "False"]
+            }
         },
 
         {
             title: "Association and Independence: Strategic Correlation Analysis",
             content: `
                 <h3>Detecting Relationships in Imperial Data</h3>
+                <p>Understanding whether variables are associated or independent is crucial for strategic decision-making across the Imperium. This fundamental concept determines whether knowing one variable helps predict another.</p>
+                
                 ${LessonGridBuilder.create({
-                    theory: { title: "Association Concepts", definitions: [
-                        { term: "Association", definition: "Relationship between two categorical variables" },
-                        { term: "Independence", definition: "No relationship - knowing one variable doesn't help predict the other" }
-                    ], lists: [{ title: "Signs of Association", items: [
-                        { category: "Different Patterns", description: "Conditional distributions vary significantly" },
-                        { category: "Predictive Power", description: "One variable helps predict the other" }
-                    ]}] },
-                    application: { title: "Chapter Success vs. Homeworld Type", insights: { title: "Association Analysis", items: [
-                        "Death World chapters show 20% higher success rates",
-                        "Hive World recruitment correlates with tactical flexibility"
-                    ]}}
+                    theory: { 
+                        title: "Association vs. Independence", 
+                        definitions: [
+                            { term: "Association", definition: "A relationship exists between two variables - knowing one helps predict the other" },
+                            { term: "Independence", definition: "No relationship exists - knowing one variable provides no information about the other" },
+                            { term: "Strong Association", definition: "Conditional distributions differ by 20+ percentage points" },
+                            { term: "Weak Association", definition: "Conditional distributions differ by 5-20 percentage points" }
+                        ], 
+                        lists: [{ 
+                            title: "Key Characteristics", 
+                            items: [
+                                { category: "Association", description: "Different conditional distributions, predictive power, consistent patterns" },
+                                { category: "Independence", description: "Similar conditional distributions, no predictive power, uniform patterns" },
+                                { category: "Detection Method", description: "Compare conditional percentages across all categories" }
+                            ]
+                        }] 
+                    },
+                    examples: {
+                        title: "Step-by-Step Detection",
+                        steps: [
+                            { action: "Calculate conditional distributions", description: "Find row percentages for each category" },
+                            { action: "Compare across conditions", description: "Look for patterns in the percentages" },
+                            { action: "Measure differences", description: "Calculate largest - smallest percentage in each outcome" },
+                            { action: "Apply decision rules", description: "≤5% = Independence, 5-20% = Weak, >20% = Strong" },
+                            { action: "Draw strategic conclusions", description: "Determine if one variable predicts the other" }
+                        ],
+                        highlights: {
+                            title: "Quick Decision Rules",
+                            items: [
+                                "Independence: All conditional distributions look nearly identical",
+                                "Association: Conditional distributions show clear differences"
+                            ]
+                        }
+                    },
+                    application: { 
+                        title: "Comparative Analysis: Association vs. Independence",
+                        subtitle: "Two Strategic Examples:",
+                        customContent: `
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0;">
+                                <!-- Example 1: Strong Association -->
+                                <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; border: 2px solid #dc2626;">
+                                    <h4 style="color: #dc2626; margin-bottom: 0.5rem;">🔴 ASSOCIATION DETECTED</h4>
+                                    <h5 style="color: var(--secondary-gold); margin: 0.5rem 0;">Chapter Success by Homeworld</h5>
+                                    ${StandardTable.generate({
+                                        headers: ["Homeworld", "High Success", "Medium Success", "Low Success"],
+                                        rows: [
+                                            ["Death World", "75%", "20%", "5%"],
+                                            ["Hive World", "55%", "30%", "15%"],
+                                            ["Fortress World", "50%", "35%", "15%"]
+                                        ],
+                                        size: "small"
+                                    })}
+                                    <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                                        <strong>Analysis:</strong><br>
+                                        • High Success: 75% - 50% = 25% difference<br>
+                                        • <strong>Conclusion:</strong> Strong association (>20%)<br>
+                                        • <strong>Meaning:</strong> Homeworld type predicts success rate
+                                    </div>
+                                </div>
+                                
+                                <!-- Example 2: Independence -->
+                                <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; border: 2px solid #16a34a;">
+                                    <h4 style="color: #16a34a; margin-bottom: 0.5rem;">🟢 INDEPENDENCE DETECTED</h4>
+                                    <h5 style="color: var(--secondary-gold); margin: 0.5rem 0;">Mission Outcome by Day of Week</h5>
+                                    ${StandardTable.generate({
+                                        headers: ["Day", "Victory", "Draw", "Defeat"],
+                                        rows: [
+                                            ["Monday", "62%", "23%", "15%"],
+                                            ["Wednesday", "61%", "24%", "15%"],
+                                            ["Friday", "63%", "22%", "15%"]
+                                        ],
+                                        size: "small"
+                                    })}
+                                    <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">
+                                        <strong>Analysis:</strong><br>
+                                        • Victory: 63% - 61% = 2% difference<br>
+                                        • <strong>Conclusion:</strong> Independence (≤5%)<br>
+                                        • <strong>Meaning:</strong> Day of week doesn't affect outcomes
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: rgba(212, 175, 55, 0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                <h4 style="color: var(--secondary-gold); margin-bottom: 0.5rem;">📊 Strategic Interpretation Guide</h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.85rem;">
+                                    <div>
+                                        <strong>When Variables are Associated:</strong>
+                                        <ul style="margin: 0.25rem 0;">
+                                            <li>One variable helps predict the other</li>
+                                            <li>Strategic planning should consider both</li>
+                                            <li>Resources can be allocated more efficiently</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <strong>When Variables are Independent:</strong>
+                                        <ul style="margin: 0.25rem 0;">
+                                            <li>Variables don't influence each other</li>
+                                            <li>Can be analyzed separately</li>
+                                            <li>No strategic advantage from combination</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        `,
+                        insights: { 
+                            title: "Detection Summary", 
+                            items: [
+                                "Association: Homeworld predicts success (25% difference)",
+                                "Independence: Day of week irrelevant to outcomes (2% difference)",
+                                "Decision rule: >20% = strong, 5-20% = weak, ≤5% = independent",
+                                "Strategic impact: Focus resources on associated variables"
+                            ]
+                        }
+                    },
+                    interactive: { 
+                        title: "Association Detection Mastery", 
+                        prompt: "Practice identifying relationships between categorical variables" 
+                    }
                 })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Analyze each scenario and classify the relationship as 'Strong Association', 'Weak Association', or 'Independence':",
+                items: [
+                    { text: "Chapter Homeworld vs Success: Death World 75%, Hive World 55%, Fortress World 50% (25% difference)", category: "Strong Association" },
+                    { text: "Battle Day vs Outcome: Monday 62% victory, Wednesday 61% victory, Friday 63% victory (2% difference)", category: "Independence" },
+                    { text: "Training Level vs Performance: Elite 85% success, Standard 75% success, Basic 72% success (13% difference)", category: "Weak Association" },
+                    { text: "Weapon Type vs Effectiveness: Plasma 90%, Bolter 88%, Lasgun 89% (2% difference)", category: "Independence" },
+                    { text: "Experience vs Mission Success: Veteran 80%, Regular 55%, Recruit 35% (45% difference)", category: "Strong Association" },
+                    { text: "Squad Size vs Victory Rate: 5-man 67%, 10-man 72%, 15-man 69% (5% difference)", category: "Independence" }
+                ],
+                categories: ["Strong Association", "Weak Association", "Independence"]
+            }
         },
 
         {
             title: "Mosaic Plots: Visual Association Analysis",
             content: `
-                <h3>Advanced Visual Representation</h3>
+                <h3>Simple Visual Representation of Two-Way Tables</h3>
+                <p>Mosaic plots make it easy to see associations between two categorical variables by using rectangles whose areas are proportional to the data values.</p>
+                
                 ${LessonGridBuilder.create({
-                    theory: { title: "Mosaic Plot Principles", definitions: [
-                        { term: "Mosaic Plot", definition: "Visual representation of two-way table relationships" }
-                    ] },
-                    application: { title: "Chapter Deployment Visualization",
-                        customContent: '<div style="text-align: center; padding: 1rem; background: rgba(40, 40, 40, 0.5); border-radius: 8px;"><p style="margin: 0; font-style: italic; color: var(--text-muted);">Mosaic plot visualization would appear here</p></div>'
+                    theory: { 
+                        title: "Mosaic Plot Basics", 
+                        definitions: [
+                            { term: "Mosaic Plot", definition: "A visual display where rectangle areas represent cell frequencies from a two-way table" },
+                            { term: "Column Width", definition: "Shows the marginal distribution of the first variable" },
+                            { term: "Rectangle Height", definition: "Shows the conditional distribution within each column" },
+                            { term: "Rectangle Area", definition: "Proportional to the cell count or percentage" }
+                        ],
+                        lists: [{
+                            title: "Key Features",
+                            items: [
+                                { category: "Width = Marginal", description: "Column widths show how common each category is" },
+                                { category: "Height = Conditional", description: "Heights show percentages within each column" },
+                                { category: "Area = Cell Value", description: "Rectangle size matches the actual data count" }
+                            ]
+                        }]
+                    },
+                    examples: {
+                        title: "Reading Strategy",
+                        steps: [
+                            { action: "Start with the data table", description: "Understand the two-way table first" },
+                            { action: "Examine column widths", description: "Wider columns = more common categories" },
+                            { action: "Compare rectangle heights", description: "Different heights across columns = association" },
+                            { action: "Look for visual patterns", description: "Uniform heights = independence, varying heights = association" }
+                        ],
+                        highlights: {
+                            title: "Quick Visual Checks",
+                            items: [
+                                "Same heights across columns → Variables are independent",
+                                "Different heights across columns → Variables are associated"
+                            ]
+                        }
+                    },
+                    application: { 
+                        title: "Simple Example: Training vs Success",
+                        subtitle: "Imperial Guard Training Effectiveness:",
+                        customContent: `
+                            <!-- Step 1: Show the Data Table -->
+                            <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                <h4 style="color: var(--secondary-gold); margin-bottom: 0.5rem;">📊 Step 1: The Data Table</h4>
+                                ${StandardTable.generate({
+                                    headers: ["Training Level", "Success", "Failure", "Total"],
+                                    rows: [
+                                        ["Elite", "80", "20", "100"],
+                                        ["Basic", "40", "60", "100"],
+                                        ["Total", "120", "80", "200"]
+                                    ],
+                                    caption: "200 Imperial Guard units: 100 Elite-trained, 100 Basic-trained"
+                                })}
+                            </div>
+
+                            <!-- Step 2: Show the Mosaic Plot -->
+                            <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                <h4 style="color: var(--secondary-gold); margin-bottom: 1rem;">📊 Step 2: The Mosaic Plot</h4>
+                                
+                                <!-- Column Labels -->
+                                <div style="display: flex; margin-bottom: 0.5rem;">
+                                    <div style="width: 50%; text-align: center; font-size: 0.8rem; color: var(--secondary-gold); font-weight: bold;">Elite Training (50%)</div>
+                                    <div style="width: 50%; text-align: center; font-size: 0.8rem; color: var(--secondary-gold); font-weight: bold;">Basic Training (50%)</div>
+                                </div>
+                                
+                                <!-- Main Mosaic Plot -->
+                                <div style="display: flex; height: 150px; border: 2px solid var(--secondary-gold); background: rgba(20, 20, 20, 0.9);">
+                                    <!-- Elite Training Column (50% width because 100/200 = 50%) -->
+                                    <div style="width: 50%; border-right: 2px solid var(--secondary-gold); display: flex; flex-direction: column;">
+                                        <!-- Success: 80% of Elite column -->
+                                        <div style="height: 80%; background: rgba(34, 197, 94, 0.8); border-bottom: 1px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: white; font-weight: bold;">
+                                            Success<br>80%
+                                        </div>
+                                        <!-- Failure: 20% of Elite column -->
+                                        <div style="height: 20%; background: rgba(239, 68, 68, 0.8); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: white; font-weight: bold;">
+                                            Failure<br>20%
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Basic Training Column (50% width because 100/200 = 50%) -->
+                                    <div style="width: 50%; display: flex; flex-direction: column;">
+                                        <!-- Success: 40% of Basic column -->
+                                        <div style="height: 40%; background: rgba(34, 197, 94, 0.8); border-bottom: 1px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: white; font-weight: bold;">
+                                            Success<br>40%
+                                        </div>
+                                        <!-- Failure: 60% of Basic column -->
+                                        <div style="height: 60%; background: rgba(239, 68, 68, 0.8); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: white; font-weight: bold;">
+                                            Failure<br>60%
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Row Labels -->
+                                <div style="display: flex; justify-content: space-between; margin-top: 0.5rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                        <div style="width: 12px; height: 12px; background: rgba(34, 197, 94, 0.8);"></div>
+                                        <span style="font-size: 0.75rem; color: var(--secondary-gold);">Success</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                        <div style="width: 12px; height: 12px; background: rgba(239, 68, 68, 0.8);"></div>
+                                        <span style="font-size: 0.75rem; color: var(--secondary-gold);">Failure</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Analysis -->
+                            <div style="background: rgba(212, 175, 55, 0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                <h4 style="color: var(--secondary-gold); margin-bottom: 0.5rem;">📈 Step 3: What the Plot Shows</h4>
+                                <div style="font-size: 0.9rem;">
+                                    <p><strong>Column Widths:</strong> Both columns are equal width (50%) because we have equal numbers of Elite and Basic units.</p>
+                                    <p><strong>Rectangle Heights:</strong> The heights are very different!</p>
+                                    <ul style="margin: 0.5rem 0;">
+                                        <li><strong>Elite column:</strong> 80% success (tall green), 20% failure (short red)</li>
+                                        <li><strong>Basic column:</strong> 40% success (short green), 60% failure (tall red)</li>
+                                    </ul>
+                                    <p><strong>Conclusion:</strong> The different heights show <span style="color: #dc2626; font-weight: bold;">strong association</span> between training level and success rate!</p>
+                                </div>
+                            </div>
+                        `,
+                        insights: {
+                            title: "Key Learning Points",
+                            items: [
+                                "Column widths = marginal distribution (50% Elite, 50% Basic)",
+                                "Rectangle heights = conditional distribution (80% vs 40% success)",
+                                "Different heights across columns = strong association",
+                                "If heights were the same, variables would be independent"
+                            ]
+                        }
+                    },
+                    interactive: { 
+                        title: "Mosaic Plot Interpretation", 
+                        prompt: "Practice reading simple mosaic plots" 
                     }
                 })}
-            `
-        },
-
-        {
-            title: "Interpreting Associations: Intelligence Analysis Protocol",
-            content: `
-                <h3>Drawing Strategic Conclusions</h3>
-                ${LessonGridBuilder.create({
-                    theory: { title: "Interpretation Guidelines", lists: [{ title: "Strong Association Indicators", items: [
-                        { category: "Large Differences", description: "Conditional percentages vary by 20%+" },
-                        { category: "Consistent Patterns", description: "Same trend across multiple comparisons" }
-                    ]}] },
-                    application: { title: "Mission Success Analysis",
-                        customContent: StandardTable.generate({
-                            headers: ["Mission Type", "High Success %", "Medium Success %", "Low Success %"],
-                            rows: [["Reconnaissance", "85%", "12%", "3%"], ["Assault", "45%", "35%", "20%"], ["Siege", "25%", "50%", "25%"]]
-                        }),
-                        insights: { title: "Strategic Conclusions", items: [
-                            "Strong association between mission type and success rate",
-                            "Reconnaissance missions have highest success probability"
-                        ]}
-                    }
-                })}
-            `
-        },
-
-        {
-            title: "Simpson's Paradox: The Hidden Variable Trap",
-            content: `
-                <h3>Understanding Paradoxical Results</h3>
-                ${LessonGridBuilder.create({
-                    theory: { title: "Simpson's Paradox", definitions: [
-                        { term: "Simpson's Paradox", definition: "Trend appears in groups but reverses when groups are combined" },
-                        { term: "Lurking Variable", definition: "Hidden variable that affects the relationship" }
-                    ] },
-                    application: { title: "Chapter Performance Paradox", insights: { title: "Example Analysis", items: [
-                        "Chapter A has higher overall success rate",
-                        "But Chapter B performs better in each individual mission type",
-                        "Difference explained by mission type distribution"
-                    ]}}
-                })}
-            `
-        },
-
-        {
-            title: "Categorical Data in Context: Real-World Applications",
-            content: `
-                <h3>Practical Imperial Applications</h3>
-                ${LessonGridBuilder.create({
-                    theory: { title: "Practical Applications", lists: [{ title: "Use Cases", items: [
-                        { category: "Resource Allocation", description: "Distributing forces based on threat analysis" },
-                        { category: "Performance Evaluation", description: "Assessing unit effectiveness" }
-                    ]}] },
-                    application: { title: "Comprehensive Force Analysis",
-                        customContent: StandardTable.generate({
-                            headers: ["Sector", "Total Forces", "Threat Level", "Recommended Action"],
-                            rows: [["Alpha", "12,000", "High", "Reinforce"], ["Beta", "8,500", "Medium", "Maintain"], ["Gamma", "15,000", "Low", "Redeploy"]]
-                        })
-                    }
-                })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Based on the Training vs Success mosaic plot above, classify each statement as 'True' or 'False':",
+                items: [
+                    { text: "Both columns are equal width because we have equal numbers of Elite and Basic units", category: "True" },
+                    { text: "The Elite column shows 80% success (tall green rectangle) and 20% failure (short red rectangle)", category: "True" },
+                    { text: "The Basic column shows 40% success (short green rectangle) and 60% failure (tall red rectangle)", category: "True" },
+                    { text: "The different rectangle heights across columns indicate association between training and success", category: "True" },
+                    { text: "If both columns had identical heights, the variables would be independent", category: "True" },
+                    { text: "The rectangle areas are proportional to the actual counts from the data table", category: "True" }
+                ],
+                categories: ["True", "False"]
+            }
         },
 
         {
             title: "Chapter Summary: Mastery of Categorical Data Analysis",
             content: `
                 <h3>Imperial Data Analysis Mastery Achieved</h3>
+                <p>Congratulations, Imperial Data Analyst! You have successfully completed your training in categorical data analysis. Review your mastery of essential statistical concepts.</p>
+                
                 ${LessonGridBuilder.create({
-                    theory: { title: "Key Concepts Mastered", lists: [{ title: "Core Skills Achieved", items: [
-                        { category: "Data Identification", description: "Variables, individuals, and data types" },
-                        { category: "Visualization", description: "Bar graphs and interpretation" },
-                        { category: "Two-Way Analysis", description: "Tables, marginal, and conditional distributions" },
-                        { category: "Association Detection", description: "Recognizing and interpreting relationships" }
-                    ]}] },
-                    application: { title: "Final Assessment Protocol", insights: { title: "Ready for Advanced Training", items: [
-                        "Categorical data fundamentals: Mastered",
-                        "Visual analysis skills: Combat-ready",
-                        "Association interpretation: Strategic-level",
-                        "Ready to advance to quantitative analysis"
-                    ]}},
-                    interactive: { title: "Chapter Complete", prompt: "Proceed to Chapter 2: Describing Quantitative Data" }
+                    theory: { 
+                        title: "Core Concepts Mastered", 
+                        definitions: [
+                            { term: "Data Fundamentals", definition: "Identifying individuals, variables, and distinguishing categorical from quantitative data" },
+                            { term: "Categorical Analysis", definition: "Working with mutually exclusive categories and classification systems" },
+                            { term: "Visual Representation", definition: "Creating and interpreting bar graphs for categorical data display" },
+                            { term: "Relationship Analysis", definition: "Using two-way tables to examine associations between variables" }
+                        ],
+                        lists: [{ 
+                            title: "Statistical Skills Achieved", 
+                            items: [
+                                { category: "Data Classification", description: "Identify individuals, categorical variables, and quantitative variables" },
+                                { category: "Bar Graph Mastery", description: "Create, read, and interpret bar graphs with proper scaling" },
+                                { category: "Two-Way Table Analysis", description: "Construct tables, calculate totals, and extract insights" },
+                                { category: "Distribution Analysis", description: "Compute marginal and conditional distributions" },
+                                { category: "Association Detection", description: "Distinguish between association and independence" },
+                                { category: "Visual Interpretation", description: "Read mosaic plots and identify relationship patterns" }
+                            ]
+                        }] 
+                    },
+                    examples: {
+                        title: "Key Techniques Learned",
+                        steps: [
+                            { action: "Variable Identification", description: "Classify data elements as individuals, categorical variables, or quantitative variables" },
+                            { action: "Bar Graph Construction", description: "Create appropriate bar graphs with equal widths, proper scaling, and clear labels" },
+                            { action: "Two-Way Table Creation", description: "Organize bivariate categorical data with accurate row/column totals" },
+                            { action: "Percentage Calculations", description: "Compute marginal distributions (overall patterns) and conditional distributions (within groups)" },
+                            { action: "Association Assessment", description: "Apply decision rules: ≤5% = Independence, 5-20% = Weak, >20% = Strong association" },
+                            { action: "Mosaic Plot Reading", description: "Interpret column widths (marginal) and rectangle heights (conditional) to detect patterns" }
+                        ],
+                        highlights: {
+                            title: "Critical Decision Rules",
+                            items: [
+                                "Association Detection: Compare conditional distributions across categories",
+                                "Independence Test: Look for uniform patterns in conditional percentages"
+                            ]
+                        }
+                    },
+                    application: { 
+                        title: "Imperial Mastery Assessment",
+                        subtitle: "Comprehensive Skills Review:",
+                        customContent: `
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0;">
+                                <!-- Skills Mastery Checklist -->
+                                <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px;">
+                                    <h4 style="color: var(--secondary-gold); margin-bottom: 0.75rem;">✅ Skills Mastery Checklist</h4>
+                                    <div style="font-size: 0.85rem; line-height: 1.4;">
+                                        <div style="margin-bottom: 0.5rem;">
+                                            <strong style="color: #22c55e;">🎯 Data Fundamentals:</strong><br>
+                                            • Identify individuals in a dataset<br>
+                                            • Distinguish categorical vs quantitative variables<br>
+                                            • Recognize valid categorical systems
+                                        </div>
+                                        <div style="margin-bottom: 0.5rem;">
+                                            <strong style="color: #22c55e;">📊 Visualization Skills:</strong><br>
+                                            • Create proper bar graphs<br>
+                                            • Read and interpret bar graph data<br>
+                                            • Calculate differences and percentages
+                                        </div>
+                                        <div style="margin-bottom: 0.5rem;">
+                                            <strong style="color: #22c55e;">🔗 Relationship Analysis:</strong><br>
+                                            • Construct accurate two-way tables<br>
+                                            • Calculate marginal distributions<br>
+                                            • Compute conditional distributions<br>
+                                            • Detect association vs independence
+                                        </div>
+                                        <div>
+                                            <strong style="color: #22c55e;">🎨 Advanced Visualization:</strong><br>
+                                            • Interpret mosaic plots<br>
+                                            • Recognize visual association patterns
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Real-World Applications -->
+                                <div style="background: rgba(40, 40, 40, 0.8); padding: 1rem; border-radius: 8px;">
+                                    <h4 style="color: var(--secondary-gold); margin-bottom: 0.75rem;">🌟 Real-World Applications</h4>
+                                    <div style="font-size: 0.85rem; line-height: 1.4;">
+                                        <div style="margin-bottom: 0.5rem;">
+                                            <strong style="color: #3b82f6;">📈 Business Intelligence:</strong><br>
+                                            • Customer segment analysis<br>
+                                            • Product preference studies<br>
+                                            • Market research surveys
+                                        </div>
+                                        <div style="margin-bottom: 0.5rem;">
+                                            <strong style="color: #3b82f6;">🏥 Healthcare Analytics:</strong><br>
+                                            • Treatment effectiveness studies<br>
+                                            • Patient outcome analysis<br>
+                                            • Risk factor identification
+                                        </div>
+                                        <div style="margin-bottom: 0.5rem;">
+                                            <strong style="color: #3b82f6;">🎓 Educational Research:</strong><br>
+                                            • Student performance analysis<br>
+                                            • Teaching method effectiveness<br>
+                                            • Demographic impact studies
+                                        </div>
+                                        <div>
+                                            <strong style="color: #3b82f6;">⚖️ Social Science:</strong><br>
+                                            • Survey data analysis<br>
+                                            • Behavioral pattern detection<br>
+                                            • Policy impact assessment
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Key Formulas & Decision Rules -->
+                            <div style="background: rgba(212, 175, 55, 0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                                <h4 style="color: var(--secondary-gold); margin-bottom: 0.75rem;">📋 Essential Formulas & Decision Rules</h4>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.85rem;">
+                                    <div>
+                                        <strong>Key Calculations:</strong>
+                                        <ul style="margin: 0.5rem 0; line-height: 1.4;">
+                                            <li><strong>Percentage:</strong> (Category ÷ Total) × 100%</li>
+                                            <li><strong>Marginal %:</strong> (Row/Column Total ÷ Grand Total) × 100%</li>
+                                            <li><strong>Conditional %:</strong> (Cell ÷ Row Total) × 100%</li>
+                                            <li><strong>Association Strength:</strong> |Max% - Min%| in each outcome</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <strong>Decision Rules:</strong>
+                                        <ul style="margin: 0.5rem 0; line-height: 1.4;">
+                                            <li><strong>Independence:</strong> Difference ≤ 5%</li>
+                                            <li><strong>Weak Association:</strong> 5% < Difference ≤ 20%</li>
+                                            <li><strong>Strong Association:</strong> Difference > 20%</li>
+                                            <li><strong>Visual Test:</strong> Different mosaic heights = association</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Next Steps -->
+                            <div style="background: rgba(34, 197, 94, 0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0; border: 2px solid #22c55e;">
+                                <h4 style="color: #22c55e; margin-bottom: 0.5rem;">🚀 Ready for Advanced Training</h4>
+                                <p style="font-size: 0.9rem; margin: 0; line-height: 1.5;">
+                                    You have mastered the fundamentals of categorical data analysis! These skills form the foundation for all statistical analysis. 
+                                    You're now ready to advance to <strong>Chapter 2: Describing Quantitative Data</strong>, where you'll learn about 
+                                    measures of center, spread, and distribution shapes for numerical data.
+                                </p>
+                            </div>
+                        `,
+                        insights: { 
+                            title: "Mastery Achievement Summary", 
+                            items: [
+                                "✅ Categorical data fundamentals: Expert level",
+                                "✅ Bar graph creation and interpretation: Combat-ready",
+                                "✅ Two-way table analysis: Advanced proficiency", 
+                                "✅ Association detection methodology: Strategic mastery",
+                                "✅ Visual pattern recognition: Elite-level skills",
+                                "🎯 Ready to advance to quantitative data analysis"
+                            ]
+                        }
+                    },
+                    interactive: { 
+                        title: "Chapter Mastery Complete", 
+                        prompt: "Proceed to Chapter 2: Describing Quantitative Data" 
+                    }
                 })}
-            `
+            `,
+            interactive: {
+                type: "classification",
+                question: "Final mastery check: Classify each statement about your categorical data analysis skills as 'Mastered' or 'Need Review':",
+                items: [
+                    { text: "I can identify individuals, categorical variables, and quantitative variables in any dataset", category: "Mastered" },
+                    { text: "I can create proper bar graphs with equal widths, appropriate scaling, and clear labels", category: "Mastered" },
+                    { text: "I can construct two-way tables and calculate accurate row, column, and grand totals", category: "Mastered" },
+                    { text: "I can compute both marginal distributions (overall patterns) and conditional distributions (within groups)", category: "Mastered" },
+                    { text: "I can apply decision rules to determine if variables show independence, weak association, or strong association", category: "Mastered" },
+                    { text: "I can interpret mosaic plots by analyzing column widths and rectangle heights to detect association patterns", category: "Mastered" }
+                ],
+                categories: ["Mastered", "Need Review"]
+            }
         }
     ]
 };

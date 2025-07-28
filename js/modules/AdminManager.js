@@ -252,7 +252,17 @@ class AdminManager {
                             ${this.generateChapterQuickNav()}
                         </div>
                         <div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 0.9em;">
-                            <strong>💡 Tip:</strong> Click "Show Steps" to access individual lesson steps within each chapter.
+                            <strong>💡 Tip:</strong> Click "Show Steps" to access individual lesson steps, or "Assessment" to jump directly to chapter quizzes.
+                        </div>
+                    </div>
+                    
+                    <div class="admin-section">
+                        <h4>Assessment Quick Access</h4>
+                        <div class="assessment-quick-nav">
+                            ${this.generateAssessmentQuickNav()}
+                        </div>
+                        <div style="margin-top: 10px; padding: 8px; background: rgba(128, 0, 128, 0.2); border-radius: 4px; font-size: 0.85em;">
+                            <strong>📝 Assessment Mode:</strong> Jump directly to any available chapter assessment.
                         </div>
                     </div>
                     
@@ -282,13 +292,26 @@ class AdminManager {
         const chapters = this.dataManager.getAllChapters();
         return chapters.map(chapter => {
             const lesson = this.dataManager.getLesson(chapter.id);
+            const quiz = this.dataManager.getQuiz(chapter.id);
             const hasSteps = lesson && lesson.steps && lesson.steps.length > 0;
+            const hasQuiz = quiz && quiz.questions && quiz.questions.length > 0;
             
             return `
                 <div class="chapter-nav-section">
-                    <button onclick="window.adminManager.jumpToChapter(${chapter.id})" class="admin-btn">
-                        Chapter ${chapter.id}: ${chapter.title}
-                    </button>
+                    <div class="chapter-nav-main">
+                        <button onclick="window.adminManager.jumpToChapter(${chapter.id})" class="admin-btn">
+                            Chapter ${chapter.id}: ${chapter.title}
+                        </button>
+                        ${hasQuiz ? `
+                            <button onclick="window.adminManager.jumpToQuiz(${chapter.id})" class="admin-btn small quiz-btn" title="Jump to Chapter ${chapter.id} Assessment">
+                                📝 Assessment
+                            </button>
+                        ` : `
+                            <button class="admin-btn small disabled" disabled title="No assessment available">
+                                📝 No Quiz
+                            </button>
+                        `}
+                    </div>
                     ${hasSteps ? `
                         <button onclick="window.adminManager.toggleStepsFor(${chapter.id})" class="admin-btn small secondary step-toggle" data-chapter="${chapter.id}">
                             Show Steps
@@ -313,6 +336,33 @@ class AdminManager {
                 Step ${index + 1}: ${step.title}
              </button>`
         ).join('');
+    }
+
+    /**
+     * Generate quick navigation for assessments only
+     */
+    generateAssessmentQuickNav() {
+        const chapters = this.dataManager.getAllChapters();
+        const availableQuizzes = chapters.filter(chapter => {
+            const quiz = this.dataManager.getQuiz(chapter.id);
+            return quiz && quiz.questions && quiz.questions.length > 0;
+        });
+
+        if (availableQuizzes.length === 0) {
+            return '<div style="color: #888; font-style: italic;">No assessments available</div>';
+        }
+
+        return availableQuizzes.map(chapter => {
+            const quiz = this.dataManager.getQuiz(chapter.id);
+            const questionCount = quiz.questions ? quiz.questions.length : 0;
+            
+            return `
+                <button onclick="window.adminManager.jumpToQuiz(${chapter.id})" class="admin-btn quiz-btn full-width">
+                    📝 Chapter ${chapter.id}: ${chapter.title}
+                    <span class="quiz-info">(${questionCount} questions)</span>
+                </button>
+            `;
+        }).join('');
     }
 
     /**
@@ -347,6 +397,25 @@ class AdminManager {
         // Navigate to chapter
         this.eventManager.emit('admin:jump-to-chapter', { chapterId });
         this.showNotification(`🚀 Jumped to Chapter ${chapterId} (admin mode)`, 'info');
+    }
+
+    /**
+     * Admin action: Jump to chapter quiz/assessment
+     */
+    jumpToQuiz(chapterId) {
+        // Close admin panel
+        document.querySelector('.admin-modal-overlay')?.remove();
+        
+        // Check if quiz exists
+        const quiz = this.dataManager.getQuiz(chapterId);
+        if (!quiz) {
+            this.showNotification(`❌ No assessment available for Chapter ${chapterId}`, 'error');
+            return;
+        }
+        
+        // Navigate to quiz using the correct event name
+        this.eventManager.emit('quiz:started', chapterId);
+        this.showNotification(`📝 Started Chapter ${chapterId} Assessment (admin mode)`, 'info');
     }
 
     /**

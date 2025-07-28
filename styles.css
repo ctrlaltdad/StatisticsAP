@@ -1425,6 +1425,56 @@ body {
     gap: 5px;
 }
 
+.chapter-nav-main {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.chapter-nav-main .admin-btn:first-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.quiz-btn {
+    background: var(--accent-purple) !important;
+    color: white !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.quiz-btn:hover {
+    background: var(--accent-blue) !important;
+}
+
+.admin-btn.disabled {
+    background: #444 !important;
+    color: #888 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+
+.assessment-quick-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.quiz-btn.full-width {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quiz-info {
+    font-size: 0.85em;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
 .lesson-steps-nav {
     display: flex;
     flex-direction: column;
